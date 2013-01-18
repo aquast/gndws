@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="gndRequester" targetNamespace="http://gnd.hbz.nrw.de/definitions/" xmlns:ns1="http://gnd.hbz.nrw.de/webservice/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gnd.hbz.nrw.de/definitions/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://gnd.hbz.nrw.de/webservice/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    	<xsd:element name="getGndPersonInfo">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="0" name="lastName" type="xsd:string">
+    				</xsd:element>
+    				<xsd:element maxOccurs="1" minOccurs="1" name="firstName" type="xsd:string"/>
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
+    	<xsd:element name="getGndPersonInfoResponse">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="1" name="resultSize" type="xsd:int">
+    				</xsd:element>
+    				<xsd:element maxOccurs="unbounded" minOccurs="0" name="result" type="ns1:resultType"/>
+    			</xsd:sequence>
+    		</xsd:complexType>
+    	</xsd:element>
+    
+        
+    	<xsd:complexType name="resultType">
+    		<xsd:sequence>
+    			<xsd:element maxOccurs="1" minOccurs="1" name="pndUri" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="1" minOccurs="1" name="pndID" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="1" minOccurs="0" name="prefferedName" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="1" minOccurs="0" name="yearOfBirth" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="wpUrl" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="1" minOccurs="0" name="biograficData" type="xsd:string"/>
+    		</xsd:sequence>
+    	</xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getGndPersonInfoRequest">
+    <wsdl:part name="parameters" element="ns1:getGndPersonInfo">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestPndFromName">
+  </wsdl:message>
+  <wsdl:message name="getGndPersonInfoResponse">
+    <wsdl:part name="parameters" element="ns1:getGndPersonInfoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestPnd">
+  </wsdl:message>
+  <wsdl:portType name="gndRequester">
+    <wsdl:operation name="getGndPersonInfo">
+<wsdl:documentation>An Operaton that requests URIs and other information (if any) provided by the GND from given first and last name of a person </wsdl:documentation>
+      <wsdl:input message="tns:getGndPersonInfoRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getGndPersonInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="gndRequesterSOAP" type="tns:gndRequester">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getGndPersonInfo">
+      <soap:operation soapAction="http://gnd.hbz.nrw.de/definitions/getGndPersonInfo"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="gndRequester">
+    <wsdl:port name="gndRequesterSOAP" binding="tns:gndRequesterSOAP">
+      <soap:address location="http://www.hbz-nrw.de/gnd"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

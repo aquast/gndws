@@ -1,0 +1,18 @@
+h1. About
+
+gndWS is a testing project for accessing different Data Provider within the LOD Environment
+and provide an interface to the informaion stored therein 
+
+h1. Releases
+
+Not released yet! The current status of this project is "in development". 
+Current Version is still SNAPSHOT-0.0.1.
+
+
+h1. Status
+
+
+h1. License
+
+Apache License  Version 2.0, January 2004  http://www.apache.org/licenses/
+Copyright 2012 hbz NRW (http://www.hbz-nrw.de/)
