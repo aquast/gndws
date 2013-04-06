@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/gndSparql" xmlns:tns="http://www.example.org/gndSparql" elementFormDefault="qualified">
+
+    <complexType name="SparqlType">
+    	<sequence>
+    		<element name="PrefixStatement" type="string"
+    			minOccurs="0" maxOccurs="unbounded">
+    		</element>
+    		<element name="QueryString" type="string" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    		<element name="Placeholder" type="tns:PlaceholderType"
+    			minOccurs="1" maxOccurs="unbounded">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PlaceholderType">
+    	<attribute name="ArgName" type="string" use="optional"></attribute>
+    </complexType>
+</schema>
