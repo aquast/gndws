@@ -1,7 +1,6 @@
 h1. About
 
-gndWS is a testing project for accessing different Data Provider within the LOD Environment
-and provide an interface to the informaion stored therein 
+gndWS is a testing project for accessing different Data Provider within the LOD Environment and provide an interface to the information stored therein 
 
 h1. Releases
 
@@ -11,6 +10,7 @@ Current Version is still SNAPSHOT-0.0.1.
 
 h1. Status
 
+work in progress
 
 h1. License
 
