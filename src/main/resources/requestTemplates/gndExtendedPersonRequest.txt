@@ -1,0 +1,9 @@
+select distinct ?uri ?name ?birth ?link ?acad where
+	{
+    ?uri <http://d-nb.info/standards/elementset/gnd#variantNameForThePerson> "$lastName , $firstName" .
+	?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> ?name .
+    OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#dateOfBirth> ?birth} .
+    OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#biographicalOrHistoricalInformation> ?biogr} .
+    OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#academicTitleOfThePerson> ?acad} .
+	OPTIONAL {?uri <http://xmlns.com/foaf/0.1/page> ?link}
+	};
