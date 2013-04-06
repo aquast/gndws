@@ -12,6 +12,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -48,62 +49,54 @@ public class PersonRequest {
 		log.info(decompLastName);
 		log.info(decompFirstName);
 		
-		String queryStringExtended = "select distinct ?uri ?name ?birth ?link ?acad where \n" +
-		"{" +
-        " ?uri <http://d-nb.info/standards/elementset/gnd#variantNameForThePerson> \"" + decompLastName + ", " + decompFirstName + "\" ." +
-		//" ?anoS <http://d-nb.info/standards/elementset/gnd#surname> \"" +  decompLastName + "\" ." +
-		//" ?anoF <http://d-nb.info/standards/elementset/gnd#forename> \"" + decompFirstName + "\" ." +
-		//" ?uri ?x ?anoS ." +
-		//" ?uri ?x ?anoF ." +
-		" ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> ?name .\n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#dateOfBirth> ?birth} .\n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#biographicalOrHistoricalInformation> ?biogr} .\n" +
-        //" OPTIONAL {?uri <http://RDVocab.info/ElementsGr2/professionOrOccupation> ?profess} .\n" +
-        //" OPTIONAL {?profess  <http://www.w3.org/2004/02/skos/core#prefLabel> ?occu} .\n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#academicTitleOfThePerson> ?acad} .\n" +
-		" OPTIONAL {?uri <http://xmlns.com/foaf/0.1/page> ?link} " +
-		"}";
 		
-
-        /*String queryStringSimple = "select distinct ?uri ?name ?name1 ?birth ?link ?biogr ?acad where \n" +
-        "{" +
-        " ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> \"" + decompLastName + ", " + decompFirstName + "\" . \n" +
-        " ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> ?name . \n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#dateOfBirth> ?birth} .\n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#biographicalOrHistoricalInformation> ?biogr} .\n" +
-        //" OPTIONAL {?uri <http://RDVocab.info/ElementsGr2/professionOrOccupation> ?profess} .\n" +
-        //" OPTIONAL {?profess  <http://www.w3.org/2004/02/skos/core#prefLabel> ?occu} .\n" +
-        " OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#academicTitleOfThePerson> ?acad} .\n " +
-        " OPTIONAL {?uri <http://xmlns.com/foaf/0.1/page> ?link} " +
-        "}"; */
-		
-		String queryStringSimple = null;
+		String queryString = null;
 		
 		try{
-			File persRequest = new File("META-INF/gndPersonRequest.txt");
-			FileInputStream fis = new FileInputStream(persRequest);
-			BufferedInputStream bis = new BufferedInputStream(fis);
+			// read in appropriate request String from text file
+			InputStream is = getClass().getResourceAsStream("/requestTemplates/gndPersonRequest.txt");
+			BufferedInputStream bis = new BufferedInputStream(is);
 			
 			ByteArrayOutputStream bas = new ByteArrayOutputStream();
 			int i = 0;
 			while ((i = bis.read()) !=-1){
 				bas.write(i);
-				queryStringSimple = bas.toString("UTF-8");
-			}
+				queryString = bas.toString("UTF-8"); 
+			} 
 			
 		}catch(Exception e){
 				log.error(e);
 		}
 		
 		
-		queryStringSimple = queryStringSimple.replace("$lastName", decompLastName);
-		queryStringSimple = queryStringSimple.replace("$firstName", decompFirstName);
+		queryString = queryString.replace("$lastName", decompLastName);
+		queryString = queryString.replace("$firstName", decompFirstName);
 			
-		query.setQueryString(queryStringSimple);
+		query.setQueryString(queryString);
 		ArrayList<Hashtable<String,RDFNode>> results = query.querySparql();
 		
-		if (results.size()<=1){
-			query.setQueryString(queryStringExtended);
+		if (results.size()<=10){
+			try{
+				// read in appropriate request String from text file
+				InputStream is = getClass().getResourceAsStream("/requestTemplates/gndPersonRequestExtended.txt");
+				BufferedInputStream bis = new BufferedInputStream(is);
+				
+				ByteArrayOutputStream bas = new ByteArrayOutputStream();
+				int i = 0;
+				while ((i = bis.read()) !=-1){
+					bas.write(i);
+					queryString = bas.toString("UTF-8"); 
+				} 
+				
+			}catch(Exception e){
+					log.error(e);
+			}
+			
+			
+			queryString = queryString.replace("$lastName", decompLastName);
+			queryString = queryString.replace("$firstName", decompFirstName);
+				
+			query.setQueryString(queryString);
 			results.addAll(query.querySparql());
 		}
 
