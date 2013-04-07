@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import org.junit.Test;
+
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -26,12 +28,14 @@ import de.qterra.gnd.sparql.util.UnifyResults;
  */
 public class TestRequests {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+	
+ 	/**
+ 	 * <p><em>Title: </em></p>
+ 	 * <p>Description: Method verifies that Class UnifyResults is working correctly</p>
+ 	 *  
+ 	 */
+ 	@Test public void testRequests() {
+
 		ArrayList<Hashtable<String, RDFNode>> results = new ArrayList<Hashtable<String, RDFNode>>();
 		
 		String queryString = null;
@@ -56,8 +60,9 @@ public class TestRequests {
 	    }
 	    
 	    ArrayList<String> comp = new ArrayList<String>();
-	    comp.add("title");
-	    //comp.add("creator");
+	    //comp.add("title");
+	    comp.add("name");
+	    comp.add("uri");
 	    UnifyResults uni = new UnifyResults();
 	    
 	    uni.setComparator(comp);
@@ -82,6 +87,16 @@ public class TestRequests {
 	    	
 	    	System.out.print("\n");
 	    }
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		TestRequests tReq = new TestRequests();
+		tReq.testRequests();
+
 	}
 
 }

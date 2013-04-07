@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+
+import org.junit.Test;
 
 import de.qterra.gnd.sparql.SparqlQuery;
 import de.qterra.gnd.sparql.requests.ClassificationRequest;
@@ -28,11 +28,11 @@ public class TestSparqlEndpointQuery{
 	 * @param args
 	 */
 	public String fname = "Gudrun";
-	public String lname = "Meier";
+	public String lname = "Gersmann";
 	ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
 	
 	
-	public void request(){	
+	@Test public void request(){	
 		//Test OAContentRequest
 		//OAContentByPersonRequest oaReq = new OAContentByPersonRequest();
 		//ArrayList<Hashtable<String,RDFNode>> results = oaReq.performRequest(fname , lname);
