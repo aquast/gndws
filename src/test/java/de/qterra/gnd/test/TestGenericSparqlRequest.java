@@ -12,11 +12,14 @@ import java.util.Properties;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.openjena.atlas.logging.Log;
 
 import de.qterra.gnd.sparql.SparqlQuery;
 import de.qterra.gnd.sparql.requests.ClassificationRequest;
 import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
+import de.qterra.gnd.sparql.requests.IssnRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
@@ -27,9 +30,9 @@ import de.qterra.gnd.sparql.requests.PersonRequest;
  */
 public class TestGenericSparqlRequest{
 
-	/**
-	 * @param args
-	 */
+	// Initiate Logger for Class
+	private static Logger log = Logger.getLogger(TestGenericSparqlRequest.class);
+
 	public ArrayList<Properties> propertyList = new ArrayList<Properties>();
 	public String fname = "Gudrun";
 	public String lname = "Gersmann";
@@ -49,7 +52,6 @@ public class TestGenericSparqlRequest{
 		persReqProp.setProperty("$lastName", "Schmidt");
 		propertyList.add(persReqProp);
 
-		
 		Properties persExtendedReqProp = new Properties();
 		persExtendedReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
 		persExtendedReqProp.setProperty("sparqlFile", "gndExtendedPersonRequest.txt");
@@ -58,10 +60,18 @@ public class TestGenericSparqlRequest{
 		propertyList.add(persExtendedReqProp);
 		
 		Properties oaiIssnReqProp = new Properties();
-		oaiIssnReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
-		oaiIssnReqProp.setProperty("sparqlFile", "gndExtendedPersonRequest.txt");
-		oaiIssnReqProp.setProperty("$issn", "issn: 0031-0182");
+		oaiIssnReqProp.setProperty("requestUrl", "http://oai.rkbexplorer.com/sparql/");
+		oaiIssnReqProp.setProperty("sparqlFile", "oaiExplorerIssnRequest.txt");
+		oaiIssnReqProp.setProperty("$issn", "ISSN: 0031-0182");
 		propertyList.add(oaiIssnReqProp);
+
+		
+		Properties b3katIssnReqProp = new Properties();
+		b3katIssnReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
+		b3katIssnReqProp.setProperty("sparqlFile", "b3katIssnRequest.txt");
+		b3katIssnReqProp.setProperty("$issn", "ISSN: 0031-0182");
+		propertyList.add(b3katIssnReqProp);
+	
 	}
 	
 	
@@ -79,6 +89,7 @@ public class TestGenericSparqlRequest{
    			Thread sparqlThread = new Thread(spRun);
 			sparqlThread.setName("GenericSparqlThread_" + i);
 			sparqlThread.start();
+			threadList.add(sparqlThread);
 			 
 		}
 		
@@ -87,13 +98,14 @@ public class TestGenericSparqlRequest{
 		for(int i=0; i < threadList.size(); i++){
 			try {
 				threadList.get(i).join();
-			} catch (InterruptedException e) {
+				log.info(threadList.get(i).getName());
+			}catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
-		System.out.println(results.size());
+		System.out.println("Trefferanzahl: " + results.size());
 	    for (int i=0 ; i< results.size() ; i++){
 	    	Hashtable<String,RDFNode> soln = results.get(i); 
 		    
@@ -147,7 +159,6 @@ public class TestGenericSparqlRequest{
 		
 		@Override
 		public void run() {
-			//Test OA Explorer
 			GenericSPARQLRequest gsReq = new GenericSPARQLRequest(reqProp);
 			ArrayList<Hashtable<String,RDFNode>> oaResults = gsReq.performRequest();
 			results.addAll(oaResults);

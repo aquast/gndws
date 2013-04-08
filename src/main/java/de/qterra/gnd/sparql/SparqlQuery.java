@@ -108,7 +108,7 @@ public class SparqlQuery {
 	    		  //log.info(resultArray.size());
 	    	  }
 		    }
-		    log.info("Ergebnisliste: " + resultArray.size());
+		    log.debug("Ergebnisliste: " + resultArray.size());
 		  }
 		catch(Exception e){
 			log.error(e);			
@@ -125,7 +125,7 @@ public class SparqlQuery {
 	 */
 	public void setQueryString(String queryString) {
 		this.queryString = queryString;
-		log.info(queryString);
+		log.debug(queryString);
 	}
 
 }

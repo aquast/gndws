@@ -32,7 +32,8 @@ public class TestSparqlEndpointQuery{
 	public String lname = "Gersmann";
 	ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
 	
-	@Test public void request(){	
+	//@Test
+	public void request(){	
 		//Test OAContentRequest
 		//OAContentByPersonRequest oaReq = new OAContentByPersonRequest();
 		//ArrayList<Hashtable<String,RDFNode>> results = oaReq.performRequest(fname , lname);

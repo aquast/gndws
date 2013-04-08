@@ -34,7 +34,8 @@ public class TestRequests {
  	 * <p>Description: Method verifies that Class UnifyResults is working correctly</p>
  	 *  
  	 */
- 	@Test public void testRequests() {
+ 	//@Test 
+ 	public void testRequests() {
 
 		ArrayList<Hashtable<String, RDFNode>> results = new ArrayList<Hashtable<String, RDFNode>>();
 		

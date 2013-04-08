@@ -35,7 +35,8 @@ public class TestPersonRequest {
 	 * functionality of this class</p>
 	 *  
 	 */
-	@Test public void testPersonRequest() {
+	//@Test 
+	public void testPersonRequest() {
 		// TODO Auto-generated method stub
 		
 		ArrayList<Hashtable<String, RDFNode>> results = new ArrayList<Hashtable<String, RDFNode>>();
