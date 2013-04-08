@@ -8,8 +8,15 @@ import com.ibm.icu.text.Normalizer;
 
 import de.qterra.gnd.sparql.SparqlQuery;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
 
 
 /**
@@ -18,46 +25,54 @@ import java.util.Hashtable;
  */
 public class GenericSPARQLRequest {
 
-	private String requestUrl = null;
-	private ArrayList<String> queryArguments = null;
-	private String queryPrefix = null;
+	// Initiate Logger for Class
+	private static Logger log = Logger.getLogger(PersonRequest.class);
+
+	private Properties requestProp = null;
+	private String queryString = null;
 	
 	
+	public GenericSPARQLRequest(Properties RequestProp){
+		requestProp = RequestProp;
+	}
 	/**
 	 * Method calls the SPARQL-request
 	 * @param discipline
 	 * @return
 	 */
-	public ArrayList<Hashtable<String,RDFNode>> performRequest(String discipline){
+	public ArrayList<Hashtable<String,RDFNode>> performRequest(){
 
-		SparqlQuery query = new SparqlQuery(requestUrl);
+		// set remote Sparql-Enpoint
+		SparqlQuery query = new SparqlQuery(requestProp.getProperty("requestUrl"));
 
-		String decompDiscipline = Normalizer.normalize(discipline, Normalizer.NFKD);
+		// load query template from appropriate file
+		try{
+			InputStream is = getClass().getResourceAsStream("/requestTemplates/" + requestProp.getProperty("sparqlFile"));
+			BufferedInputStream bis = new BufferedInputStream(is);
+			
+			ByteArrayOutputStream bas = new ByteArrayOutputStream();
+			int i = 0;
+			while ((i = bis.read()) !=-1){
+				bas.write(i);
+				queryString = bas.toString("UTF-8"); 
+			} 
+			
+		}catch(Exception e){
+				log.error(e);
+		}
 		
-		System.out.println(decompDiscipline);
-		
-		
-
-		String queryStringSimple = "select ?uri ?pred ?obj where \n" +
-		"{" +
-		" ?uri ?pred \"" + decompDiscipline  + "\"@de ." +
-		" ?uri <http://www.w3.org/2004/02/skos/core#prefLabel> ?obj ." +
-		"}";
-		
-
-		query.setQueryString(queryStringSimple);
-		ArrayList<Hashtable<String,RDFNode>> results = query.querySparql();
-		
-		if (results.size()<1){
-			//query.setQueryString(queryStringExtended);
-			//results = query.querySparql();
+		Enumeration propEnum = requestProp.keys();
+		while (propEnum.hasMoreElements()){
+			String key = (String) propEnum.nextElement();
+			if(key.startsWith("$")){
+				queryString = queryString.replace(key, Normalizer.normalize(requestProp.getProperty(key), Normalizer.NFKD));
+			}
 		}
 
-		return results;
-	}
-
-	public void parseArguments(){
+		query.setQueryString(queryString);
+		ArrayList<Hashtable<String,RDFNode>> results = query.querySparql();
 		
+		return results;
 	}
 
 

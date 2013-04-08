@@ -10,8 +10,6 @@ import de.qterra.gnd.sparql.SparqlQuery;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -78,7 +76,7 @@ public class PersonRequest {
 		if (results.size()<=10){
 			try{
 				// read in appropriate request String from text file
-				InputStream is = getClass().getResourceAsStream("/requestTemplates/gndPersonRequestExtended.txt");
+				InputStream is = getClass().getResourceAsStream("/requestTemplates/gndExtendedPersonRequest.txt");
 				BufferedInputStream bis = new BufferedInputStream(is);
 				
 				ByteArrayOutputStream bas = new ByteArrayOutputStream();

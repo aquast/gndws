@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Properties;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
@@ -30,7 +31,6 @@ public class TestSparqlEndpointQuery{
 	public String fname = "Gudrun";
 	public String lname = "Gersmann";
 	ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
-	
 	
 	@Test public void request(){	
 		//Test OAContentRequest
