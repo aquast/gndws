@@ -56,7 +56,7 @@ public class TestSparQLEndpointRequestAsClient {
 	 * Default Constructor for getting Configuration and set up logging
 	 */
 	public TestSparQLEndpointRequestAsClient(){
-		Configuration.initLog();
+		//Configuration.initLog();
 	}
 
 	// Initiate Logger for TestGndRequesterAsClient
@@ -65,34 +65,34 @@ public class TestSparQLEndpointRequestAsClient {
 	public void sparqlRequest() {
 		GndRequesterStub stub = null;
 		
-		GetPublicationsByCreatorNameResponse gndResponse = new GetPublicationsByCreatorNameResponse();
+		GetGndPersonInfoResponse gndResponse = new GetGndPersonInfoResponse();
 		
 		try {
-			//stub = new Dc2MarcStub("http://localhost:8081/axis2/services/dc2marc");
+			stub = new GndRequesterStub("http://localhost:8080/axis2/services/gndRequester");
 			//stub = new GndRequesterStub("http://melpomene.hbz-nrw.de:9180/axis2/services/gndRequester");
 			//stub = new GndRequesterStub("http://phacops.dyndns.org:8080/axis2/services/gndRequester");
-			stub = new GndRequesterStub("http://192.168.1.39:8080/axis2/services/gndRequester");
+			//stub = new GndRequesterStub("http://192.168.1.39:8080/axis2/services/gndRequester");
 		} catch (AxisFault e) {
 			log.error(e);
 			e.printStackTrace();
 		}
 		
-		de.qterra.gnd.client.GndRequesterStub.GetPublicationsByCreatorName gnd = new GetPublicationsByCreatorName();
+		de.qterra.gnd.client.GndRequesterStub.GetGndPersonInfo gnd = new GetGndPersonInfo();
 		gnd.setFirstName("Carl Friedrich");
 		gnd.setLastName("Gauß");
 		
 		try {
-			gndResponse = stub.getPublicationsByCreatorName(gnd);
+			gndResponse = stub.getGndPersonInfo(gnd);
 		} catch (RemoteException e) {
 			log.error(e);
 			e.printStackTrace();
 		}
-		PublResultType[] res = gndResponse.getResult(); 
+		ResultType[] res = gndResponse.getResult(); 
 		if(res != null){
 			log.info("returned " + res.length + " results");
-			log.info("Example: " + res[0].getPublTitle());
-			log.info("Example: " + res[0].getUrn());
-			log.info("Example: " + res[0].getPage()[0]);
+			log.info("Example: " + res[0].getPndID());
+			log.info("Example: " + res[0].getPrefferedName());
+			log.info("Example: " + res[0].getYearOfBirth());
 		}
 		else{
 			log.info("no Results returned");

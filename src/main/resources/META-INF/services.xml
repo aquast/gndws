@@ -4,9 +4,9 @@
 <serviceGroup>
     <service name="gndRequester">
         <messageReceivers>
-            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="de.nrw.hbz.gnd.services.GndRequesterMessageReceiverInOut"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="de.qterra.gnd.services.GndRequesterMessageReceiverInOut"/>
         </messageReceivers>
-        <parameter name="ServiceClass">de.nrw.hbz.gnd.serviceimpl.ServiceImpl</parameter>
+        <parameter name="ServiceClass">de.qterra.gnd.serviceimpl.ServiceImpl</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
         <operation name="getGndPersonInfo" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://gnd.hbz.nrw.de/definitions/">

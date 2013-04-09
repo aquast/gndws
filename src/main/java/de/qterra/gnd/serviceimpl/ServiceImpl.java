@@ -3,15 +3,21 @@ package de.qterra.gnd.serviceimpl;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
 
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import de.qterra.gnd.services.GndRequesterSkeletonInterface;
 import de.qterra.gnd.sparql.requests.ClassificationRequest;
+import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
+import de.qterra.gnd.test.TestGenericSparqlRequest;
+import de.qterra.gnd.test.TestGenericSparqlRequest.SparqlRunnable;
 import de.qterra.gnd.webservice.GetGndKeywordResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
@@ -22,22 +28,70 @@ import de.qterra.gnd.webservice.PublResultType;
 import de.qterra.gnd.webservice.ResultType;
 
 public class ServiceImpl implements GndRequesterSkeletonInterface {
+
+	// Initiate Logger for Class
+	private static Logger log = Logger.getLogger(ServiceImpl.class);
+
+	private ArrayList<Properties> propertyList = new ArrayList<Properties>();
 	private ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
-	private String firstName = "";
-	private String lastName = "";
+	
+	// these Strings are not null, in order to avoid a null pointer exception <- nessecary???  
+	private String firstName = null;
+	private String lastName = null;
+	private String pndUri = null;
+	private String issn = null;
 
 	@Override
 	public GetGndPersonInfoResponse getGndPersonInfo(
 			GetGndPersonInfo getGndPersonInfo) {
 
 		GetGndPersonInfoResponse response = new GetGndPersonInfoResponse();
+		
 		firstName = getGndPersonInfo.getFirstName();
 		lastName = getGndPersonInfo.getLastName();
 		
-		PersonRequest persReq = new PersonRequest();
-		ArrayList<Hashtable<String,RDFNode>> results = persReq.performRequest(firstName, lastName);
+		Properties persReqProp = new Properties();
+		persReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
+		persReqProp.setProperty("sparqlFile", "gndPersonRequest.txt");
+		persReqProp.setProperty("$firstName", firstName);
+		persReqProp.setProperty("$lastName", lastName);
+		propertyList.add(persReqProp);
+
+		Properties persExtendedReqProp = new Properties();
+		persExtendedReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
+		persExtendedReqProp.setProperty("sparqlFile", "gndExtendedPersonRequest.txt");
+		persExtendedReqProp.setProperty("$firstName", firstName);
+		persExtendedReqProp.setProperty("$lastName", lastName);
+		propertyList.add(persExtendedReqProp);
+
+		// create request threads
+		ArrayList<Thread> threadList = new ArrayList<Thread>();
+		for(int i=0; i < propertyList.size(); i++){
+			Properties reqProp = propertyList.get(i);
+			SparqlRunnable spRun = new SparqlRunnable();
+			spRun.setProperties(reqProp);
+   			Thread sparqlThread = new Thread(spRun);
+			sparqlThread.setName("GenericSparqlThread_" + i);
+			sparqlThread.start();
+			threadList.add(sparqlThread);
+			 
+		}
+		
+		
+		
+		for(int i=0; i < threadList.size(); i++){
+			try {
+				threadList.get(i).join();
+				log.info(threadList.get(i).getName());
+			}catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		ArrayList<ResultType> resultArray = new ArrayList<ResultType>();
 		
+		// create appropriate GndPersonInfoResponse from results arraylist 
 		response.setResultSize(results.size());
 		
 		for (int i=0; i<results.size(); i++){
@@ -105,7 +159,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 	@Override
 	public GetPublicationsByCreatorNameResponse getPublicationsByCreatorName(
 			GetPublicationsByCreatorName getPublicationsByCreatorName) {
-		
+		/*
 		GetPublicationsByCreatorNameResponse response = new GetPublicationsByCreatorNameResponse();
 		firstName = getPublicationsByCreatorName.getFirstName();
 		lastName = getPublicationsByCreatorName.getLastName();
@@ -147,37 +201,29 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 				res.addTestemonial(resLine.get("publication").toString());
 			}
 
-		}
+		}*/
 			
 		
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public class OARunable implements Runnable {
 
+	public class SparqlRunnable implements Runnable {
+
+		private Properties reqProp = null;
+		
 		@Override
 		public void run() {
-			//Test OA Explorer
-			OAContentByPersonRequest oaReq = new OAContentByPersonRequest();
-			ArrayList<Hashtable<String,RDFNode>> oaResults = oaReq.performRequest(firstName , lastName);
-			results.addAll(oaResults);
+			GenericSPARQLRequest gsReq = new GenericSPARQLRequest(reqProp);
+			ArrayList<Hashtable<String,RDFNode>> sparqlResults = gsReq.performRequest();
+			results.addAll(sparqlResults);
 			
 			
 		}
 		
-	}
-	public class OlRunable implements Runnable {
-
-		@Override
-		public void run() {
-
-			//Test OpenLibrary 
-		    OpenLibContentByPersonRequest olReq = new OpenLibContentByPersonRequest();
-		    ArrayList<Hashtable<String,RDFNode>> olResults = olReq.performRequest(firstName , lastName);
-			results.addAll(olResults);
-			
-			
+		public void setProperties(Properties ReqProp){
+			reqProp = ReqProp;
 		}
 		
 	}

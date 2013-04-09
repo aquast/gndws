@@ -12,9 +12,11 @@ PREFIX dcmitype:<http://purl.org/dc/dcmitype/>
 PREFIX marcrel:<http://id.loc.gov/vocabulary/relators/>
 PREFIX event:<http://purl.org/NET/c4dm/event.owl#>
 
-SELECT DISTINCT ?uri ?title ?creator WHERE {
-	?uri bibo:issn "$issn" .
-	?uri dcterms:creator ?creator .
-	?uri dcterms:title ?title
-	} LIMIT 1000
- 
+SELECT DISTINCT ?uri ?title WHERE {
+	?uri dcterms:title ?title .
+	?uri dcterms:creator $pnd .
+        optional{?uri bibo:isbn ?isbn} .
+        optional{?uri bibo:issn ?issn} .
+        optional{?uri dcterms:extend ?extend} .
+        optional{?uri dcterms:issued ?issued} 
+	} LIMIT 500 

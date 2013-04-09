@@ -33,9 +33,7 @@ public class TestGenericSparqlRequest{
 	// Initiate Logger for Class
 	private static Logger log = Logger.getLogger(TestGenericSparqlRequest.class);
 
-	public ArrayList<Properties> propertyList = new ArrayList<Properties>();
-	public String fname = "Gudrun";
-	public String lname = "Gersmann";
+	private ArrayList<Properties> propertyList = new ArrayList<Properties>();
 	ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
 	
 	/**
@@ -63,15 +61,21 @@ public class TestGenericSparqlRequest{
 		oaiIssnReqProp.setProperty("requestUrl", "http://oai.rkbexplorer.com/sparql/");
 		oaiIssnReqProp.setProperty("sparqlFile", "oaiExplorerIssnRequest.txt");
 		oaiIssnReqProp.setProperty("$issn", "ISSN: 0031-0182");
-		propertyList.add(oaiIssnReqProp);
+		//propertyList.add(oaiIssnReqProp);
 
 		
 		Properties b3katIssnReqProp = new Properties();
 		b3katIssnReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
 		b3katIssnReqProp.setProperty("sparqlFile", "b3katIssnRequest.txt");
 		b3katIssnReqProp.setProperty("$issn", "ISSN: 0031-0182");
-		propertyList.add(b3katIssnReqProp);
-	
+		//propertyList.add(b3katIssnReqProp);
+
+		Properties b3katPersResReqProp = new Properties();
+		b3katPersResReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
+		b3katPersResReqProp.setProperty("sparqlFile", "b3katPersonResourcesRequest.txt");
+		b3katPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/118836617>");
+		propertyList.add(b3katPersResReqProp);
+
 	}
 	
 	
@@ -111,38 +115,14 @@ public class TestGenericSparqlRequest{
 		    
 	    	Enumeration kEnum = soln.keys();
 	    	while (kEnum.hasMoreElements()){
-	    		System.out.print(soln.get((String)  kEnum.nextElement()) + ": ");
+	    		String key = (String) kEnum.nextElement();
+	    		System.out.print(key + " = " + soln.get(key) + "; ");
 	    		//rKeys.add((String) kEnum.nextElement());
 	    	}
 	    	
 	    	System.out.print("\n");
 	    }
 
-/*		System.out.println(results.size());
-	    for (int i=0 ; i< results.size() ; i++){
-	    	Hashtable<String,RDFNode> soln = results.get(i); 
-	    	
-	    	// keywords
-	    	System.out.print(i +1  + ". " + soln.get("ptitle"));
-	    	if(soln.containsKey("page")){
-		    	System.out.print(" : Page= " + soln.get("page"));
-		    }
-	    	else{
-	    		System.out.print(" : Nachweis = " + soln.get("publication"));
-	    	}
-	    	if(soln.containsKey("urn")){
-	    		System.out.print(": URN= " + soln.get("urn"));
-	    	}
-	    	if(soln.containsKey("isbn10")){
-	    		System.out.print(": isbn10= " + soln.get("isbn10"));
-	    	}
-	    	if(soln.containsKey("isbn13")){
-	    		System.out.print(": isbn13= " + soln.get("isbn13"));
-	    	}
-	    	System.out.println();
-	    	
-	      
-	    } */
 
 	}
 
@@ -160,8 +140,8 @@ public class TestGenericSparqlRequest{
 		@Override
 		public void run() {
 			GenericSPARQLRequest gsReq = new GenericSPARQLRequest(reqProp);
-			ArrayList<Hashtable<String,RDFNode>> oaResults = gsReq.performRequest();
-			results.addAll(oaResults);
+			ArrayList<Hashtable<String,RDFNode>> sparqlResults = gsReq.performRequest();
+			results.addAll(sparqlResults);
 			
 			
 		}
