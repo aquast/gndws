@@ -28,6 +28,7 @@ import de.qterra.gnd.webservice.GetResourcesByPndResponse;
 import de.qterra.gnd.webservice.KeywordResultType;
 import de.qterra.gnd.webservice.PersonResultType;
 import de.qterra.gnd.webservice.PublResultType;
+import de.qterra.gnd.webservice.ResourceResultType;
 import de.qterra.gnd.webservice.ResultType;
 
 public class ServiceImpl implements GndRequesterSkeletonInterface {
@@ -35,8 +36,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 	// Initiate Logger for Class
 	private static Logger log = Logger.getLogger(ServiceImpl.class);
 
-	private ArrayList<Properties> propertyList = new ArrayList<Properties>();
-	private ArrayList<Hashtable<String,RDFNode>> results = new ArrayList<Hashtable<String,RDFNode>>();
+	private ArrayList<Hashtable<String,RDFNode>> results = null;
 	
 	// these Strings are not null, in order to avoid a null pointer exception <- nessecary???  
 	private String firstName = null;
@@ -49,6 +49,8 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			GetGndPersonInfo getGndPersonInfo) {
 
 		GetGndPersonInfoResponse response = new GetGndPersonInfoResponse();
+		ArrayList<Properties> propertyList = new ArrayList<Properties>();
+		results = new ArrayList<Hashtable<String,RDFNode>>();
 		
 		firstName = getGndPersonInfo.getFirstName();
 		lastName = getGndPersonInfo.getLastName();
@@ -211,6 +213,89 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		return null;
 	}
 
+	@Override
+	public GetResourcesByPndResponse getResourcesByPnd(
+			GetResourcesByPnd getResourcesByPnd) {
+		
+		GetResourcesByPndResponse response = new GetResourcesByPndResponse();
+		ArrayList<Properties> propertyList = new ArrayList<Properties>();
+		results = new ArrayList<Hashtable<String,RDFNode>>();
+		
+		pndUri = getResourcesByPnd.getPndUri();
+		
+		Properties b3katPersResReqProp = new Properties();
+		b3katPersResReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
+		b3katPersResReqProp.setProperty("sparqlFile", "b3katPersonResourcesRequest.txt");
+		b3katPersResReqProp.setProperty("$pnd", "<" + pndUri + ">");
+		propertyList.add(b3katPersResReqProp);
+
+
+		// create request threads
+		ArrayList<Thread> threadList = new ArrayList<Thread>();
+		for(int i=0; i < propertyList.size(); i++){
+			Properties reqProp = propertyList.get(i);
+			SparqlRunnable spRun = new SparqlRunnable();
+			spRun.setProperties(reqProp);
+   			Thread sparqlThread = new Thread(spRun);
+			sparqlThread.setName("GenericSparqlThread_" + i);
+			sparqlThread.start();
+			threadList.add(sparqlThread);
+			 
+		}
+		
+		
+		
+		for(int i=0; i < threadList.size(); i++){
+			try {
+				threadList.get(i).join();
+				log.info(threadList.get(i).getName());
+			}catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
+		
+		// create appropriate GndPersonInfoResponse from results arraylist 
+		response.setResultSize(results.size());
+		
+		for (int i=0; i<results.size(); i++){
+			Hashtable<String,RDFNode> resLine = results.get(i);
+			
+			ResourceResultType res = new ResourceResultType();
+			//res.setPndUri(resLine.get("uri").toString());
+			res.setResourceUri(resLine.get("uri").toString());
+			//res.setResourceTitle(resLine.get("title").toString());
+			
+			if(resLine.containsKey("title")){
+				res.setResourceTitle(resLine.get("title").toString());
+			}
+			if(resLine.containsKey("isbn")){
+				res.setIsbn(resLine.get("isbn").toString());
+			}
+			if(resLine.containsKey("issn")){
+				res.setIssn(resLine.get("issn").toString());
+			}
+			if(resLine.containsKey("extent")){
+				res.setExtent(resLine.get("extent").toString());
+			}
+			if(resLine.containsKey("publisher")){
+				res.setPublisher(resLine.get("publisher").toString());
+			}
+			if(resLine.containsKey("issued")){
+				res.setIssued(resLine.get("issued").toString().substring(0, 4));
+			}
+
+			resultArray.add(res);
+		}
+		
+		ResourceResultType[] resType = null;
+		resultArray.toArray(resType = new ResourceResultType[resultArray.size()] );
+		response.setResult(resType) ;
+		return response;
+	}
+
 
 	public class SparqlRunnable implements Runnable {
 
@@ -232,11 +317,5 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 	}
 
 
-	@Override
-	public GetResourcesByPndResponse getResourcesByPnd(
-			GetResourcesByPnd getResourcesByPnd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

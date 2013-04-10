@@ -27,6 +27,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
+import org.junit.Test;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
@@ -34,7 +35,11 @@ import de.qterra.gnd.serviceimpl.ServiceImpl;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
 import de.qterra.gnd.webservice.PersonResultType;
-import de.qterra.gnd.webservice.ResultType;
+import de.qterra.gnd.webservice.GetResourcesByPnd;
+import de.qterra.gnd.webservice.GetResourcesByPndResponse;
+import de.qterra.gnd.webservice.ResourceResultType;
+
+//import de.qterra.gnd.webservice.ResultType;
 
 /**
  * Class TestGndRequesterAsClient
@@ -51,13 +56,13 @@ public class TestServiceImpl {
 	// Initiate Logger for TestGndRequesterAsClient
 	private static Logger log = Logger.getLogger(TestServiceImpl.class);
 
-	public void testGndPersonInfo() {
+	@Test public void testGndPersonInfo() {
 		
 		ServiceImpl sImpl= new ServiceImpl();
 		
 		GetGndPersonInfo persInfo = new GetGndPersonInfo();
-		persInfo.setFirstName("Gudrun");
-		persInfo.setLastName("Gersmann");
+		persInfo.setFirstName("Loki");
+		persInfo.setLastName("Schmidt");
 		GetGndPersonInfoResponse response = sImpl.getGndPersonInfo(persInfo);
 		
 		
@@ -66,8 +71,32 @@ public class TestServiceImpl {
 
 		if(res != null){
 			for(int i = 0 ; i < res.length; i++){
-				log.info(res[i].getPrefferedName() + " ; " + res[i].getPndID() 
-						+ " ; " + res[i].getYearOfBirth());  
+				log.info(res[i].getPrefferedName() 
+						 + " ; " + res[i].getPndUri()
+						 + " ; " + res[i].getYearOfBirth()
+						 + " ; " + res[i].getAcadTitle());
+			}
+			// ask for resources
+			for(int i = 0 ; i < res.length; i++){
+				//Request ServiceImpl
+				GetResourcesByPnd resInfo = new GetResourcesByPnd();
+				resInfo.setPndUri(res[i].getPndUri());
+				GetResourcesByPndResponse response2 = sImpl.getResourcesByPnd(resInfo);
+				ResourceResultType[] rResult = response2.getResult();
+				
+				
+				log.info("Anzahl gefundene Resourcen von " 
+						+ res[i].getPrefferedName() + ", " + res[i].getPndUri() + ": " + response2.getResultSize());
+				for(int j = 0; j < rResult.length; j++){
+					log.info(res[i].getPrefferedName() + " " 
+					+  "(" + rResult[j].getIssued() + "): " 
+						+ rResult[j].getResourceTitle() + ". - " 
+						+  rResult[j].getExtent() + ", " 
+						+  rResult[j].getPublisher() +  ", " 
+						+ rResult[j].getIsbn() +  ", " 
+						//+ rResult[j].getIssn() +  ", " 
+						+ ". - URI: " + rResult[j].getResourceUri());
+				}
 			}
 		}else{
 			log.info("no Results returned");

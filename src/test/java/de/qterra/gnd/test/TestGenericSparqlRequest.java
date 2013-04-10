@@ -48,14 +48,14 @@ public class TestGenericSparqlRequest{
 		persReqProp.setProperty("sparqlFile", "gndPersonRequest.txt");
 		persReqProp.setProperty("$firstName", "Loki");
 		persReqProp.setProperty("$lastName", "Schmidt");
-		propertyList.add(persReqProp);
+		//propertyList.add(persReqProp);
 
 		Properties persExtendedReqProp = new Properties();
 		persExtendedReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
 		persExtendedReqProp.setProperty("sparqlFile", "gndExtendedPersonRequest.txt");
 		persExtendedReqProp.setProperty("$firstName", "Loki");
 		persExtendedReqProp.setProperty("$lastName", "Schmidt");
-		propertyList.add(persExtendedReqProp);
+		//propertyList.add(persExtendedReqProp);
 		
 		Properties oaiIssnReqProp = new Properties();
 		oaiIssnReqProp.setProperty("requestUrl", "http://oai.rkbexplorer.com/sparql/");
@@ -73,7 +73,7 @@ public class TestGenericSparqlRequest{
 		Properties b3katPersResReqProp = new Properties();
 		b3katPersResReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
 		b3katPersResReqProp.setProperty("sparqlFile", "b3katPersonResourcesRequest.txt");
-		b3katPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/118836617>");
+		b3katPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/112537316>");
 		propertyList.add(b3katPersResReqProp);
 
 	}
