@@ -17,6 +17,7 @@ SELECT DISTINCT ?uri ?title WHERE {
 	?uri dcterms:creator $pnd .
         optional{?uri bibo:isbn ?isbn} .
         optional{?uri bibo:issn ?issn} .
-        optional{?uri dcterms:extend ?extend} .
+        optional{?uri dcterms:extent ?extent} .
+        optional{?uri dcterms:publisher ?publisher} . 
         optional{?uri dcterms:issued ?issued} 
 	} LIMIT 500 

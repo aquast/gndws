@@ -62,44 +62,30 @@
                             
 
                         /**
-                        * field for PrefferedName
+                        * field for ResourceUri
                         */
 
                         
-                                    protected java.lang.String localPrefferedName ;
+                                    protected java.lang.String localResourceUri ;
                                 
-                           /*  This tracker boolean wil be used to detect whether the user called the set method
-                          *   for this attribute. It will be used to determine whether to include this field
-                           *   in the serialized XML
-                           */
-                           protected boolean localPrefferedNameTracker = false ;
-                           
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getPrefferedName(){
-                               return localPrefferedName;
+                           public  java.lang.String getResourceUri(){
+                               return localResourceUri;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param PrefferedName
+                               * @param param ResourceUri
                                */
-                               public void setPrefferedName(java.lang.String param){
+                               public void setResourceUri(java.lang.String param){
                             
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localPrefferedNameTracker = true;
-                                       } else {
-                                          localPrefferedNameTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localPrefferedName=param;
+                                            this.localResourceUri=param;
                                     
 
                                }
@@ -151,11 +137,10 @@
 
                         /**
                         * field for Isbn
-                        * This was an Array!
                         */
 
                         
-                                    protected java.lang.String[] localIsbn ;
+                                    protected java.lang.String localIsbn ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -166,78 +151,40 @@
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String[]
+                           * @return java.lang.String
                            */
-                           public  java.lang.String[] getIsbn(){
+                           public  java.lang.String getIsbn(){
                                return localIsbn;
                            }
 
                            
                         
-
-
-                               
-                              /**
-                               * validate the array for Isbn
+                            /**
+                               * Auto generated setter method
+                               * @param param Isbn
                                */
-                              protected void validateIsbn(java.lang.String[] param){
-                             
-                              }
-
-
-                             /**
-                              * Auto generated setter method
-                              * @param param Isbn
-                              */
-                              public void setIsbn(java.lang.String[] param){
-                              
-                                   validateIsbn(param);
-
-                               
-                                          if (param != null){
-                                             //update the setting tracker
-                                             localIsbnTracker = true;
-                                          } else {
-                                             localIsbnTracker = false;
-                                                 
-                                          }
-                                      
-                                      this.localIsbn=param;
-                              }
-
-                               
-                             
-                             /**
-                             * Auto generated add method for the array for convenience
-                             * @param param java.lang.String
-                             */
-                             public void addIsbn(java.lang.String param){
-                                   if (localIsbn == null){
-                                   localIsbn = new java.lang.String[]{};
-                                   }
-
+                               public void setIsbn(java.lang.String param){
                             
-                                 //update the setting tracker
-                                localIsbnTracker = true;
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localIsbnTracker = true;
+                                       } else {
+                                          localIsbnTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localIsbn=param;
+                                    
+
+                               }
                             
-
-                               java.util.List list =
-                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localIsbn);
-                               list.add(param);
-                               this.localIsbn =
-                             (java.lang.String[])list.toArray(
-                            new java.lang.String[list.size()]);
-
-                             }
-                             
 
                         /**
                         * field for Issn
-                        * This was an Array!
                         */
 
                         
-                                    protected java.lang.String[] localIssn ;
+                                    protected java.lang.String localIssn ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -248,78 +195,172 @@
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String[]
+                           * @return java.lang.String
                            */
-                           public  java.lang.String[] getIssn(){
+                           public  java.lang.String getIssn(){
                                return localIssn;
                            }
 
                            
                         
-
-
-                               
-                              /**
-                               * validate the array for Issn
+                            /**
+                               * Auto generated setter method
+                               * @param param Issn
                                */
-                              protected void validateIssn(java.lang.String[] param){
-                             
-                              }
-
-
-                             /**
-                              * Auto generated setter method
-                              * @param param Issn
-                              */
-                              public void setIssn(java.lang.String[] param){
-                              
-                                   validateIssn(param);
-
-                               
-                                          if (param != null){
-                                             //update the setting tracker
-                                             localIssnTracker = true;
-                                          } else {
-                                             localIssnTracker = false;
-                                                 
-                                          }
-                                      
-                                      this.localIssn=param;
-                              }
-
-                               
-                             
-                             /**
-                             * Auto generated add method for the array for convenience
-                             * @param param java.lang.String
-                             */
-                             public void addIssn(java.lang.String param){
-                                   if (localIssn == null){
-                                   localIssn = new java.lang.String[]{};
-                                   }
-
+                               public void setIssn(java.lang.String param){
                             
-                                 //update the setting tracker
-                                localIssnTracker = true;
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localIssnTracker = true;
+                                       } else {
+                                          localIssnTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localIssn=param;
+                                    
+
+                               }
                             
-
-                               java.util.List list =
-                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localIssn);
-                               list.add(param);
-                               this.localIssn =
-                             (java.lang.String[])list.toArray(
-                            new java.lang.String[list.size()]);
-
-                             }
-                             
 
                         /**
-                        * field for Description
-                        * This was an Array!
+                        * field for Issued
                         */
 
                         
-                                    protected java.lang.String[] localDescription ;
+                                    protected java.lang.String localIssued ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localIssuedTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getIssued(){
+                               return localIssued;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Issued
+                               */
+                               public void setIssued(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localIssuedTracker = true;
+                                       } else {
+                                          localIssuedTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localIssued=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Publisher
+                        */
+
+                        
+                                    protected java.lang.String localPublisher ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localPublisherTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getPublisher(){
+                               return localPublisher;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Publisher
+                               */
+                               public void setPublisher(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localPublisherTracker = true;
+                                       } else {
+                                          localPublisherTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localPublisher=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Extent
+                        */
+
+                        
+                                    protected java.lang.String localExtent ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localExtentTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getExtent(){
+                               return localExtent;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Extent
+                               */
+                               public void setExtent(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localExtentTracker = true;
+                                       } else {
+                                          localExtentTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localExtent=param;
+                                    
+
+                               }
+                            
+
+                        /**
+                        * field for Description
+                        */
+
+                        
+                                    protected java.lang.String localDescription ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -330,70 +371,33 @@
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String[]
+                           * @return java.lang.String
                            */
-                           public  java.lang.String[] getDescription(){
+                           public  java.lang.String getDescription(){
                                return localDescription;
                            }
 
                            
                         
-
-
-                               
-                              /**
-                               * validate the array for Description
+                            /**
+                               * Auto generated setter method
+                               * @param param Description
                                */
-                              protected void validateDescription(java.lang.String[] param){
-                             
-                              }
-
-
-                             /**
-                              * Auto generated setter method
-                              * @param param Description
-                              */
-                              public void setDescription(java.lang.String[] param){
-                              
-                                   validateDescription(param);
-
-                               
-                                          if (param != null){
-                                             //update the setting tracker
-                                             localDescriptionTracker = true;
-                                          } else {
-                                             localDescriptionTracker = false;
-                                                 
-                                          }
-                                      
-                                      this.localDescription=param;
-                              }
-
-                               
-                             
-                             /**
-                             * Auto generated add method for the array for convenience
-                             * @param param java.lang.String
-                             */
-                             public void addDescription(java.lang.String param){
-                                   if (localDescription == null){
-                                   localDescription = new java.lang.String[]{};
-                                   }
-
+                               public void setDescription(java.lang.String param){
                             
-                                 //update the setting tracker
-                                localDescriptionTracker = true;
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localDescriptionTracker = true;
+                                       } else {
+                                          localDescriptionTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localDescription=param;
+                                    
+
+                               }
                             
-
-                               java.util.List list =
-                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localDescription);
-                               list.add(param);
-                               this.localDescription =
-                             (java.lang.String[])list.toArray(
-                            new java.lang.String[list.size()]);
-
-                             }
-                             
 
      /**
      * isReaderMTOMAware
@@ -525,7 +529,7 @@
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                              if (localPrefferedNameTracker){
+                             
                                     namespace = "";
                                     if (! namespace.equals("")) {
                                         prefix = xmlWriter.getPrefix(namespace);
@@ -533,33 +537,33 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"prefferedName", namespace);
+                                            xmlWriter.writeStartElement(prefix,"resourceUri", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"prefferedName");
+                                            xmlWriter.writeStartElement(namespace,"resourceUri");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("prefferedName");
+                                        xmlWriter.writeStartElement("resourceUri");
                                     }
                                 
 
-                                          if (localPrefferedName==null){
+                                          if (localResourceUri==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("prefferedName cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("resourceUri cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localPrefferedName);
+                                                   xmlWriter.writeCharacters(localResourceUri);
                                             
                                           }
                                     
                                    xmlWriter.writeEndElement();
-                             } if (localResourceTitleTracker){
+                              if (localResourceTitleTracker){
                                     namespace = "";
                                     if (! namespace.equals("")) {
                                         prefix = xmlWriter.getPrefix(namespace);
@@ -594,135 +598,210 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localIsbnTracker){
-                             if (localIsbn!=null) {
-                                   namespace = "";
-                                   boolean emptyNamespace = namespace == null || namespace.length() == 0;
-                                   prefix =  emptyNamespace ? null : xmlWriter.getPrefix(namespace);
-                                   for (int i = 0;i < localIsbn.length;i++){
-                                        
-                                            if (localIsbn[i] != null){
-                                        
-                                                if (!emptyNamespace) {
-                                                    if (prefix == null) {
-                                                        java.lang.String prefix2 = generatePrefix(namespace);
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
 
-                                                        xmlWriter.writeStartElement(prefix2,"isbn", namespace);
-                                                        xmlWriter.writeNamespace(prefix2, namespace);
-                                                        xmlWriter.setPrefix(prefix2, namespace);
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
 
-                                                    } else {
-                                                        xmlWriter.writeStartElement(namespace,"isbn");
-                                                    }
+                                            xmlWriter.writeStartElement(prefix,"isbn", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
 
-                                                } else {
-                                                    xmlWriter.writeStartElement("isbn");
-                                                }
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"isbn");
+                                        }
 
-                                            
-                                                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIsbn[i]));
-                                                    
-                                                xmlWriter.writeEndElement();
+                                    } else {
+                                        xmlWriter.writeStartElement("isbn");
+                                    }
+                                
+
+                                          if (localIsbn==null){
+                                              // write the nil attribute
                                               
-                                                } else {
-                                                   
-                                                           // we have to do nothing since minOccurs is zero
-                                                       
-                                                }
+                                                     throw new org.apache.axis2.databinding.ADBException("isbn cannot be null!!");
+                                                  
+                                          }else{
 
-                                   }
-                             } else {
-                                 
-                                         throw new org.apache.axis2.databinding.ADBException("isbn cannot be null!!");
-                                    
-                             }
-
-                        } if (localIssnTracker){
-                             if (localIssn!=null) {
-                                   namespace = "";
-                                   boolean emptyNamespace = namespace == null || namespace.length() == 0;
-                                   prefix =  emptyNamespace ? null : xmlWriter.getPrefix(namespace);
-                                   for (int i = 0;i < localIssn.length;i++){
                                         
-                                            if (localIssn[i] != null){
-                                        
-                                                if (!emptyNamespace) {
-                                                    if (prefix == null) {
-                                                        java.lang.String prefix2 = generatePrefix(namespace);
-
-                                                        xmlWriter.writeStartElement(prefix2,"issn", namespace);
-                                                        xmlWriter.writeNamespace(prefix2, namespace);
-                                                        xmlWriter.setPrefix(prefix2, namespace);
-
-                                                    } else {
-                                                        xmlWriter.writeStartElement(namespace,"issn");
-                                                    }
-
-                                                } else {
-                                                    xmlWriter.writeStartElement("issn");
-                                                }
-
+                                                   xmlWriter.writeCharacters(localIsbn);
                                             
-                                                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIssn[i]));
-                                                    
-                                                xmlWriter.writeEndElement();
-                                              
-                                                } else {
-                                                   
-                                                           // we have to do nothing since minOccurs is zero
-                                                       
-                                                }
-
-                                   }
-                             } else {
-                                 
-                                         throw new org.apache.axis2.databinding.ADBException("issn cannot be null!!");
+                                          }
                                     
-                             }
+                                   xmlWriter.writeEndElement();
+                             } if (localIssnTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
 
-                        } if (localDescriptionTracker){
-                             if (localDescription!=null) {
-                                   namespace = "";
-                                   boolean emptyNamespace = namespace == null || namespace.length() == 0;
-                                   prefix =  emptyNamespace ? null : xmlWriter.getPrefix(namespace);
-                                   for (int i = 0;i < localDescription.length;i++){
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"issn", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"issn");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("issn");
+                                    }
+                                
+
+                                          if (localIssn==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("issn cannot be null!!");
+                                                  
+                                          }else{
+
                                         
-                                            if (localDescription[i] != null){
-                                        
-                                                if (!emptyNamespace) {
-                                                    if (prefix == null) {
-                                                        java.lang.String prefix2 = generatePrefix(namespace);
-
-                                                        xmlWriter.writeStartElement(prefix2,"description", namespace);
-                                                        xmlWriter.writeNamespace(prefix2, namespace);
-                                                        xmlWriter.setPrefix(prefix2, namespace);
-
-                                                    } else {
-                                                        xmlWriter.writeStartElement(namespace,"description");
-                                                    }
-
-                                                } else {
-                                                    xmlWriter.writeStartElement("description");
-                                                }
-
+                                                   xmlWriter.writeCharacters(localIssn);
                                             
-                                                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDescription[i]));
-                                                    
-                                                xmlWriter.writeEndElement();
-                                              
-                                                } else {
-                                                   
-                                                           // we have to do nothing since minOccurs is zero
-                                                       
-                                                }
-
-                                   }
-                             } else {
-                                 
-                                         throw new org.apache.axis2.databinding.ADBException("description cannot be null!!");
+                                          }
                                     
-                             }
+                                   xmlWriter.writeEndElement();
+                             } if (localIssuedTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
 
-                        }
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"issued", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"issued");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("issued");
+                                    }
+                                
+
+                                          if (localIssued==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("issued cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localIssued);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localPublisherTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"publisher", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"publisher");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("publisher");
+                                    }
+                                
+
+                                          if (localPublisher==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("publisher cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localPublisher);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localExtentTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"extent", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"extent");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("extent");
+                                    }
+                                
+
+                                          if (localExtent==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localExtent);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             } if (localDescriptionTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"description", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"description");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("description");
+                                    }
+                                
+
+                                          if (localDescription==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("description cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localDescription);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -893,16 +972,16 @@
                                         } else {
                                            throw new org.apache.axis2.databinding.ADBException("pndUri cannot be null!!");
                                         }
-                                     if (localPrefferedNameTracker){
+                                    
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "prefferedName"));
+                                                                      "resourceUri"));
                                  
-                                        if (localPrefferedName != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrefferedName));
+                                        if (localResourceUri != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localResourceUri));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("prefferedName cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("resourceUri cannot be null!!");
                                         }
-                                    } if (localResourceTitleTracker){
+                                     if (localResourceTitleTracker){
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "resourceTitle"));
                                  
@@ -912,75 +991,60 @@
                                            throw new org.apache.axis2.databinding.ADBException("resourceTitle cannot be null!!");
                                         }
                                     } if (localIsbnTracker){
-                            if (localIsbn!=null){
-                                  for (int i = 0;i < localIsbn.length;i++){
-                                      
-                                         if (localIsbn[i] != null){
-                                          elementList.add(new javax.xml.namespace.QName("",
-                                                                              "isbn"));
-                                          elementList.add(
-                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIsbn[i]));
-                                          } else {
-                                             
-                                                    // have to do nothing
-                                                
-                                          }
-                                      
-
-                                  }
-                            } else {
-                              
-                                    throw new org.apache.axis2.databinding.ADBException("isbn cannot be null!!");
-                                
-                            }
-
-                        } if (localIssnTracker){
-                            if (localIssn!=null){
-                                  for (int i = 0;i < localIssn.length;i++){
-                                      
-                                         if (localIssn[i] != null){
-                                          elementList.add(new javax.xml.namespace.QName("",
-                                                                              "issn"));
-                                          elementList.add(
-                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIssn[i]));
-                                          } else {
-                                             
-                                                    // have to do nothing
-                                                
-                                          }
-                                      
-
-                                  }
-                            } else {
-                              
-                                    throw new org.apache.axis2.databinding.ADBException("issn cannot be null!!");
-                                
-                            }
-
-                        } if (localDescriptionTracker){
-                            if (localDescription!=null){
-                                  for (int i = 0;i < localDescription.length;i++){
-                                      
-                                         if (localDescription[i] != null){
-                                          elementList.add(new javax.xml.namespace.QName("",
-                                                                              "description"));
-                                          elementList.add(
-                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDescription[i]));
-                                          } else {
-                                             
-                                                    // have to do nothing
-                                                
-                                          }
-                                      
-
-                                  }
-                            } else {
-                              
-                                    throw new org.apache.axis2.databinding.ADBException("description cannot be null!!");
-                                
-                            }
-
-                        }
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "isbn"));
+                                 
+                                        if (localIsbn != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIsbn));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("isbn cannot be null!!");
+                                        }
+                                    } if (localIssnTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "issn"));
+                                 
+                                        if (localIssn != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIssn));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("issn cannot be null!!");
+                                        }
+                                    } if (localIssuedTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "issued"));
+                                 
+                                        if (localIssued != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIssued));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("issued cannot be null!!");
+                                        }
+                                    } if (localPublisherTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "publisher"));
+                                 
+                                        if (localPublisher != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPublisher));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("publisher cannot be null!!");
+                                        }
+                                    } if (localExtentTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "extent"));
+                                 
+                                        if (localExtent != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExtent));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
+                                        }
+                                    } if (localDescriptionTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "description"));
+                                 
+                                        if (localDescription != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDescription));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("description cannot be null!!");
+                                        }
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1056,12 +1120,6 @@
                     
                     reader.next();
                 
-                        java.util.ArrayList list4 = new java.util.ArrayList();
-                    
-                        java.util.ArrayList list5 = new java.util.ArrayList();
-                    
-                        java.util.ArrayList list6 = new java.util.ArrayList();
-                    
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -1084,21 +1142,22 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","prefferedName").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","resourceUri").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setPrefferedName(
+                                              object.setResourceUri(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
                                     
                               }  // End of if for expected property start element
                                 
-                                    else {
-                                        
-                                    }
-                                
+                                else{
+                                    // A start element we are not expecting indicates an invalid parameter was passed
+                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
+                                }
+                            
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
@@ -1122,40 +1181,13 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","isbn").equals(reader.getName())){
                                 
+                                    java.lang.String content = reader.getElementText();
                                     
+                                              object.setIsbn(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
                                     
-                                    // Process the array and step past its final element's end.
-                                    list4.add(reader.getElementText());
-                                            
-                                            //loop until we find a start element that is not part of this array
-                                            boolean loopDone4 = false;
-                                            while(!loopDone4){
-                                                // Ensure we are at the EndElement
-                                                while (!reader.isEndElement()){
-                                                    reader.next();
-                                                }
-                                                // Step out of this element
-                                                reader.next();
-                                                // Step to next element event.
-                                                while (!reader.isStartElement() && !reader.isEndElement())
-                                                    reader.next();
-                                                if (reader.isEndElement()){
-                                                    //two continuous end elements means we are exiting the xml structure
-                                                    loopDone4 = true;
-                                                } else {
-                                                    if (new javax.xml.namespace.QName("","isbn").equals(reader.getName())){
-                                                         list4.add(reader.getElementText());
-                                                        
-                                                    }else{
-                                                        loopDone4 = true;
-                                                    }
-                                                }
-                                            }
-                                            // call the converter utility  to convert and set the array
-                                            
-                                                    object.setIsbn((java.lang.String[])
-                                                        list4.toArray(new java.lang.String[list4.size()]));
-                                                
                               }  // End of if for expected property start element
                                 
                                     else {
@@ -1167,40 +1199,67 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","issn").equals(reader.getName())){
                                 
+                                    java.lang.String content = reader.getElementText();
                                     
+                                              object.setIssn(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
                                     
-                                    // Process the array and step past its final element's end.
-                                    list5.add(reader.getElementText());
-                                            
-                                            //loop until we find a start element that is not part of this array
-                                            boolean loopDone5 = false;
-                                            while(!loopDone5){
-                                                // Ensure we are at the EndElement
-                                                while (!reader.isEndElement()){
-                                                    reader.next();
-                                                }
-                                                // Step out of this element
-                                                reader.next();
-                                                // Step to next element event.
-                                                while (!reader.isStartElement() && !reader.isEndElement())
-                                                    reader.next();
-                                                if (reader.isEndElement()){
-                                                    //two continuous end elements means we are exiting the xml structure
-                                                    loopDone5 = true;
-                                                } else {
-                                                    if (new javax.xml.namespace.QName("","issn").equals(reader.getName())){
-                                                         list5.add(reader.getElementText());
-                                                        
-                                                    }else{
-                                                        loopDone5 = true;
-                                                    }
-                                                }
-                                            }
-                                            // call the converter utility  to convert and set the array
-                                            
-                                                    object.setIssn((java.lang.String[])
-                                                        list5.toArray(new java.lang.String[list5.size()]));
-                                                
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","issued").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setIssued(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","publisher").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setPublisher(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","extent").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setExtent(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
                               }  // End of if for expected property start element
                                 
                                     else {
@@ -1212,40 +1271,13 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","description").equals(reader.getName())){
                                 
+                                    java.lang.String content = reader.getElementText();
                                     
+                                              object.setDescription(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
                                     
-                                    // Process the array and step past its final element's end.
-                                    list6.add(reader.getElementText());
-                                            
-                                            //loop until we find a start element that is not part of this array
-                                            boolean loopDone6 = false;
-                                            while(!loopDone6){
-                                                // Ensure we are at the EndElement
-                                                while (!reader.isEndElement()){
-                                                    reader.next();
-                                                }
-                                                // Step out of this element
-                                                reader.next();
-                                                // Step to next element event.
-                                                while (!reader.isStartElement() && !reader.isEndElement())
-                                                    reader.next();
-                                                if (reader.isEndElement()){
-                                                    //two continuous end elements means we are exiting the xml structure
-                                                    loopDone6 = true;
-                                                } else {
-                                                    if (new javax.xml.namespace.QName("","description").equals(reader.getName())){
-                                                         list6.add(reader.getElementText());
-                                                        
-                                                    }else{
-                                                        loopDone6 = true;
-                                                    }
-                                                }
-                                            }
-                                            // call the converter utility  to convert and set the array
-                                            
-                                                    object.setDescription((java.lang.String[])
-                                                        list6.toArray(new java.lang.String[list6.size()]));
-                                                
                               }  // End of if for expected property start element
                                 
                                     else {
