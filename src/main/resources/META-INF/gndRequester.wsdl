@@ -30,7 +30,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     	<xsd:element name="getResourcesByPnd">
     		<xsd:complexType>
     			<xsd:sequence>
-    				<xsd:element maxOccurs="1" minOccurs="1" name="pndUri" type="xsd:string">
+    				<xsd:element maxOccurs="1" minOccurs="1" name="pnd" type="xsd:string">
     				</xsd:element>
     			</xsd:sequence>
     		</xsd:complexType>

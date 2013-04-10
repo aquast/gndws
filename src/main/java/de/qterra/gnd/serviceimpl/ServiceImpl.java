@@ -41,7 +41,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 	// these Strings are not null, in order to avoid a null pointer exception <- nessecary???  
 	private String firstName = null;
 	private String lastName = null;
-	private String pndUri = null;
+	private String pnd = null;
 	private String issn = null;
 
 	@Override
@@ -221,12 +221,12 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		ArrayList<Properties> propertyList = new ArrayList<Properties>();
 		results = new ArrayList<Hashtable<String,RDFNode>>();
 		
-		pndUri = getResourcesByPnd.getPndUri();
+		pnd = getResourcesByPnd.getPnd();
 		
 		Properties b3katPersResReqProp = new Properties();
 		b3katPersResReqProp.setProperty("requestUrl", "http://lod.b3kat.de/sparql");
 		b3katPersResReqProp.setProperty("sparqlFile", "b3katPersonResourcesRequest.txt");
-		b3katPersResReqProp.setProperty("$pnd", "<" + pndUri + ">");
+		b3katPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/" + pnd + ">");
 		propertyList.add(b3katPersResReqProp);
 
 
@@ -264,7 +264,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
 			ResourceResultType res = new ResourceResultType();
-			//res.setPndUri(resLine.get("uri").toString());
+			res.setPndUri("<http://d-nb.info/gnd/" + pnd + ">");
 			res.setResourceUri(resLine.get("uri").toString());
 			//res.setResourceTitle(resLine.get("title").toString());
 			

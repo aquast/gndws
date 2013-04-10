@@ -61,8 +61,8 @@ public class TestServiceImpl {
 		ServiceImpl sImpl= new ServiceImpl();
 		
 		GetGndPersonInfo persInfo = new GetGndPersonInfo();
-		persInfo.setFirstName("Loki");
-		persInfo.setLastName("Schmidt");
+		persInfo.setFirstName("Gudrun");
+		persInfo.setLastName("Gersmann");
 		GetGndPersonInfoResponse response = sImpl.getGndPersonInfo(persInfo);
 		
 		
@@ -80,7 +80,7 @@ public class TestServiceImpl {
 			for(int i = 0 ; i < res.length; i++){
 				//Request ServiceImpl
 				GetResourcesByPnd resInfo = new GetResourcesByPnd();
-				resInfo.setPndUri(res[i].getPndUri());
+				resInfo.setPnd(res[i].getPndUri().replace("http://d-nb.info/gnd/", ""));
 				GetResourcesByPndResponse response2 = sImpl.getResourcesByPnd(resInfo);
 				ResourceResultType[] rResult = response2.getResult();
 				

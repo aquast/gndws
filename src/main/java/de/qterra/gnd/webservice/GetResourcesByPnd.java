@@ -33,30 +33,30 @@
         
 
                         /**
-                        * field for PndUri
+                        * field for Pnd
                         */
 
                         
-                                    protected java.lang.String localPndUri ;
+                                    protected java.lang.String localPnd ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getPndUri(){
-                               return localPndUri;
+                           public  java.lang.String getPnd(){
+                               return localPnd;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param PndUri
+                               * @param param Pnd
                                */
-                               public void setPndUri(java.lang.String param){
+                               public void setPnd(java.lang.String param){
                             
-                                            this.localPndUri=param;
+                                            this.localPnd=param;
                                     
 
                                }
@@ -166,28 +166,28 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"pndUri", namespace);
+                                            xmlWriter.writeStartElement(prefix,"pnd", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"pndUri");
+                                            xmlWriter.writeStartElement(namespace,"pnd");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("pndUri");
+                                        xmlWriter.writeStartElement("pnd");
                                     }
                                 
 
-                                          if (localPndUri==null){
+                                          if (localPnd==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("pndUri cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("pnd cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localPndUri);
+                                                   xmlWriter.writeCharacters(localPnd);
                                             
                                           }
                                     
@@ -356,12 +356,12 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "pndUri"));
+                                                                      "pnd"));
                                  
-                                        if (localPndUri != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPndUri));
+                                        if (localPnd != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPnd));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("pndUri cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("pnd cannot be null!!");
                                         }
                                     
 
@@ -442,11 +442,11 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","pndUri").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","pnd").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setPndUri(
+                                              object.setPnd(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
