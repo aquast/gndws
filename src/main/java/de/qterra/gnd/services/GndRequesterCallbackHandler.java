@@ -3,7 +3,7 @@
  * GndRequesterCallbackHandler.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:24 EDT)
+ * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT)
  */
 
     package de.qterra.gnd.services;
@@ -45,38 +45,6 @@
 
         
            /**
-            * auto generated Axis2 call back method for getPublicationsByCreatorName method
-            * override this method for handling normal response from getPublicationsByCreatorName operation
-            */
-           public void receiveResultgetPublicationsByCreatorName(
-                    de.qterra.gnd.webservice.GetPublicationsByCreatorNameResponse result
-                        ) {
-           }
-
-          /**
-           * auto generated Axis2 Error handler
-           * override this method for handling error response from getPublicationsByCreatorName operation
-           */
-            public void receiveErrorgetPublicationsByCreatorName(java.lang.Exception e) {
-            }
-                
-           /**
-            * auto generated Axis2 call back method for getGndKeyword method
-            * override this method for handling normal response from getGndKeyword operation
-            */
-           public void receiveResultgetGndKeyword(
-                    de.qterra.gnd.webservice.GetGndKeywordResponse result
-                        ) {
-           }
-
-          /**
-           * auto generated Axis2 Error handler
-           * override this method for handling error response from getGndKeyword operation
-           */
-            public void receiveErrorgetGndKeyword(java.lang.Exception e) {
-            }
-                
-           /**
             * auto generated Axis2 call back method for getGndPersonInfo method
             * override this method for handling normal response from getGndPersonInfo operation
             */
@@ -90,6 +58,22 @@
            * override this method for handling error response from getGndPersonInfo operation
            */
             public void receiveErrorgetGndPersonInfo(java.lang.Exception e) {
+            }
+                
+           /**
+            * auto generated Axis2 call back method for getResourcesByPnd method
+            * override this method for handling normal response from getResourcesByPnd operation
+            */
+           public void receiveResultgetResourcesByPnd(
+                    de.qterra.gnd.webservice.GetResourcesByPndResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from getResourcesByPnd operation
+           */
+            public void receiveErrorgetResourcesByPnd(java.lang.Exception e) {
             }
                 
 

@@ -3,7 +3,7 @@
  * ExtensionMapper.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:47 EDT)
+ * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:34 EDT)
  */
 
             package de.qterra.gnd.webservice;
@@ -19,40 +19,20 @@
 
               
                   if (
-                  "http://gnd.hbz.nrw.de/webservice/".equals(namespaceURI) &&
-                  "publResultType".equals(typeName)){
+                  "http://gnd.qterra.de/webservice/".equals(namespaceURI) &&
+                  "resourceResultType".equals(typeName)){
                    
-                            return  de.qterra.gnd.webservice.PublResultType.Factory.parse(reader);
+                            return  de.qterra.gnd.webservice.ResourceResultType.Factory.parse(reader);
                         
 
                   }
 
               
                   if (
-                  "http://gnd.hbz.nrw.de/webservice/".equals(namespaceURI) &&
-                  "resultType".equals(typeName)){
+                  "http://gnd.qterra.de/webservice/".equals(namespaceURI) &&
+                  "personResultType".equals(typeName)){
                    
-                            return  de.qterra.gnd.webservice.ResultType.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://gnd.hbz.nrw.de/webservice/".equals(namespaceURI) &&
-                  "keywordResultType".equals(typeName)){
-                   
-                            return  de.qterra.gnd.webservice.KeywordResultType.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
-                  "http://gnd.hbz.nrw.de/webservice/".equals(namespaceURI) &&
-                  "keywordType".equals(typeName)){
-                   
-                            return  de.qterra.gnd.webservice.KeywordType.Factory.parse(reader);
+                            return  de.qterra.gnd.webservice.PersonResultType.Factory.parse(reader);
                         
 
                   }

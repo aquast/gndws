@@ -1,6 +1,6 @@
 
 /**
- * GetGndPersonInfo.java
+ * GetResourcesByPndResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:34 EDT)
@@ -10,15 +10,15 @@
             
 
             /**
-            *  GetGndPersonInfo bean class
+            *  GetResourcesByPndResponse bean class
             */
         
-        public  class GetGndPersonInfo
+        public  class GetResourcesByPndResponse
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://gnd.qterra.de/webservice/",
-                "getGndPersonInfo",
+                "getResourcesByPndResponse",
                 "ns1");
 
             
@@ -33,64 +33,116 @@
         
 
                         /**
-                        * field for LastName
+                        * field for ResultSize
                         */
 
                         
-                                    protected java.lang.String localLastName ;
+                                    protected int localResultSize ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getLastName(){
-                               return localLastName;
+                           public  int getResultSize(){
+                               return localResultSize;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param LastName
+                               * @param param ResultSize
                                */
-                               public void setLastName(java.lang.String param){
+                               public void setResultSize(int param){
                             
-                                            this.localLastName=param;
+                                            this.localResultSize=param;
                                     
 
                                }
                             
 
                         /**
-                        * field for FirstName
+                        * field for Result
+                        * This was an Array!
                         */
 
                         
-                                    protected java.lang.String localFirstName ;
+                                    protected de.qterra.gnd.webservice.ResourceResultType[] localResult ;
                                 
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localResultTracker = false ;
+                           
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return de.qterra.gnd.webservice.ResourceResultType[]
                            */
-                           public  java.lang.String getFirstName(){
-                               return localFirstName;
+                           public  de.qterra.gnd.webservice.ResourceResultType[] getResult(){
+                               return localResult;
                            }
 
                            
                         
-                            /**
-                               * Auto generated setter method
-                               * @param param FirstName
-                               */
-                               public void setFirstName(java.lang.String param){
-                            
-                                            this.localFirstName=param;
-                                    
 
-                               }
+
+                               
+                              /**
+                               * validate the array for Result
+                               */
+                              protected void validateResult(de.qterra.gnd.webservice.ResourceResultType[] param){
+                             
+                              }
+
+
+                             /**
+                              * Auto generated setter method
+                              * @param param Result
+                              */
+                              public void setResult(de.qterra.gnd.webservice.ResourceResultType[] param){
+                              
+                                   validateResult(param);
+
+                               
+                                          if (param != null){
+                                             //update the setting tracker
+                                             localResultTracker = true;
+                                          } else {
+                                             localResultTracker = false;
+                                                 
+                                          }
+                                      
+                                      this.localResult=param;
+                              }
+
+                               
+                             
+                             /**
+                             * Auto generated add method for the array for convenience
+                             * @param param de.qterra.gnd.webservice.ResourceResultType
+                             */
+                             public void addResult(de.qterra.gnd.webservice.ResourceResultType param){
+                                   if (localResult == null){
+                                   localResult = new de.qterra.gnd.webservice.ResourceResultType[]{};
+                                   }
+
                             
+                                 //update the setting tracker
+                                localResultTracker = true;
+                            
+
+                               java.util.List list =
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localResult);
+                               list.add(param);
+                               this.localResult =
+                             (de.qterra.gnd.webservice.ResourceResultType[])list.toArray(
+                            new de.qterra.gnd.webservice.ResourceResultType[list.size()]);
+
+                             }
+                             
 
      /**
      * isReaderMTOMAware
@@ -124,7 +176,7 @@
                        new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME){
 
                  public void serialize(org.apache.axis2.databinding.utils.writer.MTOMAwareXMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-                       GetGndPersonInfo.this.serialize(MY_QNAME,factory,xmlWriter);
+                       GetResourcesByPndResponse.this.serialize(MY_QNAME,factory,xmlWriter);
                  }
                };
                return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
@@ -178,11 +230,11 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://gnd.qterra.de/webservice/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":getGndPersonInfo",
+                           namespacePrefix+":getResourcesByPndResponse",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "getGndPersonInfo",
+                           "getResourcesByPndResponse",
                            xmlWriter);
                    }
 
@@ -196,67 +248,46 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"lastName", namespace);
+                                            xmlWriter.writeStartElement(prefix,"resultSize", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"lastName");
+                                            xmlWriter.writeStartElement(namespace,"resultSize");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("lastName");
+                                        xmlWriter.writeStartElement("resultSize");
                                     }
                                 
-
-                                          if (localLastName==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("lastName cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localLastName);
-                                            
-                                          }
+                                               if (localResultSize==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         throw new org.apache.axis2.databinding.ADBException("resultSize cannot be null!!");
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localResultSize));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
+                              if (localResultTracker){
+                                       if (localResult!=null){
+                                            for (int i = 0;i < localResult.length;i++){
+                                                if (localResult[i] != null){
+                                                 localResult[i].serialize(new javax.xml.namespace.QName("","result"),
+                                                           factory,xmlWriter);
+                                                } else {
+                                                   
+                                                        // we don't have to do any thing since minOccures is zero
+                                                    
+                                                }
 
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"firstName", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"firstName");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("firstName");
+                                            }
+                                     } else {
+                                        
+                                               throw new org.apache.axis2.databinding.ADBException("result cannot be null!!");
+                                        
                                     }
-                                
-
-                                          if (localFirstName==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("firstName cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localFirstName);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
+                                 }
                     xmlWriter.writeEndElement();
                
 
@@ -420,23 +451,32 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "lastName"));
+                                                                      "resultSize"));
                                  
-                                        if (localLastName != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localLastName));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("lastName cannot be null!!");
-                                        }
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "firstName"));
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localResultSize));
+                             if (localResultTracker){
+                             if (localResult!=null) {
+                                 for (int i = 0;i < localResult.length;i++){
+
+                                    if (localResult[i] != null){
+                                         elementList.add(new javax.xml.namespace.QName("",
+                                                                          "result"));
+                                         elementList.add(localResult[i]);
+                                    } else {
+                                        
+                                                // nothing to do
+                                            
+                                    }
+
+                                 }
+                             } else {
                                  
-                                        if (localFirstName != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFirstName));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("firstName cannot be null!!");
-                                        }
+                                        throw new org.apache.axis2.databinding.ADBException("result cannot be null!!");
                                     
+                             }
+
+                        }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -461,9 +501,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static GetGndPersonInfo parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            GetGndPersonInfo object =
-                new GetGndPersonInfo();
+        public static GetResourcesByPndResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            GetResourcesByPndResponse object =
+                new GetResourcesByPndResponse();
 
             int event;
             java.lang.String nillableValue = null;
@@ -487,10 +527,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"getGndPersonInfo".equals(type)){
+                            if (!"getResourcesByPndResponse".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (GetGndPersonInfo)de.qterra.gnd.webservice.ExtensionMapper.getTypeObject(
+                                return (GetResourcesByPndResponse)de.qterra.gnd.webservice.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -512,15 +552,17 @@
                     
                     reader.next();
                 
+                        java.util.ArrayList list2 = new java.util.ArrayList();
+                    
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","lastName").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","resultSize").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setLastName(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              object.setResultSize(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                               
                                         reader.next();
                                     
@@ -534,22 +576,49 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","firstName").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","result").equals(reader.getName())){
                                 
-                                    java.lang.String content = reader.getElementText();
                                     
-                                              object.setFirstName(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
                                     
+                                    // Process the array and step past its final element's end.
+                                    list2.add(de.qterra.gnd.webservice.ResourceResultType.Factory.parse(reader));
+                                                                
+                                                        //loop until we find a start element that is not part of this array
+                                                        boolean loopDone2 = false;
+                                                        while(!loopDone2){
+                                                            // We should be at the end element, but make sure
+                                                            while (!reader.isEndElement())
+                                                                reader.next();
+                                                            // Step out of this element
+                                                            reader.next();
+                                                            // Step to next element event.
+                                                            while (!reader.isStartElement() && !reader.isEndElement())
+                                                                reader.next();
+                                                            if (reader.isEndElement()){
+                                                                //two continuous end elements means we are exiting the xml structure
+                                                                loopDone2 = true;
+                                                            } else {
+                                                                if (new javax.xml.namespace.QName("","result").equals(reader.getName())){
+                                                                    list2.add(de.qterra.gnd.webservice.ResourceResultType.Factory.parse(reader));
+                                                                        
+                                                                }else{
+                                                                    loopDone2 = true;
+                                                                }
+                                                            }
+                                                        }
+                                                        // call the converter utility  to convert and set the array
+                                                        
+                                                        object.setResult((de.qterra.gnd.webservice.ResourceResultType[])
+                                                            org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                                                                de.qterra.gnd.webservice.ResourceResultType.class,
+                                                                list2));
+                                                            
                               }  // End of if for expected property start element
                                 
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                              
+                                    else {
+                                        
+                                    }
+                                  
                             while (!reader.isStartElement() && !reader.isEndElement())
                                 reader.next();
                             

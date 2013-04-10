@@ -23,7 +23,10 @@ import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
 import de.qterra.gnd.webservice.GetPublicationsByCreatorName;
 import de.qterra.gnd.webservice.GetPublicationsByCreatorNameResponse;
+import de.qterra.gnd.webservice.GetResourcesByPnd;
+import de.qterra.gnd.webservice.GetResourcesByPndResponse;
 import de.qterra.gnd.webservice.KeywordResultType;
+import de.qterra.gnd.webservice.PersonResultType;
 import de.qterra.gnd.webservice.PublResultType;
 import de.qterra.gnd.webservice.ResultType;
 
@@ -89,7 +92,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			}
 		}
 
-		ArrayList<ResultType> resultArray = new ArrayList<ResultType>();
+		ArrayList<PersonResultType> resultArray = new ArrayList<PersonResultType>();
 		
 		// create appropriate GndPersonInfoResponse from results arraylist 
 		response.setResultSize(results.size());
@@ -97,7 +100,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		for (int i=0; i<results.size(); i++){
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
-			ResultType res = new ResultType();
+			PersonResultType res = new PersonResultType();
 			res.setPndUri(resLine.get("uri").toString());
 			res.setPrefferedName(resLine.get("name").toString());
 			res.setPndID(resLine.get("uri").toString().substring(21));
@@ -117,14 +120,14 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			resultArray.add(res);
 		}
 		
-		ResultType[] resType = null;
-		resultArray.toArray(resType = new ResultType[resultArray.size()] );
+		PersonResultType[] resType = null;
+		resultArray.toArray(resType = new PersonResultType[resultArray.size()] );
 		response.setResult(resType) ;
 		return response;
 	}
 
 
-	@Override
+	//@Override
 	public de.qterra.gnd.webservice.GetGndKeywordResponse getGndKeyword(
 			de.qterra.gnd.webservice.GetGndKeyword getGndKeyword) {
 		// TODO Auto-generated method stub
@@ -156,7 +159,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 	}
 
 
-	@Override
+	//@Override
 	public GetPublicationsByCreatorNameResponse getPublicationsByCreatorName(
 			GetPublicationsByCreatorName getPublicationsByCreatorName) {
 		/*
@@ -226,6 +229,14 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			reqProp = ReqProp;
 		}
 		
+	}
+
+
+	@Override
+	public GetResourcesByPndResponse getResourcesByPnd(
+			GetResourcesByPnd getResourcesByPnd) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

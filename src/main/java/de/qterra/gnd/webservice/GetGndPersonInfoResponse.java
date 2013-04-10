@@ -3,7 +3,7 @@
  * GetGndPersonInfoResponse.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:47 EDT)
+ * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:34 EDT)
  */
             
                 package de.qterra.gnd.webservice;
@@ -17,14 +17,14 @@
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://gnd.hbz.nrw.de/webservice/",
+                "http://gnd.qterra.de/webservice/",
                 "getGndPersonInfoResponse",
                 "ns1");
 
             
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://gnd.hbz.nrw.de/webservice/")){
+            if(namespace.equals("http://gnd.qterra.de/webservice/")){
                 return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -68,7 +68,7 @@
                         */
 
                         
-                                    protected de.qterra.gnd.webservice.ResultType[] localResult ;
+                                    protected de.qterra.gnd.webservice.PersonResultType[] localResult ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -79,9 +79,9 @@
 
                            /**
                            * Auto generated getter method
-                           * @return de.qterra.gnd.webservice.ResultType[]
+                           * @return de.qterra.gnd.webservice.PersonResultType[]
                            */
-                           public  de.qterra.gnd.webservice.ResultType[] getResult(){
+                           public  de.qterra.gnd.webservice.PersonResultType[] getResult(){
                                return localResult;
                            }
 
@@ -93,7 +93,7 @@
                               /**
                                * validate the array for Result
                                */
-                              protected void validateResult(de.qterra.gnd.webservice.ResultType[] param){
+                              protected void validateResult(de.qterra.gnd.webservice.PersonResultType[] param){
                              
                               }
 
@@ -102,7 +102,7 @@
                               * Auto generated setter method
                               * @param param Result
                               */
-                              public void setResult(de.qterra.gnd.webservice.ResultType[] param){
+                              public void setResult(de.qterra.gnd.webservice.PersonResultType[] param){
                               
                                    validateResult(param);
 
@@ -122,11 +122,11 @@
                              
                              /**
                              * Auto generated add method for the array for convenience
-                             * @param param de.qterra.gnd.webservice.ResultType
+                             * @param param de.qterra.gnd.webservice.PersonResultType
                              */
-                             public void addResult(de.qterra.gnd.webservice.ResultType param){
+                             public void addResult(de.qterra.gnd.webservice.PersonResultType param){
                                    if (localResult == null){
-                                   localResult = new de.qterra.gnd.webservice.ResultType[]{};
+                                   localResult = new de.qterra.gnd.webservice.PersonResultType[]{};
                                    }
 
                             
@@ -138,8 +138,8 @@
                             org.apache.axis2.databinding.utils.ConverterUtil.toList(localResult);
                                list.add(param);
                                this.localResult =
-                             (de.qterra.gnd.webservice.ResultType[])list.toArray(
-                            new de.qterra.gnd.webservice.ResultType[list.size()]);
+                             (de.qterra.gnd.webservice.PersonResultType[])list.toArray(
+                            new de.qterra.gnd.webservice.PersonResultType[list.size()]);
 
                              }
                              
@@ -227,7 +227,7 @@
                   if (serializeType){
                
 
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://gnd.hbz.nrw.de/webservice/");
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://gnd.qterra.de/webservice/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
                            namespacePrefix+":getGndPersonInfoResponse",
@@ -581,7 +581,7 @@
                                     
                                     
                                     // Process the array and step past its final element's end.
-                                    list2.add(de.qterra.gnd.webservice.ResultType.Factory.parse(reader));
+                                    list2.add(de.qterra.gnd.webservice.PersonResultType.Factory.parse(reader));
                                                                 
                                                         //loop until we find a start element that is not part of this array
                                                         boolean loopDone2 = false;
@@ -599,7 +599,7 @@
                                                                 loopDone2 = true;
                                                             } else {
                                                                 if (new javax.xml.namespace.QName("","result").equals(reader.getName())){
-                                                                    list2.add(de.qterra.gnd.webservice.ResultType.Factory.parse(reader));
+                                                                    list2.add(de.qterra.gnd.webservice.PersonResultType.Factory.parse(reader));
                                                                         
                                                                 }else{
                                                                     loopDone2 = true;
@@ -608,9 +608,9 @@
                                                         }
                                                         // call the converter utility  to convert and set the array
                                                         
-                                                        object.setResult((de.qterra.gnd.webservice.ResultType[])
+                                                        object.setResult((de.qterra.gnd.webservice.PersonResultType[])
                                                             org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                                                de.qterra.gnd.webservice.ResultType.class,
+                                                                de.qterra.gnd.webservice.PersonResultType.class,
                                                                 list2));
                                                             
                               }  // End of if for expected property start element

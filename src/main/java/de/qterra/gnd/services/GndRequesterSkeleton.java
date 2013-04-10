@@ -6,6 +6,9 @@
  * by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:24 EDT)
  */
     package de.qterra.gnd.services;
+
+import de.qterra.gnd.webservice.GetResourcesByPnd;
+import de.qterra.gnd.webservice.GetResourcesByPndResponse;
     /**
      *  GndRequesterSkeleton java skeleton for the axisService
      */
@@ -58,6 +61,14 @@
                 //TODO : fill this with the necessary business logic
                 throw new  java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#getGndPersonInfo");
         }
+
+
+		@Override
+		public GetResourcesByPndResponse getResourcesByPnd(
+				GetResourcesByPnd getResourcesByPnd) {
+			// TODO Auto-generated method stub
+			return null;
+		}
      
     }
     

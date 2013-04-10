@@ -3,7 +3,7 @@
  * GndRequesterSkeletonInterface.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:24 EDT)
+ * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT)
  */
     package de.qterra.gnd.services;
     /**
@@ -14,35 +14,7 @@
          
         /**
          * Auto generated method signature
-         * 
-                                    * @param getPublicationsByCreatorName
-         */
-
-        
-                public de.qterra.gnd.webservice.GetPublicationsByCreatorNameResponse getPublicationsByCreatorName
-                (
-                  de.qterra.gnd.webservice.GetPublicationsByCreatorName getPublicationsByCreatorName
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param getGndKeyword
-         */
-
-        
-                public de.qterra.gnd.webservice.GetGndKeywordResponse getGndKeyword
-                (
-                  de.qterra.gnd.webservice.GetGndKeyword getGndKeyword
-                 )
-            ;
-        
-         
-        /**
-         * Auto generated method signature
-         * An Operaton that requests URIs and other information (if any) provided by the GND from given first and last name of a person
+         * An Operation that requests URIs and other information (if any) provided by the GND from given first and last name of a person
                                     * @param getGndPersonInfo
          */
 
@@ -50,6 +22,20 @@
                 public de.qterra.gnd.webservice.GetGndPersonInfoResponse getGndPersonInfo
                 (
                   de.qterra.gnd.webservice.GetGndPersonInfo getGndPersonInfo
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
+                                    * @param getResourcesByPnd
+         */
+
+        
+                public de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPnd
+                (
+                  de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd
                  )
             ;
         

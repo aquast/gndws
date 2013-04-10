@@ -33,6 +33,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import de.qterra.gnd.serviceimpl.ServiceImpl;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
+import de.qterra.gnd.webservice.PersonResultType;
 import de.qterra.gnd.webservice.ResultType;
 
 /**
@@ -60,7 +61,7 @@ public class TestServiceImpl {
 		GetGndPersonInfoResponse response = sImpl.getGndPersonInfo(persInfo);
 		
 		
-		ResultType[] res = response.getResult(); 
+		PersonResultType[] res = response.getResult(); 
 
 
 		if(res != null){

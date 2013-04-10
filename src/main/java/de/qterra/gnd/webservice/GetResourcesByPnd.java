@@ -1,6 +1,6 @@
 
 /**
- * GetGndPersonInfo.java
+ * GetResourcesByPnd.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:34 EDT)
@@ -10,15 +10,15 @@
             
 
             /**
-            *  GetGndPersonInfo bean class
+            *  GetResourcesByPnd bean class
             */
         
-        public  class GetGndPersonInfo
+        public  class GetResourcesByPnd
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://gnd.qterra.de/webservice/",
-                "getGndPersonInfo",
+                "getResourcesByPnd",
                 "ns1");
 
             
@@ -33,60 +33,30 @@
         
 
                         /**
-                        * field for LastName
+                        * field for PndUri
                         */
 
                         
-                                    protected java.lang.String localLastName ;
+                                    protected java.lang.String localPndUri ;
                                 
 
                            /**
                            * Auto generated getter method
                            * @return java.lang.String
                            */
-                           public  java.lang.String getLastName(){
-                               return localLastName;
+                           public  java.lang.String getPndUri(){
+                               return localPndUri;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param LastName
+                               * @param param PndUri
                                */
-                               public void setLastName(java.lang.String param){
+                               public void setPndUri(java.lang.String param){
                             
-                                            this.localLastName=param;
-                                    
-
-                               }
-                            
-
-                        /**
-                        * field for FirstName
-                        */
-
-                        
-                                    protected java.lang.String localFirstName ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getFirstName(){
-                               return localFirstName;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param FirstName
-                               */
-                               public void setFirstName(java.lang.String param){
-                            
-                                            this.localFirstName=param;
+                                            this.localPndUri=param;
                                     
 
                                }
@@ -124,7 +94,7 @@
                        new org.apache.axis2.databinding.ADBDataSource(this,MY_QNAME){
 
                  public void serialize(org.apache.axis2.databinding.utils.writer.MTOMAwareXMLStreamWriter xmlWriter) throws javax.xml.stream.XMLStreamException {
-                       GetGndPersonInfo.this.serialize(MY_QNAME,factory,xmlWriter);
+                       GetResourcesByPnd.this.serialize(MY_QNAME,factory,xmlWriter);
                  }
                };
                return new org.apache.axiom.om.impl.llom.OMSourcedElementImpl(
@@ -178,11 +148,11 @@
                    java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://gnd.qterra.de/webservice/");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":getGndPersonInfo",
+                           namespacePrefix+":getResourcesByPnd",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "getGndPersonInfo",
+                           "getResourcesByPnd",
                            xmlWriter);
                    }
 
@@ -196,62 +166,28 @@
                                         if (prefix == null) {
                                             prefix = generatePrefix(namespace);
 
-                                            xmlWriter.writeStartElement(prefix,"lastName", namespace);
+                                            xmlWriter.writeStartElement(prefix,"pndUri", namespace);
                                             xmlWriter.writeNamespace(prefix, namespace);
                                             xmlWriter.setPrefix(prefix, namespace);
 
                                         } else {
-                                            xmlWriter.writeStartElement(namespace,"lastName");
+                                            xmlWriter.writeStartElement(namespace,"pndUri");
                                         }
 
                                     } else {
-                                        xmlWriter.writeStartElement("lastName");
+                                        xmlWriter.writeStartElement("pndUri");
                                     }
                                 
 
-                                          if (localLastName==null){
+                                          if (localPndUri==null){
                                               // write the nil attribute
                                               
-                                                     throw new org.apache.axis2.databinding.ADBException("lastName cannot be null!!");
+                                                     throw new org.apache.axis2.databinding.ADBException("pndUri cannot be null!!");
                                                   
                                           }else{
 
                                         
-                                                   xmlWriter.writeCharacters(localLastName);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"firstName", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"firstName");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("firstName");
-                                    }
-                                
-
-                                          if (localFirstName==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("firstName cannot be null!!");
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localFirstName);
+                                                   xmlWriter.writeCharacters(localPndUri);
                                             
                                           }
                                     
@@ -420,21 +356,12 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "lastName"));
+                                                                      "pndUri"));
                                  
-                                        if (localLastName != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localLastName));
+                                        if (localPndUri != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPndUri));
                                         } else {
-                                           throw new org.apache.axis2.databinding.ADBException("lastName cannot be null!!");
-                                        }
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "firstName"));
-                                 
-                                        if (localFirstName != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localFirstName));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("firstName cannot be null!!");
+                                           throw new org.apache.axis2.databinding.ADBException("pndUri cannot be null!!");
                                         }
                                     
 
@@ -461,9 +388,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static GetGndPersonInfo parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            GetGndPersonInfo object =
-                new GetGndPersonInfo();
+        public static GetResourcesByPnd parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            GetResourcesByPnd object =
+                new GetResourcesByPnd();
 
             int event;
             java.lang.String nillableValue = null;
@@ -487,10 +414,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"getGndPersonInfo".equals(type)){
+                            if (!"getResourcesByPnd".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (GetGndPersonInfo)de.qterra.gnd.webservice.ExtensionMapper.getTypeObject(
+                                return (GetResourcesByPnd)de.qterra.gnd.webservice.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -515,30 +442,11 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","lastName").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","pndUri").equals(reader.getName())){
                                 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setLastName(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getLocalName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","firstName").equals(reader.getName())){
-                                
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setFirstName(
+                                              object.setPndUri(
                                                     org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                               
                                         reader.next();
