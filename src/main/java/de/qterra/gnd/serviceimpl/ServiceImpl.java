@@ -119,6 +119,9 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			if(resLine.containsKey("acad")){
 				res.setAcadTitle(resLine.get("acad").toString());
 			}
+			if(resLine.containsKey("wpUrl")){
+				res.addWpUrl(resLine.get("wpUrl").toString());
+			}
 			resultArray.add(res);
 		}
 		

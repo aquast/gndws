@@ -1,7 +1,10 @@
-select distinct ?uri ?name ?name1 ?birth ?link ?biogr ?acad where 
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+select distinct ?uri ?name ?birth ?link ?biogr ?acad where 
 	{
      ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> "$lastName, $firstName" . 
      ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> ?name .
+     ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://d-nb.info/standards/elementset/gnd#DifferentiatedPerson> .
      OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#dateOfBirth> ?birth} .
      OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#biographicalOrHistoricalInformation> ?biogr} .
      OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#academicTitleOfThePerson> ?acad} .

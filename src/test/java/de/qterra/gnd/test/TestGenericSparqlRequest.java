@@ -79,7 +79,8 @@ public class TestGenericSparqlRequest{
 	}
 	
 	
-	@Test public void request(){	
+	//@Test 
+	public void request(){	
 		
 		// create testing properties
 		setPropertyList();
