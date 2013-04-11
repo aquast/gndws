@@ -45,7 +45,7 @@ public class TestPersonRequest {
 		//Test PersonRequest
 		PersonRequest perReq = new PersonRequest();
 		//results = perReq.performRequest("Andres", "Quast");
-		results = perReq.performRequest("Loki", "Schmidt");
+		results = perReq.performRequest("Björn", "Quast");
 
 
 		System.out.println(results.size());

@@ -65,9 +65,10 @@ public class GenericSPARQLRequest {
 		while (propEnum.hasMoreElements()){
 			String key = (String) propEnum.nextElement();
 			if(key.startsWith("$")){
-				queryString = queryString.replace(key, Normalizer.normalize(requestProp.getProperty(key), Normalizer.NFKD));
+				queryString = queryString.replace(key, Normalizer.normalize(requestProp.getProperty(key), Normalizer.NFC));
 			}
 		}
+		log.debug(queryString);
 
 		query.setQueryString(queryString);
 		ArrayList<Hashtable<String,RDFNode>> results = query.querySparql();

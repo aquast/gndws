@@ -61,8 +61,8 @@ public class TestServiceImpl {
 		ServiceImpl sImpl= new ServiceImpl();
 		
 		GetGndPersonInfo persInfo = new GetGndPersonInfo();
-		persInfo.setFirstName("Gudrun");
-		persInfo.setLastName("Gersmann");
+		persInfo.setFirstName("Heiner");
+		persInfo.setLastName("Müller");
 		GetGndPersonInfoResponse response = sImpl.getGndPersonInfo(persInfo);
 		
 		
@@ -94,7 +94,6 @@ public class TestServiceImpl {
 						+  rResult[j].getExtent() + ", " 
 						+  rResult[j].getPublisher() +  ", " 
 						+ rResult[j].getIsbn() +  ", " 
-						//+ rResult[j].getIssn() +  ", " 
 						+ ". - URI: " + rResult[j].getResourceUri());
 				}
 			}

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import java.text.Normalizer;
 
 import de.qterra.gnd.services.GndRequesterSkeletonInterface;
 import de.qterra.gnd.sparql.requests.ClassificationRequest;
@@ -53,7 +54,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		results = new ArrayList<Hashtable<String,RDFNode>>();
 		
 		firstName = getGndPersonInfo.getFirstName();
-		lastName = getGndPersonInfo.getLastName();
+		lastName =  getGndPersonInfo.getLastName();
 		
 		Properties persReqProp = new Properties();
 		persReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
@@ -119,9 +120,10 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			if(resLine.containsKey("acad")){
 				res.setAcadTitle(resLine.get("acad").toString());
 			}
-			if(resLine.containsKey("wpUrl")){
+			if(resLine.containsKey("link")){
 				res.addWpUrl(resLine.get("wpUrl").toString());
 			}
+			
 			resultArray.add(res);
 		}
 		
@@ -232,6 +234,11 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		b3katPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/" + pnd + ">");
 		propertyList.add(b3katPersResReqProp);
 
+		Properties gndPersResReqProp = new Properties();
+		gndPersResReqProp.setProperty("requestUrl", "http://lobid.org/sparql/");
+		gndPersResReqProp.setProperty("sparqlFile", "gndResourcesRequest.txt");
+		gndPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/" + pnd + ">");
+		propertyList.add(gndPersResReqProp);
 
 		// create request threads
 		ArrayList<Thread> threadList = new ArrayList<Thread>();

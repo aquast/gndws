@@ -91,9 +91,12 @@ public class PersonRequest {
 			}
 			
 			
-			queryString = queryString.replace("$lastName", decompLastName);
-			queryString = queryString.replace("$firstName", decompFirstName);
-				
+			String queryString0 = queryString.replace("$lastName", decompLastName);
+			queryString0 = queryString0.replace("$firstName", decompFirstName);
+			queryString = Normalizer.normalize(queryString0, Normalizer.NFC);
+			
+			log.info(queryString); 
+			
 			query.setQueryString(queryString);
 			results.addAll(query.querySparql());
 		}
