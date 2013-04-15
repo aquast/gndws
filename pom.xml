@@ -34,21 +34,20 @@
   				</execution>
   			</executions>
   		</plugin>
-  		<!-- <plugin>
+  		<plugin>
   			<groupId>org.apache.maven.plugins</groupId>
   			<artifactId>maven-war-plugin</artifactId>
   			<version>2.3</version>
 			<configuration>
-				<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-				<packagingExclude>src/main/java/</packagingExclude>
-				<warName>lodDigger-0.3</warName>
+				<packagingExcludes>WEB-INF/lib/*.jar,WEB-INF/classes/*</packagingExcludes>
+				<warName>loddiggr</warName>
 			</configuration>
   			<executions>
   				<execution>
   					<id>war</id>
   				</execution>
   			</executions> 
-  		</plugin> -->
+  		</plugin>
   	</plugins>
   </build>
   <repositories>

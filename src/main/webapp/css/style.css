@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: #ffffff;
+	font-family: "Verdana", "Arial", "Helvetica", sans-serif;
+	}
+	
+table tr td{
+	font-size: 0.7em;
+	padding-right: 5px;
+	padding-top:10px;
+	padding-bottom:10px;
+	border: 2px solid;
+	align:bottom;
+	}
+
+.requestarea{
+	float: left;
+	background-color: #dde4e4;
+	width: 70%;
+	padding: 10px;
+}
+
+.formarea{
+	background-color: #dffc44;
+	box-shadow: 3px 3px 7px #6666ff;
+	border-radius: 20px;
+	padding: 30px;
+	margin: 10px;
+	}
+	
+.resultarea{
+	float: left;
+	background-color: #dde4e4;
+	width: 30%	
+}
+
+.resultbox{
+	background-color: #ffeb6c;
+	box-shadow: 3px 3px 3px #666666;
+	border-radius: 20px;
+	padding: 30px;
+}
