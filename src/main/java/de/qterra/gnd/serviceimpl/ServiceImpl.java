@@ -17,8 +17,6 @@ import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
-import de.qterra.gnd.test.TestGenericSparqlRequest;
-import de.qterra.gnd.test.TestGenericSparqlRequest.SparqlRunnable;
 import de.qterra.gnd.webservice.GetGndKeywordResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;

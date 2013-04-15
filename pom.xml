@@ -11,14 +11,14 @@
   			<artifactId>maven-assembly-plugin</artifactId>
   			<version>2.2-beta-5</version>
   			<configuration>
-  			<descriptorRefs>
-  			<descriptorRef>jar-with-dependencies</descriptorRef>
-  			</descriptorRefs>
-  			<archive>
-  			<manifest>
-  			<mainClass>de.qterra.gnd.serviceimpl.ServiceImpl</mainClass>
-  			</manifest>
-  			</archive>
+  				<descriptorRefs>
+  					<descriptorRef>jar-with-dependencies</descriptorRef>
+  				</descriptorRefs>
+  				<archive>
+  					<manifest>
+  						<mainClass>de.qterra.gnd.serviceimpl.ServiceImpl</mainClass>
+  					</manifest>
+  				</archive>
   			</configuration>
   		</plugin>
   		<plugin>
@@ -34,6 +34,21 @@
   				</execution>
   			</executions>
   		</plugin>
+  		<!-- <plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-war-plugin</artifactId>
+  			<version>2.3</version>
+			<configuration>
+				<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				<packagingExclude>src/main/java/</packagingExclude>
+				<warName>lodDigger-0.3</warName>
+			</configuration>
+  			<executions>
+  				<execution>
+  					<id>war</id>
+  				</execution>
+  			</executions> 
+  		</plugin> -->
   	</plugins>
   </build>
   <repositories>
