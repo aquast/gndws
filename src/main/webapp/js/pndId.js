@@ -8,24 +8,30 @@
 
 $(document).ready(addPndForm);
 
+var pRow;
 
 function addPndForm(){
-	var suchImage = "<div style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
+	var suchImage = "<div class=\"pnd\" style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
 	var imageDiv = $(".PNDIdentNumber").parent().append(suchImage);
-	$(".lastName").blur(requestPersonId);
+	//$(".lastName").blur(requestPersonId);
 	$("img").click(requestPersonId);
 	$("body").append("<div class=\"result\"><h4>Ergebnis der PND ID-Abfrage</h4></div>");
 	$(".result").hide();
+
 };
 
 function requestPersonId(){
-    $(".result").slideUp();	
+    $(".resultalert").remove();	
+    $(".result").hide();
+    $(".item").remove();
 	var firstName = $(this).parent().parent().parent().find(".firstName").val();
 	var lastName = $(this).parent().parent().parent().find(".lastName").val();
+	
+	pRow = $(this).parent().parent().parent();
 	if(pndFormCheck(firstName, lastName)){
 		requestGndService(firstName, lastName); 	
-/*PersonData = window.open("https://alkyoneus.hbz-nrw.de/gnd/gndrequest.jsp?firstName=" + firstName + "&lastName=" + lastName, "Person Data", "height=800,width=600,scrollbars=yes");
-    	PersonData.focus();*/
+		$(this).parent().parent().find(".pnd").append("<div class=\"resultalert\"></div>");
+		//$(this).parent().parent().find("img").remove();
     	}
 };
 
@@ -51,17 +57,25 @@ function requestGndService(firstName, lastName){
      var testText;
      var jqxhr = jQuery.ajax(options)
 			.done(function(){
-				$("div.result").append(jqxhr.responseText);
-				$("div.result").slideDown("slow");
+				$("div.resultalert").append($(jqxhr.responseText).find("resultSize").text());
+				$("div.resultalert").slideDown("slow");
+				$("div.resultalert").click(function(){
+					$(".result").show();
+					});
+				$("div.result").append(responseParser(jqxhr.responseText));
+				$("a.item strong").click(function(){
+					var pnd = $(this).parent().parent().find("ul li:first-child").text();
+					pRow.find("input.PNDIdentNumber").val(pnd);
+					$(".result").hide();
+				});
 			})
 			.fail(function(){
 				alert("request failed: " + jqxhr.statusText);
-				$("div.result").append(jqxhr.statusText);
-				$("div.result").slideDown("slow");
+				var xml = "<test><resultSize>4</resultSize></test>";
+				$("div.resultalert").append($(xml).find("resultSize").text());
+				$("div.resultalert").slideDown("slow");
 				})
 			.always(function(){
-				//$("div.result").append(jqxhr.responseText);
-				//$("div.result").slideDown("slow");
 			});
 		//alert(response);
 	//alert("warte mal: " + jqxhr.responseText);
@@ -69,4 +83,27 @@ function requestGndService(firstName, lastName){
     return jqxhr.responseText;
             	
 
+}
+
+function responseParser(xml){
+	var resultField = "";
+	var pndResult = $(xml).find("result");
+	//pndResult.length();
+	pndResult.each(function(){
+		var prefferedName = $(this).find("prefferedName").text();
+		var pndUri =$(this).find("pndUri").text();
+		var pndId = $(this).find("pndID").text();
+		var biogr = $(this).find("biograficData").text();
+		var birth =$(this).find("yearOfBirth").text();
+		
+		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong>" + prefferedName + "</strong></a>" 
+			+ "<ul><li><strong>PND-ID: </strong>" +  pndId + "</li>"
+			+ "<li><strong>Geburtsjahr: </strong>" + birth + "</li>"
+			+ "<li><strong>Bibliographische Daten: </strong>" + biogr  + "</li></ul></div>";
+	});
+	return resultField;
+}
+
+function insertField(){
+	;
 }
