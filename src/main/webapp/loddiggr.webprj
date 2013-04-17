@@ -1,0 +1,55 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project type="Local" name="lodDiggr" encoding="utf8" >
+    <upload/>
+    <author/>
+    <email/>
+    <defaultDTD>-//W3C//DTD HTML 4.01 Transitional//EN</defaultDTD>
+    <item url="css/" uploadstatus="1" />
+    <item url="css/loddiggr.css" uploadstatus="1" />
+    <item url="css/style.css" uploadstatus="1" />
+    <item url="html/" uploadstatus="1" />
+    <item url="html/gnd_form_light.html" uploadstatus="1" />
+    <item url="html/include.html" uploadstatus="1" />
+    <item url="html/personform.html" uploadstatus="1" />
+    <item url="image/" uploadstatus="1" />
+    <item url="image/search_icon.jpg" uploadstatus="1" />
+    <item url="image/searchpnd.png" uploadstatus="1" />
+    <item url="js/" uploadstatus="1" />
+    <item url="js/gndInRequest.js" uploadstatus="1" />
+    <item url="js/gndRequest.js" uploadstatus="1" />
+    <item url="js/jquery-1.9.1.min.js" uploadstatus="1" />
+    <item url="js/pndId.js" uploadstatus="1" />
+    <item url="jsp/" uploadstatus="1" />
+    <item url="jsp/autorentabelle.jsp" uploadstatus="1" />
+    <item url="jsp/biblioform.jsp" uploadstatus="1" />
+    <item url="jsp/get_pnd_id_form.jsp" uploadstatus="1" />
+    <item url="jsp/gnd_form.jsp" uploadstatus="1" />
+    <item url="jsp/gndrequest.jsp" uploadstatus="1" />
+    <item url="WEB-INF/" uploadstatus="1" />
+    <item url="WEB-INF/css/" uploadstatus="1" />
+    <item url="WEB-INF/css/loddiggr.css" uploadstatus="1" />
+    <item url="WEB-INF/css/style.css" uploadstatus="1" />
+    <item url="WEB-INF/html/" uploadstatus="1" />
+    <item url="WEB-INF/html/gnd_form_light.html" uploadstatus="1" />
+    <item url="WEB-INF/html/include.html" uploadstatus="1" />
+    <item url="WEB-INF/html/personform.html" uploadstatus="1" />
+    <item url="WEB-INF/image/" uploadstatus="1" />
+    <item url="WEB-INF/image/searchpnd.png" uploadstatus="1" />
+    <item url="WEB-INF/js/" uploadstatus="1" />
+    <item url="WEB-INF/js/gndInRequest.js" uploadstatus="1" />
+    <item url="WEB-INF/js/gndRequest.js" uploadstatus="1" />
+    <item url="WEB-INF/jsp/" uploadstatus="1" />
+    <item url="WEB-INF/jsp/autorentabelle.jsp" uploadstatus="1" />
+    <item url="WEB-INF/jsp/biblioform.jsp" uploadstatus="1" />
+    <item url="WEB-INF/jsp/gnd_form.jsp" uploadstatus="1" />
+    <item url="WEB-INF/jsp/gndRequest.js" uploadstatus="1" />
+    <item url="WEB-INF/jsp/gndrequest.jsp" uploadstatus="1" />
+    <item url="WEB-INF/web.xml" uploadstatus="1" />
+    <item url="index.html" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <annotations/>
+  </project>
+</webproject>

@@ -1,6 +1,7 @@
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%
 int z;
 if(request.getParameter("count")!= null){
@@ -58,6 +59,8 @@ if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").len
 		pndIdList.set(i,pndId[i]);
 	}
 }
+
+response.addHeader("Access-Control-Allow-Origin", "http://131.220.138.195:8080");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -121,11 +124,7 @@ for(int i = 0; i < z ; i++ ){
 			<input type="submit" value="Formular verwerfen" name="clear" />
 		</form>
 	</div>
-	
-	<div class="resultarea">
-	<p>Ergebnisse</p>
-	</div>
-<script src="../js/jquery-1.9.1.min.js"></script>
+	<script src="../js/jquery-1.9.1.min.js"></script>
 <script src="../js/pndId.js" type="text/javascript"></script>
 </body>
 </html>

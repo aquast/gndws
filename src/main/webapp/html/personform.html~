@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Form for request authors or contributors personal data</title>
-<link  rel="stylesheet" type="text/css" href="../css/style.css"/>
+<link  rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
 <body>
 <h1>Eingabeformular</h1>
@@ -18,8 +18,8 @@
 		</tr>
 		<tr>
 			<td><input class="academicTitle" name="acadTitle" type="text" size="5"/></td>
-			<td><input class="firstName" type="text" size="20" value="Andres" /></td>
-			<td><input class="lastName" type="text" size="20" value="Quast" /></td>
+			<td><input class="firstName" type="text" size="20"  /></td>
+			<td><input class="lastName" type="text" size="20"/></td>
 			<td><input class="PNDIdentNumber" type="text" size="10"/></td>
 			<td><select>
 			<option value="author">Autor</option>

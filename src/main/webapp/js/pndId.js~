@@ -12,18 +12,24 @@ $(document).ready(addPndForm);
 function addPndForm(){
 	var suchImage = "<div style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
 	var imageDiv = $(".PNDIdentNumber").parent().append(suchImage);
-	$(".lastName").blur(requestPersonId);
+	$("div").addClass("search_icon");
 	$("img").click(requestPersonId);
-	$("body").append("<div class=\"result\"><h4>Ergebnis der PND ID-Abfrage</h4></div>");
-	$(".result").hide();
+	
 };
 
 function requestPersonId(){
-    $(".result").slideUp();	
-	var firstName = $(this).parent().parent().parent().find(".firstName").val();
+    	var firstName = $(this).parent().parent().parent().find(".firstName").val();
 	var lastName = $(this).parent().parent().parent().find(".lastName").val();
+    //var firstName = $(this + " input.firstName");
+	/*$(".result").append("<h2>PNDs für den Namen: </h2>");
+	$(".firstName").each(function(){
+		var firstName = $(this).val();
+		$(".result").append("<p>Vorname : " + firstName + "</p>" + tagEbene);
+		
+	});*/
 	if(pndFormCheck(firstName, lastName)){
-		requestGndService(firstName, lastName); 	
+		$(".result").append("<p>Name : " + firstName + " " + lastName + "</p>");
+		$(".result").append(requestGndService(firstName, lastName)); 	
 /*PersonData = window.open("https://alkyoneus.hbz-nrw.de/gnd/gndrequest.jsp?firstName=" + firstName + "&lastName=" + lastName, "Person Data", "height=800,width=600,scrollbars=yes");
     	PersonData.focus();*/
     	}
@@ -41,32 +47,23 @@ function requestGndService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
 	var requestUrl = "http://localhost:8080/axis2/services/gndRequester/getGndPersonInfo?firstName=" 
 	+ firstName + "&lastName=" + lastName;
+
+	var response = "<p>TEST</p>";
 	var options = {
-			
 			type: 'GET',
 			url: requestUrl,
-			dataType: 'xml',
+			dataType: 'xml text',
             	}
             
-     var testText;
-     var jqxhr = jQuery.ajax(options)
-			.done(function(){
-				$("div.result").append(jqxhr.responseText);
-				$("div.result").slideDown("slow");
-			})
-			.fail(function(){
-				alert("request failed: " + jqxhr.statusText);
-				$("div.result").append(jqxhr.statusText);
-				$("div.result").slideDown("slow");
-				})
-			.always(function(){
-				//$("div.result").append(jqxhr.responseText);
-				//$("div.result").slideDown("slow");
-			});
+            	//jQuery.ajax('include.txt');
+            	alert('starte Anfrage mit' + requestUrl);
+            	
+            	var jqxhr = jQuery.ajax(options)
+			.done(function(){alert("success");})
+			.fail(function(){alert("failed: " + jqxhr.statusCode());})
+			.always(function(){alert("complete");});
 		//alert(response);
-	//alert("warte mal: " + jqxhr.responseText);
-	//alert("warte mal2: " + testText);
-    return jqxhr.responseText;
+		//alert(jqxhr.status);
             	
 
 }

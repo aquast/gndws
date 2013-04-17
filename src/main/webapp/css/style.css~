@@ -7,9 +7,9 @@ body{
 	
 table tr td{
 	font-size: 0.7em;
-	padding-right: 20px;
-	padding-top:10px;
-	padding-bottom:10px;
+	padding-right: 5px;
+	padding-top:40px;
+	padding-bottom:40px;
 	align:bottom;
 	}
 
@@ -43,17 +43,5 @@ table tr td{
 
 div.search_icon{
 	float: left;
-}
-
-div.result{
-	z-index:10;
-	position:fixed;
-	top:20px;
-	right: 20px; 
-	height: 200px;
-	width:150px;
-	background-color: #ffeb6c;
-	box-shadow: 3px 3px 3px #666666;
-	border-radius: 20px;
-	padding: 30px;
+	border: 5px solid;
 }
