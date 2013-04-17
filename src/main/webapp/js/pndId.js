@@ -64,7 +64,9 @@ function requestGndService(firstName, lastName){
 					});
 				$("div.result").append(responseParser(jqxhr.responseText));
 				$("a.item strong").click(function(){
+					$(this).parent().parent().find("ul li strong").remove();
 					var pnd = $(this).parent().parent().find("ul li:first-child").text();
+					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
 					pRow.find("input.PNDIdentNumber").val(pnd);
 					$(".result").hide();
 				});
