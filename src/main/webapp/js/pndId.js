@@ -12,7 +12,7 @@ $(document).ready(addPndForm);
 function addPndForm(){
 	var suchImage = "<div style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
 	var imageDiv = $(".PNDIdentNumber").parent().append(suchImage);
-	$(".lastName").blur(requestPersonId);
+	$(".lastName").blur(requestPersonId)
 	$("img").click(requestPersonId);
 	$("body").append("<div class=\"result\"><h4>Ergebnis der PND ID-Abfrage</h4></div>");
 	$(".result").hide();
