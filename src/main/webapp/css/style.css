@@ -4,40 +4,33 @@ body{
 	background-color: #ffffff;
 	font-family: "Verdana", "Arial", "Helvetica", sans-serif;
 	}
-	
+
+table {
+	z-index:0;
+}
 table tr td{
+	z-index:0;
 	font-size: 0.7em;
 	padding-right: 20px;
-	padding-top:10px;
-	padding-bottom:10px;
-	align:bottom;
+	padding-top:3px;
+	padding-bottom:3px;
+	border: 1px solid;
 	}
 
-.requestarea{
-	float: left;
-	background-color: #dde4e4;
-	width: 70%;
-	padding: 10px;
-}
 
 .formarea{
-	background-color: #dffc44;
+	background-color: #ddd;
 	box-shadow: 3px 3px 7px #6666ff;
-	border-radius: 20px;
+	border-radius: 10px;
 	padding: 30px;
 	margin: 10px;
-	}
-	
-.resultarea{
-	float: left;
-	background-color: #dde4e4;
-	width: 30%	
+	z-index:0;
 }
-
+	
 .resultbox{
 	background-color: #ffeb6c;
 	box-shadow: 3px 3px 3px #666666;
-	border-radius: 20px;
+	border-radius: 10px;
 	padding: 30px;
 }
 
@@ -45,15 +38,26 @@ div.search_icon{
 	float: left;
 }
 
+div.resultalert{
+	float:left;
+	background-color: #ffeb6c;
+	box-shadow:  1px 1px 4px #6666ff;
+	border-radius: 3px;
+	padding: 3px;
+	z-index:50;
+	overflow:visible;
+}
+
 div.result{
+	font-size: 0.7em;
 	z-index:10;
-	position:fixed;
+	position:absolute;
 	top:20px;
 	right: 20px; 
-	height: 200px;
-	width:150px;
-	background-color: #ffeb6c;
-	box-shadow: 3px 3px 3px #666666;
-	border-radius: 20px;
+	width:30%;
+	background-color: #fffcad;
+	box-shadow:  3px 3px 7px #6666ff;
+	border-radius: 10px;
 	padding: 30px;
+	overflow:auto;
 }
