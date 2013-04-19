@@ -10,22 +10,28 @@ $(document).ready(addPndForm);
 
 var pRow;
 
+//add a PersonID-field to the form
 function addPndForm(){
-	var suchImage = "<div class=\"pnd\" style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
-	var imageDiv = $(".PNDIdentNumber").parent().append(suchImage);
+	var suchImage = "<div class=\"pnd\" style=\"margin-top:4px;\"><img src=\"../Icons/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" style=\"float:left;\" />"
+	+ "<input class=\"pndid\" type=\"text\" size=\"30\" value=\"PND-ID\" /></div>";
+	var imageDiv = $(".person").parent().append(suchImage);
 	//$(".lastName").blur(requestPersonIdBlur);
+	$("head").append("<link  rel=\"stylesheet\" type=\"text/css\" href=\"/css/loddiggr.css\"/>");
 	$("img").click(requestPersonId);
 	$("body").append("<div class=\"result\"><h4>Ergebnis der PND ID-Abfrage</h4></div>");
 	$(".result").hide();
 
 };
 
+
 function requestPersonId(){
     $(".resultalert").remove();	
     $(".result").hide();
     $(".item").remove();
-	var firstName = $(this).parent().parent().parent().find(".firstName").val();
-	var lastName = $(this).parent().parent().parent().find(".lastName").val();
+	var personName = $(this).parent().parent().find(".person").val().split(",", 2);
+	
+	var firstName = personName[1].replace(" ", "");
+	var lastName = personName[0].replace(" ", "");
 	
 	pRow = $(this).parent().parent().parent();
 	if(pndFormCheck(firstName, lastName)){
@@ -63,7 +69,7 @@ function pndFormCheck(firstName, lastName){
 
 function requestGndService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
-	var requestUrl = "http://localhost:8080/axis2/services/gndRequester/getGndPersonInfo?firstName=" 
+	var requestUrl = "http://phacops.dyndns.org:8080/axis2/services/gndRequester/getGndPersonInfo?firstName=" 
 	+ firstName + "&lastName=" + lastName;
 	var options = {
 			
@@ -91,9 +97,6 @@ function requestGndService(firstName, lastName){
 			})
 			.fail(function(){
 				alert("request failed: " + jqxhr.statusText);
-				var xml = "<test><resultSize>4</resultSize></test>";
-				$("div.resultalert").append($(xml).find("resultSize").text());
-				$("div.resultalert").slideDown("slow");
 				})
 			.always(function(){
 			});

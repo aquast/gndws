@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="gndPerson.xslt" type="text/xsl"?>
 <%@ page language="java" contentType="text/xml; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="org.xml.sax.*" %>
@@ -7,14 +6,14 @@
 <%@ page import="java.io.*" %>
 <%@ page import="java.net.*" %>
 <%
-response.addHeader("Access-Control-Allow-Origin", "http://alkyoneus.hbz-nrw.de/dev");
+response.addHeader("Access-Control-Allow-Origin", "*");
 try {
 	// this jsp template provides acces to the rest sercive of a remote gnd triplestore
 	// it adds a processing instruction to the rest output required for xsl-transformtion
 	// and if installed on the same server where the caller html form resists solves 
 	// the cross domain problem associated wih xslt and js (hopefully)
 	// Please edit the urls to your requirements
-	String url = "http://phacops.dyndns.org:8080/axis2/services/gndRequester/getGndPersonInfo?";
+	String url = "http://localhost:8080/axis2/services/gndRequester/getGndPersonInfo?";
 
 	String fName = URLEncoder.encode(request.getParameter("firstName"), "UTF-8");
 	String lName = URLEncoder.encode(request.getParameter("lastName"), "UTF-8");
