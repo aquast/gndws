@@ -25,12 +25,29 @@
   			<groupId>org.apache.axis2</groupId>
   			<artifactId>axis2-aar-maven-plugin</artifactId>
   			<version>1.4.1</version>
-  			<executions>
+			<configuration>
+			    <fileSets>
+			        <fileSet>
+			            <directory>src/main/resources/requestTemplates</directory>
+			            <outputDirectory>requestTemplates</outputDirectory>
+			            <includes>
+			                <include>**/*.txt</include>
+			            </includes>
+			        </fileSet>
+			    </fileSets>
+			    <fileSets>
+			        <fileSet>
+			            <directory>src/main/java/de/qterra/gnd/jspservice</directory>
+			            <outputDirectory>de/qterra/gnd/jspservice</outputDirectory>
+			            <excludes>
+			                <exclude>**/*.*</exclude>
+			            </excludes>
+			        </fileSet>
+			    </fileSets>
+			  </configuration>
+			<executions>
   				<execution>
   					<id>aar</id>
-  					<!-- <phase>compile</phase>  -->
-  					<goals>
-  					</goals>
   				</execution>
   			</executions>
   		</plugin>
@@ -61,7 +78,7 @@
   	<dependency>
   		<groupId>com.hp.hpl.jena</groupId>
   		<artifactId>jena</artifactId>
-  		<version>2.6.3</version>
+  		<version>2.6.4</version>
   		<type>jar</type>
   		<scope>compile</scope>
   	</dependency>
@@ -80,11 +97,22 @@
   		<scope>compile</scope>
   	</dependency>
   	<dependency>
+  		<groupId>com.hp.hpl.jena</groupId>
+  		<artifactId>iri</artifactId>
+  		<version>0.7</version>
+  	</dependency>
+  		<dependency>
   		<groupId>org.apache.axis2</groupId>
   		<artifactId>axis2-adb</artifactId>
   		<version>1.4.1</version>
   		<type>jar</type>
   		<scope>compile</scope>
+  		<exclusions>
+  			<exclusion>
+  				<artifactId>servlet-api</artifactId>
+  				<groupId>javax.servlet</groupId>
+  			</exclusion>
+  		</exclusions>
   	</dependency>
   	<dependency>
   		<groupId>postgresql</groupId>
@@ -102,7 +130,7 @@
   	        <dependency>
   	        	<groupId>org.openrdf.sesame</groupId>
   	        	<artifactId>sesame-runtime</artifactId>
-  	        	<version>2.6.0</version>
+  	        	<version>2.7.0</version>
   	        </dependency>
   	        <dependency>
   	        	<groupId>junit</groupId>

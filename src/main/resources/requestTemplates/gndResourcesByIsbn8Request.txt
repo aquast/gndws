@@ -1,0 +1,31 @@
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX foaf:     <http://xmlns.com/foaf/0.1/>
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#>
+PREFIX vcard:    <http://www.w3.org/2006/vcard/ns#>
+PREFIX daia:     <http://purl.org/ontology/daia/>
+PREFIX dct:      <http://purl.org/dc/terms/>
+PREFIX dc:       <http://purl.org/dc/elements/1.1/>
+PREFIX skos:     <http://www.w3.org/2004/02/skos/core#>
+PREFIX frbr:     <http://purl.org/vocab/frbr/core#>
+PREFIX bibo:     <http://purl.org/ontology/bibo/>
+PREFIX geo:      <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX gr:       <http://purl.org/goodrelations/v1#>
+PREFIX org:      <http://www.w3.org/ns/org#>
+PREFIX lv:       <http://lobid.org/vocab/lobid#>
+PREFIX isbd:     <http://iflastandards.info/ns/isbd/elements/>
+PREFIX mo:       <http://purl.org/ontology/mo/>
+PREFIX gn:       <http://www.geonames.org/ontology#>
+PREFIX owl:      <http://www.w3.org/2002/07/owl#>
+PREFIX rdrel:  <http://rdvocab.info/RDARelationshipsWEMI/>
+PREFIX wdrs:     <http://www.w3.org/2007/05/powder-s#>
+
+SELECT DISTINCT ?uri ?role ?title ?publisher ?extent ?issn ?isbn ?issued WHERE {
+ ?uri dct:creator <http://d-nb.info/gnd/106895672> .  
+ ?uri dct:title ?title .
+ ?uri isbd:P1017 ?publisher .
+ optional{?uri bibo:isbn13 ?isbn} .
+ optional{?uri bibo:isbn8 ?isbn} .
+ optional{?uri isbd:P1053 ?extent} .
+ optional{?uri dct:issued ?issued} .
+} 
