@@ -22,7 +22,7 @@ div.search_icon{
 }
 
 div.resultalert{
-	float:left;
+	float:right;
 	background-color: #ffeb6c;
 	box-shadow:  1px 1px 4px #6666ff;
 	border-radius: 3px;
