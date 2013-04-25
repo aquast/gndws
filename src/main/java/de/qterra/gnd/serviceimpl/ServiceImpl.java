@@ -72,30 +72,8 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		persExtendedReqProp.setProperty("$lastName", lastName);
 		propertyList.add(persExtendedReqProp);
 
-		// create request threads
-		ArrayList<Thread> threadList = new ArrayList<Thread>();
-		for(int i=0; i < propertyList.size(); i++){
-			Properties reqProp = propertyList.get(i);
-			SparqlRunnable spRun = new SparqlRunnable();
-			spRun.setProperties(reqProp);
-   			Thread sparqlThread = new Thread(spRun);
-			sparqlThread.setName("GenericSparqlThread_" + i);
-			sparqlThread.start();
-			threadList.add(sparqlThread);
-			 
-		}
-		
-		
-		
-		for(int i=0; i < threadList.size(); i++){
-			try {
-				threadList.get(i).join();
-				log.info(threadList.get(i).getName());
-			}catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+
+		runRequests(propertyList);
 
 		ArrayList<PersonResultType> resultArray = new ArrayList<PersonResultType>();
 		
@@ -242,30 +220,8 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		gndPersResReqProp.setProperty("$pnd", "<http://d-nb.info/gnd/" + pnd + ">");
 		propertyList.add(gndPersResReqProp);
 
-		// create request threads
-		ArrayList<Thread> threadList = new ArrayList<Thread>();
-		for(int i=0; i < propertyList.size(); i++){
-			Properties reqProp = propertyList.get(i);
-			SparqlRunnable spRun = new SparqlRunnable();
-			spRun.setProperties(reqProp);
-   			Thread sparqlThread = new Thread(spRun);
-			sparqlThread.setName("GenericSparqlThread_" + i);
-			sparqlThread.start();
-			threadList.add(sparqlThread);
-			 
-		}
-		
-		
-		
-		for(int i=0; i < threadList.size(); i++){
-			try {
-				threadList.get(i).join();
-				log.info(threadList.get(i).getName());
-			}catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+
+		runRequests(propertyList);
 
 		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
 		
@@ -320,10 +276,10 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		int isbnType = 0;
 		String idType = getResourcesByIdentifier.getIdType();
 		String id = getResourcesByIdentifier.getIdString();
-		
+				
 		if(idType.equals("isbn")){
-			isbnType = id.length();
 			isbn = id.replace("-", "");
+			isbnType = isbn.length();
 		}
 		
 		Properties gndResByIsbn13Prop = new Properties();
@@ -337,11 +293,60 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		Properties gndResByIsbn8Prop = new Properties();
 		gndResByIsbn8Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
 		gndResByIsbn8Prop.setProperty("sparqlFile", "gndResourcesByIsbn8Request.txt");
-		gndResByIsbn8Prop.setProperty("$isbn", isbn);
+		gndResByIsbn8Prop.setProperty("$isbn8", isbn);
 		if( isbnType == 8){
 			propertyList.add(gndResByIsbn8Prop);
 		}
-		// create request threads
+		
+		runRequests(propertyList);
+
+		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
+
+		// create appropriate GndPersonInfoResponse from results arraylist 
+		response.setResultSize(results.size());
+		
+		for (int i=0; i<results.size(); i++){
+			Hashtable<String,RDFNode> resLine = results.get(i);
+			
+			ResourceResultType res = new ResourceResultType();
+			res.setPndUri("<http://d-nb.info/gnd/" + pnd + ">");
+			res.setResourceUri(resLine.get("uri").toString());
+			//res.setResourceTitle(resLine.get("title").toString());
+			
+			if(resLine.containsKey("title")){
+				res.setResourceTitle(resLine.get("title").toString());
+			}
+			if(resLine.containsKey("isbn")){
+				res.setIsbn(resLine.get("isbn").toString());
+			}
+			if(resLine.containsKey("issn")){
+				res.setIssn(resLine.get("issn").toString());
+			}
+			if(resLine.containsKey("extent")){
+				res.setExtent(resLine.get("extent").toString());
+			}
+			if(resLine.containsKey("publisher")){
+				res.setPublisher(resLine.get("publisher").toString());
+			}
+			if(resLine.containsKey("issued")){
+				res.setIssued(resLine.get("issued").toString().substring(0, 4));
+			}
+
+			resultArray.add(res);
+		}
+		
+		ResourceResultType[] resType = null;
+		resultArray.toArray(resType = new ResourceResultType[resultArray.size()] );
+		response.setResult(resType) ;
+		
+		
+		
+		return response;
+	}
+
+	
+	private void runRequests(ArrayList<Properties> propertyList){
+
 		ArrayList<Thread> threadList = new ArrayList<Thread>();
 		for(int i=0; i < propertyList.size(); i++){
 			Properties reqProp = propertyList.get(i);
@@ -365,11 +370,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 				e.printStackTrace();
 			}
 		}
-
 		
-		
-		
-		return response;
 	}
 
 	public class SparqlRunnable implements Runnable {
@@ -390,7 +391,6 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		}
 		
 	}
-
 
 
 

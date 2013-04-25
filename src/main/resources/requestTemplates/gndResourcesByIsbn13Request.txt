@@ -21,7 +21,7 @@ PREFIX rdrel:  <http://rdvocab.info/RDARelationshipsWEMI/>
 PREFIX wdrs:     <http://www.w3.org/2007/05/powder-s#>
 
 SELECT DISTINCT ?uri ?title ?name ?publisher ?extent ?isbn13 ?issued WHERE {
- ?uri bibo:isbn13 ?isbn13 .
+ ?uri bibo:isbn13 "$isbn" .
  ?uri dct:title ?title .
  ?uri dc:creator ?person .
  ?person <http://d-nb.info/standards/elementset/gnd#preferredNameForThePerson> ?name .

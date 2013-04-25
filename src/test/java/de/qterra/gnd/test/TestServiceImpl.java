@@ -32,6 +32,8 @@ import org.junit.Test;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import de.qterra.gnd.serviceimpl.ServiceImpl;
+import de.qterra.gnd.services.GetResourcesByIdentifier;
+import de.qterra.gnd.services.GetResourcesByIdentifierResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
 import de.qterra.gnd.webservice.PersonResultType;
@@ -56,7 +58,8 @@ public class TestServiceImpl {
 	// Initiate Logger for TestGndRequesterAsClient
 	private static Logger log = Logger.getLogger(TestServiceImpl.class);
 
-	@Test public void testGndPersonInfo() {
+	//@Test 
+	public void testGndPersonInfo() {
 		
 		ServiceImpl sImpl= new ServiceImpl();
 		
@@ -102,6 +105,31 @@ public class TestServiceImpl {
 		}
 			
 		
+	}
+	
+	@Test public void testResourceById(){
+
+		ServiceImpl sImpl= new ServiceImpl();
+		
+		GetResourcesByIdentifier resInfo = new GetResourcesByIdentifier();
+		resInfo.setIdType("isbn");
+		resInfo.setIdString("978-3-86509-791-0");
+		GetResourcesByIdentifierResponse response = sImpl.getResourcesByIdentifier(resInfo);
+		
+		
+		ResourceResultType[] res = response.getResult(); 
+
+		log.info("Anzahl Treffer: " + response.getResultSize());
+		if(res != null){
+			for(int i = 0 ; i < res.length; i++){
+				log.info(res[i].getResourceTitle() 
+						 + " ; " + res[i].getPublisher()
+						 + " ; " + res[i].getIssued()
+						 + " ; " + res[i].getDescription()
+						 + " ; " + res[i].getResourceUri()
+						 + " ; " + res[i].getExtent());
+			}
+		}
 	}
 	
 	/**
