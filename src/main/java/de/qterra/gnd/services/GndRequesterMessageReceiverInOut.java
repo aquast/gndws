@@ -54,22 +54,40 @@
                                         envelope = toEnvelope(getSOAPFactory(msgContext), getGndPersonInfoResponse1, false);
                                     } else 
 
+            if("getResourcesByIdentifier".equals(methodName)){
+                
+                de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifierResponse3 = null;
+	                        de.qterra.gnd.services.GetResourcesByIdentifier wrappedParam =
+                                                             (de.qterra.gnd.services.GetResourcesByIdentifier)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    de.qterra.gnd.services.GetResourcesByIdentifier.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               getResourcesByIdentifierResponse3 =
+                                                   
+                                                   
+                                                         skel.getResourcesByIdentifier(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByIdentifierResponse3, false);
+                                    } else 
+
             if("getResourcesByPnd".equals(methodName)){
                 
-                de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPndResponse3 = null;
+                de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPndResponse5 = null;
 	                        de.qterra.gnd.webservice.GetResourcesByPnd wrappedParam =
                                                              (de.qterra.gnd.webservice.GetResourcesByPnd)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.qterra.gnd.webservice.GetResourcesByPnd.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getResourcesByPndResponse3 =
+                                               getResourcesByPndResponse5 =
                                                    
                                                    
                                                          skel.getResourcesByPnd(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByPndResponse3, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByPndResponse5, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");
@@ -105,6 +123,34 @@
             
                         try{
                              return param.getOMElement(de.qterra.gnd.webservice.GetGndPersonInfoResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.qterra.gnd.services.GetResourcesByIdentifier param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifier.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.qterra.gnd.services.GetResourcesByIdentifierResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifierResponse.MY_QNAME,
                                           org.apache.axiom.om.OMAbstractFactory.getOMFactory());
                         } catch(org.apache.axis2.databinding.ADBException e){
                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -160,6 +206,25 @@
                                 return wrappedElement;
                          }
                     
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.qterra.gnd.services.GetResourcesByIdentifierResponse param, boolean optimizeContent)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifierResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private de.qterra.gnd.services.GetResourcesByIdentifierResponse wrapgetResourcesByIdentifier(){
+                                de.qterra.gnd.services.GetResourcesByIdentifierResponse wrappedElement = new de.qterra.gnd.services.GetResourcesByIdentifierResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.qterra.gnd.webservice.GetResourcesByPndResponse param, boolean optimizeContent)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -206,6 +271,20 @@
                 if (de.qterra.gnd.webservice.GetGndPersonInfoResponse.class.equals(type)){
                 
                            return de.qterra.gnd.webservice.GetGndPersonInfoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.qterra.gnd.services.GetResourcesByIdentifier.class.equals(type)){
+                
+                           return de.qterra.gnd.services.GetResourcesByIdentifier.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.qterra.gnd.services.GetResourcesByIdentifierResponse.class.equals(type)){
+                
+                           return de.qterra.gnd.services.GetResourcesByIdentifierResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

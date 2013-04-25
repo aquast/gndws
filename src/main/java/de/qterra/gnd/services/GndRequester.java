@@ -50,14 +50,14 @@
         /**
           * Auto generated method signature
           * 
-                    * @param getResourcesByPnd2
+                    * @param getResourcesByIdentifier2
                 
          */
 
          
-                     public de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPnd(
+                     public de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifier(
 
-                        de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd2)
+                        de.qterra.gnd.services.GetResourcesByIdentifier getResourcesByIdentifier2)
                         throws java.rmi.RemoteException
              ;
 
@@ -65,12 +65,43 @@
          /**
             * Auto generated method signature for Asynchronous Invocations
             * 
-                * @param getResourcesByPnd2
+                * @param getResourcesByIdentifier2
+            
+          */
+        public void startgetResourcesByIdentifier(
+
+            de.qterra.gnd.services.GetResourcesByIdentifier getResourcesByIdentifier2,
+
+            final de.qterra.gnd.services.GndRequesterCallbackHandler callback)
+
+            throws java.rmi.RemoteException;
+
+     
+
+        /**
+          * Auto generated method signature
+          * 
+                    * @param getResourcesByPnd4
+                
+         */
+
+         
+                     public de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPnd(
+
+                        de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd4)
+                        throws java.rmi.RemoteException
+             ;
+
+        
+         /**
+            * Auto generated method signature for Asynchronous Invocations
+            * 
+                * @param getResourcesByPnd4
             
           */
         public void startgetResourcesByPnd(
 
-            de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd2,
+            de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd4,
 
             final de.qterra.gnd.services.GndRequesterCallbackHandler callback)
 

@@ -61,6 +61,22 @@
             }
                 
            /**
+            * auto generated Axis2 call back method for getResourcesByIdentifier method
+            * override this method for handling normal response from getResourcesByIdentifier operation
+            */
+           public void receiveResultgetResourcesByIdentifier(
+                    de.qterra.gnd.services.GetResourcesByIdentifierResponse result
+                        ) {
+           }
+
+          /**
+           * auto generated Axis2 Error handler
+           * override this method for handling error response from getResourcesByIdentifier operation
+           */
+            public void receiveErrorgetResourcesByIdentifier(java.lang.Exception e) {
+            }
+                
+           /**
             * auto generated Axis2 call back method for getResourcesByPnd method
             * override this method for handling normal response from getResourcesByPnd operation
             */

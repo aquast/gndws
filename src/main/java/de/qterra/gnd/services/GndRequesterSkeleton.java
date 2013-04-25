@@ -69,6 +69,15 @@ import de.qterra.gnd.webservice.GetResourcesByPndResponse;
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+
+
+		@Override
+		public GetResourcesByIdentifierResponse getResourcesByIdentifier(
+				GetResourcesByIdentifier getResourcesByIdentifier) {
+			// TODO Auto-generated method stub
+			return null;
+		}
      
     }
     

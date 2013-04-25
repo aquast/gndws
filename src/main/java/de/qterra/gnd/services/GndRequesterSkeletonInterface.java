@@ -29,6 +29,20 @@
         /**
          * Auto generated method signature
          * 
+                                    * @param getResourcesByIdentifier
+         */
+
+        
+                public de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifier
+                (
+                  de.qterra.gnd.services.GetResourcesByIdentifier getResourcesByIdentifier
+                 )
+            ;
+        
+         
+        /**
+         * Auto generated method signature
+         * 
                                     * @param getResourcesByPnd
          */
 

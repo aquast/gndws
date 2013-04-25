@@ -11,6 +11,10 @@ import org.apache.log4j.Logger;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import java.text.Normalizer;
 
+import de.qterra.gnd.services.GetResourcesByIdentifier;
+import de.qterra.gnd.services.GetResourcesByIdentifierResponse;
+import de.qterra.gnd.services.GetRessourcesByIdentifier;
+import de.qterra.gnd.services.GetRessourcesByIdentifierResponse;
 import de.qterra.gnd.services.GndRequesterSkeletonInterface;
 import de.qterra.gnd.sparql.requests.ClassificationRequest;
 import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
@@ -304,6 +308,69 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		return response;
 	}
 
+	@Override
+	public GetResourcesByIdentifierResponse getResourcesByIdentifier(
+			GetResourcesByIdentifier getResourcesByIdentifier) {
+		GetResourcesByIdentifierResponse response = new GetResourcesByIdentifierResponse();
+
+		ArrayList<Properties> propertyList = new ArrayList<Properties>();
+		results = new ArrayList<Hashtable<String,RDFNode>>();
+		
+		String isbn = null;
+		int isbnType = 0;
+		String idType = getResourcesByIdentifier.getIdType();
+		String id = getResourcesByIdentifier.getIdString();
+		
+		if(idType.equals("isbn")){
+			isbnType = id.length();
+			isbn = id.replace("-", "");
+		}
+		
+		Properties gndResByIsbn13Prop = new Properties();
+		gndResByIsbn13Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
+		gndResByIsbn13Prop.setProperty("sparqlFile", "gndResourcesByIsbn13Request.txt");
+		gndResByIsbn13Prop.setProperty("$isbn", isbn);
+		if( isbnType == 13){
+			propertyList.add(gndResByIsbn13Prop);
+		}
+
+		Properties gndResByIsbn8Prop = new Properties();
+		gndResByIsbn8Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
+		gndResByIsbn8Prop.setProperty("sparqlFile", "gndResourcesByIsbn8Request.txt");
+		gndResByIsbn8Prop.setProperty("$isbn", isbn);
+		if( isbnType == 8){
+			propertyList.add(gndResByIsbn8Prop);
+		}
+		// create request threads
+		ArrayList<Thread> threadList = new ArrayList<Thread>();
+		for(int i=0; i < propertyList.size(); i++){
+			Properties reqProp = propertyList.get(i);
+			SparqlRunnable spRun = new SparqlRunnable();
+			spRun.setProperties(reqProp);
+   			Thread sparqlThread = new Thread(spRun);
+			sparqlThread.setName("GenericSparqlThread_" + i);
+			sparqlThread.start();
+			threadList.add(sparqlThread);
+			 
+		}
+		
+		
+		
+		for(int i=0; i < threadList.size(); i++){
+			try {
+				threadList.get(i).join();
+				log.info(threadList.get(i).getName());
+			}catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
+		
+		
+		return response;
+	}
 
 	public class SparqlRunnable implements Runnable {
 
@@ -323,6 +390,8 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		}
 		
 	}
+
+
 
 
 

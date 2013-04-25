@@ -86,7 +86,29 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     		</xsd:sequence>
     	</xsd:complexType>
     </xsd:schema>
-	</wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gnd.qterra.de/services/">
+        	<xsd:element name="getResourcesByIdentifier">
+        		<xsd:complexType>
+        			<xsd:sequence>
+        				<xsd:element name="idType" type="xsd:string"></xsd:element>
+        				<xsd:element name="idString"
+        					type="xsd:string">
+        				</xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="getResourcesByIdentifierResponse">
+    		<xsd:complexType>
+    			<xsd:sequence>
+    				<xsd:element maxOccurs="1" minOccurs="1" name="resultSize" type="xsd:int">
+    				</xsd:element>
+    				<xsd:element maxOccurs="unbounded" minOccurs="0" name="result" type="ns1:resourceResultType"/>
+    			</xsd:sequence>
+    		</xsd:complexType>
+        	</xsd:element>
+            <xsd:complexType name="responseType"></xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
   <wsdl:message name="getGndPersonInfoRequest">
     <wsdl:part name="parameters" element="ns1:getGndPersonInfo">
     </wsdl:part>
@@ -103,7 +125,13 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:message name="getResourcesByPndResponse">
   	<wsdl:part name="parameters" element="ns1:getResourcesByPndResponse"></wsdl:part>
   </wsdl:message>
-<wsdl:portType name="gndRequester">
+  <wsdl:message name="getResourcesByIdentifierRequest">
+  	<wsdl:part name="parameters" element="tns:getResourcesByIdentifier"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getResourcesByIdentifierResponse">
+  	<wsdl:part name="parameters" element="tns:getResourcesByIdentifierResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="gndRequester">
 	<wsdl:operation name="getGndPersonInfo">
 	<wsdl:documentation>An Operation that requests URIs and other information (if any) provided by the GND from given first and last name of a person </wsdl:documentation>
     	<wsdl:input message="tns:getGndPersonInfoRequest">
@@ -114,6 +142,10 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     <wsdl:operation name="getResourcesByPnd">
     	<wsdl:input message="tns:getResourcesByPndRequest"></wsdl:input>
     	<wsdl:output message="tns:getResourcesByPndResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResourcesByIdentifier">
+    	<wsdl:input message="tns:getResourcesByIdentifierRequest"></wsdl:input>
+    	<wsdl:output message="tns:getResourcesByIdentifierResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="gndRequesterSOAP" type="tns:gndRequester">
@@ -132,6 +164,16 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   	<wsdl:operation name="getResourcesByPnd">
   		<soap:operation
   			soapAction="http://gnd.qterra.de/services/getResourcesByPnd" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="getResourcesByIdentifier">
+  		<soap:operation
+  			soapAction="http://gnd.qterra.de/services/getResourcesByIdentifier" />
   		<wsdl:input>
   			<soap:body use="literal" />
   		</wsdl:input>

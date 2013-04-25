@@ -44,7 +44,7 @@
         //creating the operations
         org.apache.axis2.description.AxisOperation __operation;
 
-        _operations = new org.apache.axis2.description.AxisOperation[2];
+        _operations = new org.apache.axis2.description.AxisOperation[3];
         
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
@@ -61,13 +61,25 @@
                    __operation = new org.apache.axis2.description.OutInAxisOperation();
                 
 
-            __operation.setName(new javax.xml.namespace.QName("http://gnd.qterra.de/services/", "getResourcesByPnd"));
+            __operation.setName(new javax.xml.namespace.QName("http://gnd.qterra.de/services/", "getResourcesByIdentifier"));
 	    _service.addOperation(__operation);
 	    
 
 	    
 	    
             _operations[1]=__operation;
+            
+        
+                   __operation = new org.apache.axis2.description.OutInAxisOperation();
+                
+
+            __operation.setName(new javax.xml.namespace.QName("http://gnd.qterra.de/services/", "getResourcesByPnd"));
+	    _service.addOperation(__operation);
+	    
+
+	    
+	    
+            _operations[2]=__operation;
             
         
         }
@@ -142,7 +154,7 @@
                      * Auto generated method signature
                      * An Operation that requests URIs and other information (if any) provided by the GND from given first and last name of a person
                      * @see de.qterra.gnd.services.GndRequester#getGndPersonInfo
-                     * @param getGndPersonInfo4
+                     * @param getGndPersonInfo6
                     
                      */
 
@@ -150,7 +162,7 @@
 
                             public  de.qterra.gnd.webservice.GetGndPersonInfoResponse getGndPersonInfo(
 
-                            de.qterra.gnd.webservice.GetGndPersonInfo getGndPersonInfo4)
+                            de.qterra.gnd.webservice.GetGndPersonInfo getGndPersonInfo6)
                         
 
                     throws java.rmi.RemoteException
@@ -177,7 +189,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    getGndPersonInfo4,
+                                                    getGndPersonInfo6,
                                                     optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
                                                     "getGndPersonInfo")));
                                                 
@@ -261,12 +273,12 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * An Operation that requests URIs and other information (if any) provided by the GND from given first and last name of a person
                 * @see de.qterra.gnd.services.GndRequester#startgetGndPersonInfo
-                    * @param getGndPersonInfo4
+                    * @param getGndPersonInfo6
                 
                 */
                 public  void startgetGndPersonInfo(
 
-                 de.qterra.gnd.webservice.GetGndPersonInfo getGndPersonInfo4,
+                 de.qterra.gnd.webservice.GetGndPersonInfo getGndPersonInfo6,
 
                   final de.qterra.gnd.services.GndRequesterCallbackHandler callback)
 
@@ -291,7 +303,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    getGndPersonInfo4,
+                                                    getGndPersonInfo6,
                                                     optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
                                                     "getGndPersonInfo")));
                                                 
@@ -406,16 +418,16 @@
                     /**
                      * Auto generated method signature
                      * 
-                     * @see de.qterra.gnd.services.GndRequester#getResourcesByPnd
-                     * @param getResourcesByPnd6
+                     * @see de.qterra.gnd.services.GndRequester#getResourcesByIdentifier
+                     * @param getResourcesByIdentifier8
                     
                      */
 
                     
 
-                            public  de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPnd(
+                            public  de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifier(
 
-                            de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd6)
+                            de.qterra.gnd.services.GetResourcesByIdentifier getResourcesByIdentifier8)
                         
 
                     throws java.rmi.RemoteException
@@ -424,6 +436,271 @@
               org.apache.axis2.context.MessageContext _messageContext = null;
               try{
                org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
+              _operationClient.getOptions().setAction("http://gnd.qterra.de/services/getResourcesByIdentifier");
+              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+              // create a message context
+              _messageContext = new org.apache.axis2.context.MessageContext();
+
+              
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env = null;
+                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    getResourcesByIdentifier8,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
+                                                    "getResourcesByIdentifier")));
+                                                
+        //adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // set the message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message contxt to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+        //execute the operation client
+        _operationClient.execute(true);
+
+         
+               org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(
+                                           org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+                org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+                
+                
+                                java.lang.Object object = fromOM(
+                                             _returnEnv.getBody().getFirstElement() ,
+                                             de.qterra.gnd.services.GetResourcesByIdentifierResponse.class,
+                                              getEnvelopeNamespaces(_returnEnv));
+
+                               
+                                        return (de.qterra.gnd.services.GetResourcesByIdentifierResponse)object;
+                                   
+         }catch(org.apache.axis2.AxisFault f){
+
+            org.apache.axiom.om.OMElement faultElt = f.getDetail();
+            if (faultElt!=null){
+                if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+                    //make the fault by reflection
+                    try{
+                        java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                        java.lang.Exception ex=
+                                (java.lang.Exception) exceptionClass.newInstance();
+                        //message class
+                        java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                        java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                   new java.lang.Class[]{messageClass});
+                        m.invoke(ex,new java.lang.Object[]{messageObject});
+                        
+
+                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
+                    }catch(java.lang.ClassCastException e){
+                       // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }catch (java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }  catch (java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }   catch (java.lang.InstantiationException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }
+                }else{
+                    throw f;
+                }
+            }else{
+                throw f;
+            }
+            } finally {
+                _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+            }
+        }
+            
+                /**
+                * Auto generated method signature for Asynchronous Invocations
+                * 
+                * @see de.qterra.gnd.services.GndRequester#startgetResourcesByIdentifier
+                    * @param getResourcesByIdentifier8
+                
+                */
+                public  void startgetResourcesByIdentifier(
+
+                 de.qterra.gnd.services.GetResourcesByIdentifier getResourcesByIdentifier8,
+
+                  final de.qterra.gnd.services.GndRequesterCallbackHandler callback)
+
+                throws java.rmi.RemoteException{
+
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
+             _operationClient.getOptions().setAction("http://gnd.qterra.de/services/getResourcesByIdentifier");
+             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+              
+              
+                  addPropertyToOperationClient(_operationClient,org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,"&");
+              
+
+
+              // create SOAP envelope with that payload
+              org.apache.axiom.soap.SOAPEnvelope env=null;
+              final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+                    
+                                    //Style is Doc.
+                                    
+                                                    
+                                                    env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
+                                                    getResourcesByIdentifier8,
+                                                    optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
+                                                    "getResourcesByIdentifier")));
+                                                
+        // adding SOAP soap_headers
+         _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+
+                    
+                        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                            public void onMessage(org.apache.axis2.context.MessageContext resultContext) {
+                            try {
+                                org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+                                
+                                        java.lang.Object object = fromOM(resultEnv.getBody().getFirstElement(),
+                                                                         de.qterra.gnd.services.GetResourcesByIdentifierResponse.class,
+                                                                         getEnvelopeNamespaces(resultEnv));
+                                        callback.receiveResultgetResourcesByIdentifier(
+                                        (de.qterra.gnd.services.GetResourcesByIdentifierResponse)object);
+                                        
+                            } catch (org.apache.axis2.AxisFault e) {
+                                callback.receiveErrorgetResourcesByIdentifier(e);
+                            }
+                            }
+
+                            public void onError(java.lang.Exception error) {
+								if (error instanceof org.apache.axis2.AxisFault) {
+									org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+									org.apache.axiom.om.OMElement faultElt = f.getDetail();
+									if (faultElt!=null){
+										if (faultExceptionNameMap.containsKey(faultElt.getQName())){
+											//make the fault by reflection
+											try{
+													java.lang.String exceptionClassName = (java.lang.String)faultExceptionClassNameMap.get(faultElt.getQName());
+													java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+													java.lang.Exception ex=
+														(java.lang.Exception) exceptionClass.newInstance();
+													//message class
+													java.lang.String messageClassName = (java.lang.String)faultMessageMap.get(faultElt.getQName());
+														java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+													java.lang.Object messageObject = fromOM(faultElt,messageClass,null);
+													java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+															new java.lang.Class[]{messageClass});
+													m.invoke(ex,new java.lang.Object[]{messageObject});
+													
+					
+										            callback.receiveErrorgetResourcesByIdentifier(new java.rmi.RemoteException(ex.getMessage(), ex));
+                                            } catch(java.lang.ClassCastException e){
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (java.lang.ClassNotFoundException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (java.lang.NoSuchMethodException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (java.lang.reflect.InvocationTargetException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (java.lang.IllegalAccessException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (java.lang.InstantiationException e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            } catch (org.apache.axis2.AxisFault e) {
+                                                // we cannot intantiate the class - throw the original Axis fault
+                                                callback.receiveErrorgetResourcesByIdentifier(f);
+                                            }
+									    } else {
+										    callback.receiveErrorgetResourcesByIdentifier(f);
+									    }
+									} else {
+									    callback.receiveErrorgetResourcesByIdentifier(f);
+									}
+								} else {
+								    callback.receiveErrorgetResourcesByIdentifier(error);
+								}
+                            }
+
+                            public void onFault(org.apache.axis2.context.MessageContext faultContext) {
+                                org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                                onError(fault);
+                            }
+
+                            public void onComplete() {
+                                try {
+                                    _messageContext.getTransportOut().getSender().cleanup(_messageContext);
+                                } catch (org.apache.axis2.AxisFault axisFault) {
+                                    callback.receiveErrorgetResourcesByIdentifier(axisFault);
+                                }
+                            }
+                });
+                        
+
+          org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+        if ( _operations[1].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+           _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+          _operations[1].setMessageReceiver(
+                    _callbackReceiver);
+        }
+
+           //execute the operation client
+           _operationClient.execute(false);
+
+                    }
+                
+                    /**
+                     * Auto generated method signature
+                     * 
+                     * @see de.qterra.gnd.services.GndRequester#getResourcesByPnd
+                     * @param getResourcesByPnd10
+                    
+                     */
+
+                    
+
+                            public  de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPnd(
+
+                            de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd10)
+                        
+
+                    throws java.rmi.RemoteException
+                    
+                    {
+              org.apache.axis2.context.MessageContext _messageContext = null;
+              try{
+               org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
               _operationClient.getOptions().setAction("http://gnd.qterra.de/services/getResourcesByPnd");
               _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -442,7 +719,7 @@
                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    getResourcesByPnd6,
+                                                    getResourcesByPnd10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
                                                     "getResourcesByPnd")));
                                                 
@@ -526,18 +803,18 @@
                 * Auto generated method signature for Asynchronous Invocations
                 * 
                 * @see de.qterra.gnd.services.GndRequester#startgetResourcesByPnd
-                    * @param getResourcesByPnd6
+                    * @param getResourcesByPnd10
                 
                 */
                 public  void startgetResourcesByPnd(
 
-                 de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd6,
+                 de.qterra.gnd.webservice.GetResourcesByPnd getResourcesByPnd10,
 
                   final de.qterra.gnd.services.GndRequesterCallbackHandler callback)
 
                 throws java.rmi.RemoteException{
 
-              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
+              org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
              _operationClient.getOptions().setAction("http://gnd.qterra.de/services/getResourcesByPnd");
              _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -556,7 +833,7 @@
                                     
                                                     
                                                     env = toEnvelope(getFactory(_operationClient.getOptions().getSoapVersionURI()),
-                                                    getResourcesByPnd6,
+                                                    getResourcesByPnd10,
                                                     optimizeContent(new javax.xml.namespace.QName("http://gnd.qterra.de/services/",
                                                     "getResourcesByPnd")));
                                                 
@@ -657,9 +934,9 @@
                         
 
           org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
-        if ( _operations[1].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
+        if ( _operations[2].getMessageReceiver()==null &&  _operationClient.getOptions().isUseSeparateListener()) {
            _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
-          _operations[1].setMessageReceiver(
+          _operations[2].setMessageReceiver(
                     _callbackReceiver);
         }
 
@@ -728,6 +1005,34 @@
 
             }
         
+            private  org.apache.axiom.om.OMElement  toOM(de.qterra.gnd.services.GetResourcesByIdentifier param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifier.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(de.qterra.gnd.services.GetResourcesByIdentifierResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifierResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(de.qterra.gnd.webservice.GetResourcesByPnd param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -765,6 +1070,27 @@
 
                                                             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
                                                             emptyEnvelope.getBody().addChild(param.getOMElement(de.qterra.gnd.webservice.GetGndPersonInfo.MY_QNAME,factory));
+                                                            return emptyEnvelope;
+                                                        } catch(org.apache.axis2.databinding.ADBException e){
+                                                            throw org.apache.axis2.AxisFault.makeFault(e);
+                                                        }
+                                                
+
+                                        }
+                                
+                             
+                             /* methods to provide back word compatibility */
+
+                             
+                                    
+                                        private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, de.qterra.gnd.services.GetResourcesByIdentifier param, boolean optimizeContent)
+                                        throws org.apache.axis2.AxisFault{
+
+                                             
+                                                    try{
+
+                                                            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                                                            emptyEnvelope.getBody().addChild(param.getOMElement(de.qterra.gnd.services.GetResourcesByIdentifier.MY_QNAME,factory));
                                                             return emptyEnvelope;
                                                         } catch(org.apache.axis2.databinding.ADBException e){
                                                             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -825,6 +1151,20 @@
                 if (de.qterra.gnd.webservice.GetGndPersonInfoResponse.class.equals(type)){
                 
                            return de.qterra.gnd.webservice.GetGndPersonInfoResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.qterra.gnd.services.GetResourcesByIdentifier.class.equals(type)){
+                
+                           return de.qterra.gnd.services.GetResourcesByIdentifier.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+           
+                if (de.qterra.gnd.services.GetResourcesByIdentifierResponse.class.equals(type)){
+                
+                           return de.qterra.gnd.services.GetResourcesByIdentifierResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
