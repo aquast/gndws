@@ -130,6 +130,26 @@ public class TestServiceImpl {
 						 + " ; " + res[i].getExtent());
 			}
 		}
+		
+		resInfo = new GetResourcesByIdentifier();
+		resInfo.setIdType("isbn");
+		resInfo.setIdString("386509791X");
+		response = sImpl.getResourcesByIdentifier(resInfo);
+		
+		
+		res = response.getResult(); 
+
+		log.info("Anzahl Treffer: " + response.getResultSize());
+		if(res != null){
+			for(int i = 0 ; i < res.length; i++){
+				log.info(res[i].getResourceTitle() 
+						 + " ; " + res[i].getPublisher()
+						 + " ; " + res[i].getIssued()
+						 + " ; " + res[i].getDescription()
+						 + " ; " + res[i].getResourceUri()
+						 + " ; " + res[i].getExtent());
+			}
+		}
 	}
 	
 	/**

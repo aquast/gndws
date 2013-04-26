@@ -292,9 +292,9 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 
 		Properties gndResByIsbn8Prop = new Properties();
 		gndResByIsbn8Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
-		gndResByIsbn8Prop.setProperty("sparqlFile", "gndResourcesByIsbn8Request.txt");
-		gndResByIsbn8Prop.setProperty("$isbn8", isbn);
-		if( isbnType == 8){
+		gndResByIsbn8Prop.setProperty("sparqlFile", "gndResourcesByIsbn10Request.txt");
+		gndResByIsbn8Prop.setProperty("$isbn10", isbn);
+		if( isbnType == 10){
 			propertyList.add(gndResByIsbn8Prop);
 		}
 		
