@@ -3,6 +3,7 @@ package de.qterra.gnd.serviceimpl;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -21,6 +22,7 @@ import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
+import de.qterra.gnd.sparql.util.UnifyResults;
 import de.qterra.gnd.webservice.GetGndKeywordResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
@@ -232,7 +234,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
 			ResourceResultType res = new ResourceResultType();
-			res.setPndUri("<http://d-nb.info/gnd/" + pnd + ">");
+			res.addPndUri("<http://d-nb.info/gnd/" + pnd + ">");
 			res.setResourceUri(resLine.get("uri").toString());
 			//res.setResourceTitle(resLine.get("title").toString());
 			
@@ -240,7 +242,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 				res.setResourceTitle(resLine.get("title").toString());
 			}
 			if(resLine.containsKey("isbn")){
-				res.setIsbn(resLine.get("isbn").toString());
+				res.addIsbn(resLine.get("isbn").toString());
 			}
 			if(resLine.containsKey("issn")){
 				res.setIssn(resLine.get("issn").toString());
@@ -253,6 +255,9 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			}
 			if(resLine.containsKey("issued")){
 				res.setIssued(resLine.get("issued").toString().substring(0, 4));
+			}
+			if(resLine.containsKey("name")){
+				res.setIssued(resLine.get("name").toString().substring(0, 4));
 			}
 
 			resultArray.add(res);
@@ -280,44 +285,74 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		if(idType.equals("isbn")){
 			isbn = id.replace("-", "");
 			isbnType = isbn.length();
+			log.info(isbnType);
 		}
 		
-		Properties gndResByIsbn13Prop = new Properties();
-		gndResByIsbn13Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
-		gndResByIsbn13Prop.setProperty("sparqlFile", "gndResourcesByIsbn13Request.txt");
-		gndResByIsbn13Prop.setProperty("$isbn", isbn);
-		if( isbnType == 13){
-			propertyList.add(gndResByIsbn13Prop);
-		}
-
-		Properties gndResByIsbn8Prop = new Properties();
-		gndResByIsbn8Prop.setProperty("requestUrl", "http://lobid.org/sparql/");
-		gndResByIsbn8Prop.setProperty("sparqlFile", "gndResourcesByIsbn10Request.txt");
-		gndResByIsbn8Prop.setProperty("$isbn10", isbn);
-		if( isbnType == 10){
-			propertyList.add(gndResByIsbn8Prop);
-		}
+		Properties gndResByIsbnProp = new Properties();
+		gndResByIsbnProp.setProperty("requestUrl", "http://lobid.org/sparql/");
+		gndResByIsbnProp.setProperty("sparqlFile", "gndResourcesByIsbn" + isbnType + "Request.txt");
+		gndResByIsbnProp.setProperty("$isbn", isbn);
+		propertyList.add(gndResByIsbnProp);
 		
 		runRequests(propertyList);
 
 		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
 
+		/*
+		ArrayList<String> comp = new ArrayList<String>();
+		comp.add("uri");
+		UnifyResults uniRes = new UnifyResults();
+		uniRes.setComparator(comp);
+		uniRes.setResults(results);
+		ArrayList<Hashtable<String, ArrayList<String>>> unifiedHash = uniRes.unify();
+
+		response.setResultSize(unifiedHash.size());
+		
+		for (int i=0; i<unifiedHash.size(); i++){
+			Enumeration<String> eUni = unifiedHash.get(i).keys();
+			while(eUni.hasMoreElements()){
+				String key = eUni.nextElement();
+				log.info("Key: " + key);
+				Iterator<String> values = unifiedHash.get(i).get(key).iterator();
+				while(values.hasNext()){
+					log.info("Wert: ..........." + values.next());
+				}
+				
+			}
+		}
+		/*
+		for (int i=0; i<unifiedHash.size(); i++){
+			ResourceResultType res = new ResourceResultType();
+			res.setResourceUri(unifiedHash.get(i).get("uri").get(0));
+			
+			if(unifiedHash.get(i).containsKey("name")){
+				for(int j = 0; j>unifiedHash.get(i).get("name").size(); j++){
+					res.addPrefferedName(unifiedHash.get(i).get("name").get(j));
+				}
+			}
+			
+		}*/
+		
 		// create appropriate GndPersonInfoResponse from results arraylist 
-		response.setResultSize(results.size());
+		//response.setResultSize(results.size());
 		
 		for (int i=0; i<results.size(); i++){
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
 			ResourceResultType res = new ResourceResultType();
-			res.setPndUri("<http://d-nb.info/gnd/" + pnd + ">");
 			res.setResourceUri(resLine.get("uri").toString());
-			//res.setResourceTitle(resLine.get("title").toString());
 			
+			if(resLine.containsKey("person")){
+				res.addPndUri(resLine.get("person").toString());
+			}
+			if(resLine.containsKey("name")){
+				res.addPrefferedName(resLine.get("name").toString());
+			}
 			if(resLine.containsKey("title")){
 				res.setResourceTitle(resLine.get("title").toString());
 			}
 			if(resLine.containsKey("isbn")){
-				res.setIsbn(resLine.get("isbn").toString());
+				res.addIsbn(resLine.get("isbn").toString());
 			}
 			if(resLine.containsKey("issn")){
 				res.setIssn(resLine.get("issn").toString());
@@ -335,16 +370,23 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 			resultArray.add(res);
 		}
 		
+		
 		ResourceResultType[] resType = null;
 		resultArray.toArray(resType = new ResourceResultType[resultArray.size()] );
 		response.setResult(resType) ;
-		
 		
 		
 		return response;
 	}
 
 	
+	/**
+	 * <p><em>Title: Perform the request previously created</em></p>
+	 * <p>Description: Mathos takes a List of Requests and delegates them 
+	 * to single Request Threads</p>
+	 *  
+	 * @param propertyList 
+	 */
 	private void runRequests(ArrayList<Properties> propertyList){
 
 		ArrayList<Thread> threadList = new ArrayList<Thread>();
@@ -360,7 +402,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		}
 		
 		
-		
+		// TODO: implement work flow that catches Threads if a single Thread fails
 		for(int i=0; i < threadList.size(); i++){
 			try {
 				threadList.get(i).join();

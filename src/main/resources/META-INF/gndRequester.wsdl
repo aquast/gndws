@@ -65,13 +65,15 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     	</xsd:complexType>
     	<xsd:complexType name="resourceResultType">
     		<xsd:sequence>
-    			<xsd:element maxOccurs="1" minOccurs="1" name="pndUri" type="xsd:string">
-    			</xsd:element>
     			<xsd:element maxOccurs="1" minOccurs="1" name="resourceUri" type="xsd:string">
     			</xsd:element>
     			<xsd:element maxOccurs="1" minOccurs="0" name="resourceTitle" type="xsd:string">
     			</xsd:element>
-    			<xsd:element maxOccurs="1" minOccurs="0" name="isbn" type="xsd:string">
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="pndUri" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="prefferedName" type="xsd:string">
+    			</xsd:element>
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="isbn" type="xsd:string">
     			</xsd:element>
     			<xsd:element maxOccurs="1" minOccurs="0" name="issn" type="xsd:string">
     			</xsd:element>
@@ -81,7 +83,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
     			</xsd:element>
     			<xsd:element maxOccurs="1" minOccurs="0" name="extent" type="xsd:string">
     			</xsd:element>
-    			<xsd:element maxOccurs="1" minOccurs="0" name="description" type="xsd:string">
+    			<xsd:element maxOccurs="unbounded" minOccurs="0" name="description" type="xsd:string">
     			</xsd:element>
     		</xsd:sequence>
     	</xsd:complexType>

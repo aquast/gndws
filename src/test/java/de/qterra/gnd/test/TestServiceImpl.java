@@ -123,10 +123,12 @@ public class TestServiceImpl {
 		if(res != null){
 			for(int i = 0 ; i < res.length; i++){
 				log.info(res[i].getResourceTitle() 
+						 + " ; " + res[i].getPrefferedName()[0]
 						 + " ; " + res[i].getPublisher()
 						 + " ; " + res[i].getIssued()
 						 + " ; " + res[i].getDescription()
 						 + " ; " + res[i].getResourceUri()
+						 + " ; " + res[i].getPndUri()[0]
 						 + " ; " + res[i].getExtent());
 			}
 		}
@@ -143,10 +145,12 @@ public class TestServiceImpl {
 		if(res != null){
 			for(int i = 0 ; i < res.length; i++){
 				log.info(res[i].getResourceTitle() 
+						 + " ; " + res[i].getPrefferedName()[0]
 						 + " ; " + res[i].getPublisher()
 						 + " ; " + res[i].getIssued()
 						 + " ; " + res[i].getDescription()
 						 + " ; " + res[i].getResourceUri()
+						 + " ; " + res[i].getPndUri()[0]
 						 + " ; " + res[i].getExtent());
 			}
 		}

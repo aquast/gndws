@@ -44,7 +44,7 @@ public class TestRequests {
 		
 		//Test PersonRequest
 		PersonRequest perReq = new PersonRequest();
-		results = perReq.performRequest("Gerald", "Hoffmann");
+		results = perReq.performRequest("Gerhard", "Hoffmann");
 
 
 		System.out.println(results.size());
@@ -63,7 +63,7 @@ public class TestRequests {
 	    ArrayList<String> comp = new ArrayList<String>();
 	    //comp.add("title");
 	    comp.add("name");
-	    comp.add("uri");
+	    //comp.add("uri");
 	    UnifyResults uni = new UnifyResults();
 	    
 	    uni.setComparator(comp);

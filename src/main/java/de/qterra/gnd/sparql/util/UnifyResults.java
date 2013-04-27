@@ -52,7 +52,9 @@ public class UnifyResults {
 	
 	
 	public ArrayList<Hashtable<String,ArrayList<String>>> unify(){
-		ArrayList<Hashtable<String,ArrayList<String>>> unifiedResults = new ArrayList<Hashtable<String,ArrayList<String>>>();
+		ArrayList<Hashtable<String,ArrayList<String>>> 
+		
+		unifiedResults = new ArrayList<Hashtable<String,ArrayList<String>>>();
 
  
 		for(int j=0; j<comparator.size(); j++){
@@ -64,7 +66,9 @@ public class UnifyResults {
 		    	Hashtable<String,RDFNode> soln = results.get(i); 
 	    		relatedNodes = new ArrayList<String>();
 			    
-		    	Enumeration<String> kEnum = soln.keys();
+		    	// determinate if any key in results equals any key in Comparators
+	    		// if so, use key for the next step, if not add Node to Array
+	    		Enumeration<String> kEnum = soln.keys();
 		    	while (kEnum.hasMoreElements()){
 		    		String key = kEnum.nextElement();
 		    		if(key.equals(comp)){
@@ -76,7 +80,8 @@ public class UnifyResults {
 		    		}
 		    	}
 		    	
-		    	//Test if we already have any Hash with the comparator node
+		    	//Test if any key equals any compKey
+		    	// if so test if we already have any Hash with the comparator node
 		    	if(compKey == null){
 		    		log.error("comparing Key wasn't found in result");
 		    	}else{
