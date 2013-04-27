@@ -85,9 +85,10 @@ public class SparqlQuery {
 		    {
 		      
 		      QuerySolution soln = results.nextSolution() ;
-    		  Hashtable<String,RDFNode> rCols = new Hashtable<String,RDFNode>();
-		      //ArrayList<RDFNode> solnArray = new ArrayList<RDFNode>();
-		      ArrayList<Hashtable<String,RDFNode>> solnArray = new ArrayList<Hashtable<String,RDFNode>>();
+    		  
+		      // Hashtable takes from SPARQL-Request column name as key 
+		      // and column value (RDFNode is RDF-Resource or Literal) as value  
+		      Hashtable<String,RDFNode> rCols = new Hashtable<String,RDFNode>();
     		  
     		  boolean noAnon = true;
     		  Iterator<String> vName = soln.varNames();

@@ -298,43 +298,9 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 
 		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
 
-		/*
-		ArrayList<String> comp = new ArrayList<String>();
-		comp.add("uri");
-		UnifyResults uniRes = new UnifyResults();
-		uniRes.setComparator(comp);
-		uniRes.setResults(results);
-		ArrayList<Hashtable<String, ArrayList<String>>> unifiedHash = uniRes.unify();
-
-		response.setResultSize(unifiedHash.size());
-		
-		for (int i=0; i<unifiedHash.size(); i++){
-			Enumeration<String> eUni = unifiedHash.get(i).keys();
-			while(eUni.hasMoreElements()){
-				String key = eUni.nextElement();
-				log.info("Key: " + key);
-				Iterator<String> values = unifiedHash.get(i).get(key).iterator();
-				while(values.hasNext()){
-					log.info("Wert: ..........." + values.next());
-				}
-				
-			}
-		}
-		/*
-		for (int i=0; i<unifiedHash.size(); i++){
-			ResourceResultType res = new ResourceResultType();
-			res.setResourceUri(unifiedHash.get(i).get("uri").get(0));
-			
-			if(unifiedHash.get(i).containsKey("name")){
-				for(int j = 0; j>unifiedHash.get(i).get("name").size(); j++){
-					res.addPrefferedName(unifiedHash.get(i).get("name").get(j));
-				}
-			}
-			
-		}*/
 		
 		// create appropriate GndPersonInfoResponse from results arraylist 
-		//response.setResultSize(results.size());
+		response.setResultSize(results.size());
 		
 		for (int i=0; i<results.size(); i++){
 			Hashtable<String,RDFNode> resLine = results.get(i);

@@ -104,7 +104,57 @@ public class UnifyResults {
 		return unifiedResults;
 	}
 	
-	
+
+	public ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>> unify(String compKey){
+		
+		// provide Result as ArrayList of Hashtables. 
+		// outer Hashtable Key (String) is the Value found for CompKey, 
+		// inner Hashtable Key is holds the key for any the String[] in ArrayList
+		// unlike outer key this is not the value but the key of any column found in SPARQL result
+		
+		
+		ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>> unifiedResults = 
+		new ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>>();
+
+		Hashtable<String, Hashtable<String, ArrayList<String>>> unifiedColValues = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
+	    for (int i=0 ; i< results.size() ; i++){
+	    	
+	    	// assume any result has provides an Value for the compKey
+	    	// TODO verify: is that assumption correct?
+	    	String compValue = results.get(i).get(compKey).toString();
+	    	
+	    	// in case the compValue is new
+	    	if(compValue != null && unifiedColValues.containsKey(compValue)){
+	    		Hashtable<String, ArrayList<String>> colValues = new Hashtable<String, ArrayList<String>>();
+    			ArrayList<String> values = new ArrayList<String>();
+
+	    		Enumeration<String> keyEnum = results.get(i).keys();
+	    		while(keyEnum.hasMoreElements()){
+	    			String key = keyEnum.nextElement();
+	    			//unifiedColValues.get(compKey).get(key).add(results.get(i).get(key).toString());
+	    		}
+
+	    	}else {
+
+	    		Hashtable<String, ArrayList<String>> colValues = new Hashtable<String, ArrayList<String>>();
+    			ArrayList<String> values = new ArrayList<String>();
+	    		
+	    		//find all cols (as Hashtable keys) provided with this result
+	    		Enumeration<String> keyEnum = results.get(i).keys();
+	    		while(keyEnum.hasMoreElements()){
+	    			String key = keyEnum.nextElement();
+	    			values.add(results.get(i).get(key).toString());
+	    			colValues.put(key, values);
+	    		}
+	    		unifiedColValues.put(compValue, colValues);
+				unifiedResults.add(unifiedColValues);
+	    	}
+	    		
+	    	
+		}
+	    return unifiedResults;
+	}
+
 	public void setResults(ArrayList<Hashtable<String,RDFNode>> Results){
 		results = Results;
 	}
