@@ -22,6 +22,7 @@ import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
+import de.qterra.gnd.sparql.util.ResourceResponse;
 import de.qterra.gnd.sparql.util.UnifyResults;
 import de.qterra.gnd.webservice.GetGndKeywordResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
@@ -296,42 +297,70 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		
 		runRequests(propertyList);
 
+	    // unify those rows from the SPARQL Response, that cohave the same Resource ID   
+		UnifyResults uni = new UnifyResults();
+	    uni.setResults(results);
+	    //ArrayList<Hashtable<String,ArrayList<String>>> unifiedResults = uni.unify();
+	    ArrayList<Hashtable<String, ResourceResponse>> unifiedResults 
+	    = uni.unify("uri");
+
+		
+		
 		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
 
 		
 		// create appropriate GndPersonInfoResponse from results arraylist 
-		response.setResultSize(results.size());
+		response.setResultSize(unifiedResults.size());
 		
-		for (int i=0; i<results.size(); i++){
-			Hashtable<String,RDFNode> resLine = results.get(i);
-			
+		for (int i=0; i<unifiedResults.size(); i++){
+
 			ResourceResultType res = new ResourceResultType();
-			res.setResourceUri(resLine.get("uri").toString());
-			
-			if(resLine.containsKey("person")){
-				res.addPndUri(resLine.get("person").toString());
-			}
-			if(resLine.containsKey("name")){
-				res.addPrefferedName(resLine.get("name").toString());
-			}
-			if(resLine.containsKey("title")){
-				res.setResourceTitle(resLine.get("title").toString());
-			}
-			if(resLine.containsKey("isbn")){
-				res.addIsbn(resLine.get("isbn").toString());
-			}
-			if(resLine.containsKey("issn")){
-				res.setIssn(resLine.get("issn").toString());
-			}
-			if(resLine.containsKey("extent")){
-				res.setExtent(resLine.get("extent").toString());
-			}
-			if(resLine.containsKey("publisher")){
-				res.setPublisher(resLine.get("publisher").toString());
-			}
-			if(resLine.containsKey("issued")){
-				res.setIssued(resLine.get("issued").toString().substring(0, 4));
-			}
+	    	Hashtable<String, ResourceResponse> uResult = unifiedResults.get(i); 
+
+	    	//log.info(unifiedResults.size());
+	    	Enumeration<String> kEnum = uResult.keys();
+    		int k = 1;
+	    	while (kEnum.hasMoreElements()){
+	    		String rKey = kEnum.nextElement();
+				res.setResourceUri(rKey);
+	    		Enumeration<String> keyEnum =  uResult.get(rKey).getResponse().keys();
+	    		while(keyEnum.hasMoreElements()){
+	    			String key = keyEnum.nextElement();
+	    			ArrayList<String> value = uResult.get(rKey).getResponse().get(key);
+	    			for(int j = 0; j<value.size(); j++){
+		    			if(key.equals("person")){
+		    				res.addPndUri(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("name")){
+		    				res.addPrefferedName(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("title")){
+		    				res.setResourceTitle(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("isbn")){
+		    				res.addIsbn(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("extent")){
+		    				res.setExtent(value.get(j));
+		    				//TODO: make this multiple
+		    			}
+		    			
+		    			if(key.equals("publisher")){
+		    				res.setPublisher(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("issued")){
+		    				res.setIssued(value.get(j));
+		    			}
+		    			
+	    			}
+
+	    		}
+	    	}			
 
 			resultArray.add(res);
 		}

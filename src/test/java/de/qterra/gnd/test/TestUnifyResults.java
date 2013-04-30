@@ -23,6 +23,7 @@ import de.qterra.gnd.sparql.requests.IssnRequest;
 import de.qterra.gnd.sparql.requests.OAContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.OpenLibContentByPersonRequest;
 import de.qterra.gnd.sparql.requests.PersonRequest;
+import de.qterra.gnd.sparql.util.ResourceResponse;
 import de.qterra.gnd.sparql.util.UnifyResults;
 import de.qterra.gnd.webservice.ResourceResultType;
 
@@ -55,7 +56,6 @@ public class TestUnifyResults {
 		if(idType.equals("isbn")){
 			isbn = id.replace("-", "");
 			isbnType = isbn.length();
-			log.info(isbnType);
 		}
 		
 		ArrayList<Properties> propertyList = new ArrayList<Properties>();
@@ -69,10 +69,7 @@ public class TestUnifyResults {
 		GenericSPARQLRequest gRequest = new GenericSPARQLRequest(gndResByIsbnProp);
 		results = gRequest.performRequest();
 		
-		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
 
-
-	    
 	    ArrayList<String> comp = new ArrayList<String>();
 	    //comp.add("title");
 	    comp.add("uri");
@@ -82,23 +79,26 @@ public class TestUnifyResults {
 	    uni.setComparator(comp);
 	    uni.setResults(results);
 	    //ArrayList<Hashtable<String,ArrayList<String>>> unifiedResults = uni.unify();
-	    ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>> unifiedResults = uni.unify("uri");
+	    ArrayList<Hashtable<String, ResourceResponse>> unifiedResults 
+	    = uni.unify("person");
 	    
 
-	    System.out.println("\n\nZusammengeführte Ergebnisse: " + unifiedResults.size());
+	    System.out.println("\n\nUnified Sparql Results: " + unifiedResults.size());
 
 	    
 	    for (int i=0 ; i< unifiedResults.size() ; i++){
-	    	Hashtable<String, Hashtable<String,ArrayList<String>>> uResult = unifiedResults.get(i); 
+	    	Hashtable<String, ResourceResponse> uResult = unifiedResults.get(i); 
 		    
+	    	//log.info(unifiedResults.size());
 	    	Enumeration<String> kEnum = uResult.keys();
     		int k = 1;
 	    	while (kEnum.hasMoreElements()){
-	    		String key = kEnum.nextElement();
-	    		System.out.println(k++ + " " + key + " :");
-	    		for(int j = 0; j < uResult.get(key).size(); j++){
-	    			System.out.print("....................." + uResult.get(key).get(j) + " --- ");
-	    			System.out.println("");
+	    		String rKey = kEnum.nextElement();
+	    		log.info("Resource-Nr. : " + k++ + " " + rKey + " :");
+	    		Enumeration<String> keyEnum =  uResult.get(rKey).getResponse().keys();
+	    		while(keyEnum.hasMoreElements()){
+	    			String key = keyEnum.nextElement();
+	    			log.info("Hash: " + key + " : " + uResult.get(rKey).getResponse().get(key));
 	    		}
 	    	}
 	    	

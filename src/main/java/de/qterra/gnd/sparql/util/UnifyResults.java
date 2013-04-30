@@ -105,52 +105,64 @@ public class UnifyResults {
 	}
 	
 
-	public ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>> unify(String compKey){
+	public ArrayList<Hashtable<String, ResourceResponse>> unify(String compKey){
 		
 		// provide Result as ArrayList of Hashtables. 
 		// outer Hashtable Key (String) is the Value found for CompKey, 
 		// inner Hashtable Key is holds the key for any the String[] in ArrayList
 		// unlike outer key this is not the value but the key of any column found in SPARQL result
 		
+		//ResourceResponse rResponse = new ResourceResponse();
 		
-		ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>> unifiedResults = 
-		new ArrayList<Hashtable<String, Hashtable<String, ArrayList<String>>>>();
+		ArrayList<Hashtable<String, ResourceResponse>> unifiedResults = 
+		new ArrayList<Hashtable<String, ResourceResponse>>();
 
-		Hashtable<String, Hashtable<String, ArrayList<String>>> unifiedColValues = new Hashtable<String, Hashtable<String, ArrayList<String>>>();
+		Hashtable<String, ResourceResponse> unifiedColValues = new Hashtable<String, ResourceResponse>();
 	    for (int i=0 ; i< results.size() ; i++){
 	    	
 	    	// assume any result has provides an Value for the compKey
 	    	// TODO verify: is that assumption correct?
 	    	String compValue = results.get(i).get(compKey).toString();
-	    	
-	    	// in case the compValue is new
-	    	if(compValue != null && unifiedColValues.containsKey(compValue)){
-	    		Hashtable<String, ArrayList<String>> colValues = new Hashtable<String, ArrayList<String>>();
-    			ArrayList<String> values = new ArrayList<String>();
 
+	    	// a result with the compValue is already existing
+	    	if(compValue  != null && unifiedColValues.containsKey(compValue)){
+	    		
 	    		Enumeration<String> keyEnum = results.get(i).keys();
 	    		while(keyEnum.hasMoreElements()){
 	    			String key = keyEnum.nextElement();
-	    			//unifiedColValues.get(compKey).get(key).add(results.get(i).get(key).toString());
+	    			String value = results.get(i).get(key).toString();
+	    			//log.info(value);
+	    			if(unifiedColValues.get(compValue).getResponse().containsKey(key)){
+	    				if(!unifiedColValues.get(compValue).getResponse().get(key).contains(value)){
+		    				unifiedColValues.get(compValue).getResponse().get(key).add(value);
+			    			}
+	    			}else{
+	    				ArrayList<String> values  = new ArrayList<String>();
+	    				//values.add(results.get(i).get(key).toString());
+	    				//colValues.put(key, values);
+	    				unifiedColValues.get(compValue).getResponse().put(key, values);
+	    			}
+	    			
 	    		}
 
 	    	}else {
-
-	    		Hashtable<String, ArrayList<String>> colValues = new Hashtable<String, ArrayList<String>>();
-    			ArrayList<String> values = new ArrayList<String>();
-	    		
+	    		//we have a new result
+	    		ResourceResponse colValues = new ResourceResponse();
+ 	    		
 	    		//find all cols (as Hashtable keys) provided with this result
 	    		Enumeration<String> keyEnum = results.get(i).keys();
 	    		while(keyEnum.hasMoreElements()){
 	    			String key = keyEnum.nextElement();
+	       			ArrayList<String> values = new ArrayList<String>();
 	    			values.add(results.get(i).get(key).toString());
-	    			colValues.put(key, values);
+	    			colValues.getResponse().put(key, values);
+	    			log.debug("added first: " + key + " : " + results.get(i).get(key).toString());
 	    		}
+	    		// we add a new result
 	    		unifiedColValues.put(compValue, colValues);
 				unifiedResults.add(unifiedColValues);
 	    	}
 	    		
-	    	
 		}
 	    return unifiedResults;
 	}
