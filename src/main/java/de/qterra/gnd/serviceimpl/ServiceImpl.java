@@ -249,7 +249,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 				res.setIssn(resLine.get("issn").toString());
 			}
 			if(resLine.containsKey("extent")){
-				res.setExtent(resLine.get("extent").toString());
+				res.addExtent(resLine.get("extent").toString());
 			}
 			if(resLine.containsKey("publisher")){
 				res.setPublisher(resLine.get("publisher").toString());
@@ -345,7 +345,7 @@ public class ServiceImpl implements GndRequesterSkeletonInterface {
 		    			}
 		    			
 		    			if(key.equals("extent")){
-		    				res.setExtent(value.get(j));
+		    				res.addExtent(value.get(j));
 		    				//TODO: make this multiple
 		    			}
 		    			

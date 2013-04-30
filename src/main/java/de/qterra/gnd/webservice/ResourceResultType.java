@@ -485,10 +485,11 @@
 
                         /**
                         * field for Extent
+                        * This was an Array!
                         */
 
                         
-                                    protected java.lang.String localExtent ;
+                                    protected java.lang.String[] localExtent ;
                                 
                            /*  This tracker boolean wil be used to detect whether the user called the set method
                           *   for this attribute. It will be used to determine whether to include this field
@@ -499,33 +500,70 @@
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return java.lang.String[]
                            */
-                           public  java.lang.String getExtent(){
+                           public  java.lang.String[] getExtent(){
                                return localExtent;
                            }
 
                            
                         
-                            /**
-                               * Auto generated setter method
-                               * @param param Extent
-                               */
-                               public void setExtent(java.lang.String param){
-                            
-                                       if (param != null){
-                                          //update the setting tracker
-                                          localExtentTracker = true;
-                                       } else {
-                                          localExtentTracker = false;
-                                              
-                                       }
-                                   
-                                            this.localExtent=param;
-                                    
 
-                               }
+
+                               
+                              /**
+                               * validate the array for Extent
+                               */
+                              protected void validateExtent(java.lang.String[] param){
+                             
+                              }
+
+
+                             /**
+                              * Auto generated setter method
+                              * @param param Extent
+                              */
+                              public void setExtent(java.lang.String[] param){
+                              
+                                   validateExtent(param);
+
+                               
+                                          if (param != null){
+                                             //update the setting tracker
+                                             localExtentTracker = true;
+                                          } else {
+                                             localExtentTracker = false;
+                                                 
+                                          }
+                                      
+                                      this.localExtent=param;
+                              }
+
+                               
+                             
+                             /**
+                             * Auto generated add method for the array for convenience
+                             * @param param java.lang.String
+                             */
+                             public void addExtent(java.lang.String param){
+                                   if (localExtent == null){
+                                   localExtent = new java.lang.String[]{};
+                                   }
+
                             
+                                 //update the setting tracker
+                                localExtentTracker = true;
+                            
+
+                               java.util.List list =
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localExtent);
+                               list.add(param);
+                               this.localExtent =
+                             (java.lang.String[])list.toArray(
+                            new java.lang.String[list.size()]);
+
+                             }
+                             
 
                         /**
                         * field for Description
@@ -608,6 +646,132 @@
 
                              }
                              
+
+                        /**
+                        * field for Keyword
+                        * This was an Array!
+                        */
+
+                        
+                                    protected java.lang.String[] localKeyword ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localKeywordTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String[]
+                           */
+                           public  java.lang.String[] getKeyword(){
+                               return localKeyword;
+                           }
+
+                           
+                        
+
+
+                               
+                              /**
+                               * validate the array for Keyword
+                               */
+                              protected void validateKeyword(java.lang.String[] param){
+                             
+                              }
+
+
+                             /**
+                              * Auto generated setter method
+                              * @param param Keyword
+                              */
+                              public void setKeyword(java.lang.String[] param){
+                              
+                                   validateKeyword(param);
+
+                               
+                                          if (param != null){
+                                             //update the setting tracker
+                                             localKeywordTracker = true;
+                                          } else {
+                                             localKeywordTracker = false;
+                                                 
+                                          }
+                                      
+                                      this.localKeyword=param;
+                              }
+
+                               
+                             
+                             /**
+                             * Auto generated add method for the array for convenience
+                             * @param param java.lang.String
+                             */
+                             public void addKeyword(java.lang.String param){
+                                   if (localKeyword == null){
+                                   localKeyword = new java.lang.String[]{};
+                                   }
+
+                            
+                                 //update the setting tracker
+                                localKeywordTracker = true;
+                            
+
+                               java.util.List list =
+                            org.apache.axis2.databinding.utils.ConverterUtil.toList(localKeyword);
+                               list.add(param);
+                               this.localKeyword =
+                             (java.lang.String[])list.toArray(
+                            new java.lang.String[list.size()]);
+
+                             }
+                             
+
+                        /**
+                        * field for Location
+                        */
+
+                        
+                                    protected java.lang.String localLocation ;
+                                
+                           /*  This tracker boolean wil be used to detect whether the user called the set method
+                          *   for this attribute. It will be used to determine whether to include this field
+                           *   in the serialized XML
+                           */
+                           protected boolean localLocationTracker = false ;
+                           
+
+                           /**
+                           * Auto generated getter method
+                           * @return java.lang.String
+                           */
+                           public  java.lang.String getLocation(){
+                               return localLocation;
+                           }
+
+                           
+                        
+                            /**
+                               * Auto generated setter method
+                               * @param param Location
+                               */
+                               public void setLocation(java.lang.String param){
+                            
+                                       if (param != null){
+                                          //update the setting tracker
+                                          localLocationTracker = true;
+                                       } else {
+                                          localLocationTracker = false;
+                                              
+                                       }
+                                   
+                                            this.localLocation=param;
+                                    
+
+                               }
+                            
 
      /**
      * isReaderMTOMAware
@@ -1005,40 +1169,49 @@
                                     
                                    xmlWriter.writeEndElement();
                              } if (localExtentTracker){
-                                    namespace = "";
-                                    if (! namespace.equals("")) {
-                                        prefix = xmlWriter.getPrefix(namespace);
-
-                                        if (prefix == null) {
-                                            prefix = generatePrefix(namespace);
-
-                                            xmlWriter.writeStartElement(prefix,"extent", namespace);
-                                            xmlWriter.writeNamespace(prefix, namespace);
-                                            xmlWriter.setPrefix(prefix, namespace);
-
-                                        } else {
-                                            xmlWriter.writeStartElement(namespace,"extent");
-                                        }
-
-                                    } else {
-                                        xmlWriter.writeStartElement("extent");
-                                    }
-                                
-
-                                          if (localExtent==null){
-                                              // write the nil attribute
-                                              
-                                                     throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
-                                                  
-                                          }else{
-
+                             if (localExtent!=null) {
+                                   namespace = "";
+                                   boolean emptyNamespace = namespace == null || namespace.length() == 0;
+                                   prefix =  emptyNamespace ? null : xmlWriter.getPrefix(namespace);
+                                   for (int i = 0;i < localExtent.length;i++){
                                         
-                                                   xmlWriter.writeCharacters(localExtent);
+                                            if (localExtent[i] != null){
+                                        
+                                                if (!emptyNamespace) {
+                                                    if (prefix == null) {
+                                                        java.lang.String prefix2 = generatePrefix(namespace);
+
+                                                        xmlWriter.writeStartElement(prefix2,"extent", namespace);
+                                                        xmlWriter.writeNamespace(prefix2, namespace);
+                                                        xmlWriter.setPrefix(prefix2, namespace);
+
+                                                    } else {
+                                                        xmlWriter.writeStartElement(namespace,"extent");
+                                                    }
+
+                                                } else {
+                                                    xmlWriter.writeStartElement("extent");
+                                                }
+
                                             
-                                          }
+                                                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExtent[i]));
+                                                    
+                                                xmlWriter.writeEndElement();
+                                              
+                                                } else {
+                                                   
+                                                           // we have to do nothing since minOccurs is zero
+                                                       
+                                                }
+
+                                   }
+                             } else {
+                                 
+                                         throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
                                     
-                                   xmlWriter.writeEndElement();
-                             } if (localDescriptionTracker){
+                             }
+
+                        } if (localDescriptionTracker){
                              if (localDescription!=null) {
                                    namespace = "";
                                    boolean emptyNamespace = namespace == null || namespace.length() == 0;
@@ -1081,7 +1254,84 @@
                                     
                              }
 
-                        }
+                        } if (localKeywordTracker){
+                             if (localKeyword!=null) {
+                                   namespace = "";
+                                   boolean emptyNamespace = namespace == null || namespace.length() == 0;
+                                   prefix =  emptyNamespace ? null : xmlWriter.getPrefix(namespace);
+                                   for (int i = 0;i < localKeyword.length;i++){
+                                        
+                                            if (localKeyword[i] != null){
+                                        
+                                                if (!emptyNamespace) {
+                                                    if (prefix == null) {
+                                                        java.lang.String prefix2 = generatePrefix(namespace);
+
+                                                        xmlWriter.writeStartElement(prefix2,"keyword", namespace);
+                                                        xmlWriter.writeNamespace(prefix2, namespace);
+                                                        xmlWriter.setPrefix(prefix2, namespace);
+
+                                                    } else {
+                                                        xmlWriter.writeStartElement(namespace,"keyword");
+                                                    }
+
+                                                } else {
+                                                    xmlWriter.writeStartElement("keyword");
+                                                }
+
+                                            
+                                                        xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localKeyword[i]));
+                                                    
+                                                xmlWriter.writeEndElement();
+                                              
+                                                } else {
+                                                   
+                                                           // we have to do nothing since minOccurs is zero
+                                                       
+                                                }
+
+                                   }
+                             } else {
+                                 
+                                         throw new org.apache.axis2.databinding.ADBException("keyword cannot be null!!");
+                                    
+                             }
+
+                        } if (localLocationTracker){
+                                    namespace = "";
+                                    if (! namespace.equals("")) {
+                                        prefix = xmlWriter.getPrefix(namespace);
+
+                                        if (prefix == null) {
+                                            prefix = generatePrefix(namespace);
+
+                                            xmlWriter.writeStartElement(prefix,"location", namespace);
+                                            xmlWriter.writeNamespace(prefix, namespace);
+                                            xmlWriter.setPrefix(prefix, namespace);
+
+                                        } else {
+                                            xmlWriter.writeStartElement(namespace,"location");
+                                        }
+
+                                    } else {
+                                        xmlWriter.writeStartElement("location");
+                                    }
+                                
+
+                                          if (localLocation==null){
+                                              // write the nil attribute
+                                              
+                                                     throw new org.apache.axis2.databinding.ADBException("location cannot be null!!");
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localLocation);
+                                            
+                                          }
+                                    
+                                   xmlWriter.writeEndElement();
+                             }
                     xmlWriter.writeEndElement();
                
 
@@ -1358,15 +1608,29 @@
                                            throw new org.apache.axis2.databinding.ADBException("publisher cannot be null!!");
                                         }
                                     } if (localExtentTracker){
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "extent"));
-                                 
-                                        if (localExtent != null){
-                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExtent));
-                                        } else {
-                                           throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
-                                        }
-                                    } if (localDescriptionTracker){
+                            if (localExtent!=null){
+                                  for (int i = 0;i < localExtent.length;i++){
+                                      
+                                         if (localExtent[i] != null){
+                                          elementList.add(new javax.xml.namespace.QName("",
+                                                                              "extent"));
+                                          elementList.add(
+                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExtent[i]));
+                                          } else {
+                                             
+                                                    // have to do nothing
+                                                
+                                          }
+                                      
+
+                                  }
+                            } else {
+                              
+                                    throw new org.apache.axis2.databinding.ADBException("extent cannot be null!!");
+                                
+                            }
+
+                        } if (localDescriptionTracker){
                             if (localDescription!=null){
                                   for (int i = 0;i < localDescription.length;i++){
                                       
@@ -1389,7 +1653,39 @@
                                 
                             }
 
-                        }
+                        } if (localKeywordTracker){
+                            if (localKeyword!=null){
+                                  for (int i = 0;i < localKeyword.length;i++){
+                                      
+                                         if (localKeyword[i] != null){
+                                          elementList.add(new javax.xml.namespace.QName("",
+                                                                              "keyword"));
+                                          elementList.add(
+                                          org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localKeyword[i]));
+                                          } else {
+                                             
+                                                    // have to do nothing
+                                                
+                                          }
+                                      
+
+                                  }
+                            } else {
+                              
+                                    throw new org.apache.axis2.databinding.ADBException("keyword cannot be null!!");
+                                
+                            }
+
+                        } if (localLocationTracker){
+                                      elementList.add(new javax.xml.namespace.QName("",
+                                                                      "location"));
+                                 
+                                        if (localLocation != null){
+                                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localLocation));
+                                        } else {
+                                           throw new org.apache.axis2.databinding.ADBException("location cannot be null!!");
+                                        }
+                                    }
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -1471,7 +1767,11 @@
                     
                         java.util.ArrayList list5 = new java.util.ArrayList();
                     
+                        java.util.ArrayList list9 = new java.util.ArrayList();
+                    
                         java.util.ArrayList list10 = new java.util.ArrayList();
+                    
+                        java.util.ArrayList list11 = new java.util.ArrayList();
                     
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
@@ -1704,13 +2004,40 @@
                                 
                                     if (reader.isStartElement() && new javax.xml.namespace.QName("","extent").equals(reader.getName())){
                                 
-                                    java.lang.String content = reader.getElementText();
                                     
-                                              object.setExtent(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                              
-                                        reader.next();
                                     
+                                    // Process the array and step past its final element's end.
+                                    list9.add(reader.getElementText());
+                                            
+                                            //loop until we find a start element that is not part of this array
+                                            boolean loopDone9 = false;
+                                            while(!loopDone9){
+                                                // Ensure we are at the EndElement
+                                                while (!reader.isEndElement()){
+                                                    reader.next();
+                                                }
+                                                // Step out of this element
+                                                reader.next();
+                                                // Step to next element event.
+                                                while (!reader.isStartElement() && !reader.isEndElement())
+                                                    reader.next();
+                                                if (reader.isEndElement()){
+                                                    //two continuous end elements means we are exiting the xml structure
+                                                    loopDone9 = true;
+                                                } else {
+                                                    if (new javax.xml.namespace.QName("","extent").equals(reader.getName())){
+                                                         list9.add(reader.getElementText());
+                                                        
+                                                    }else{
+                                                        loopDone9 = true;
+                                                    }
+                                                }
+                                            }
+                                            // call the converter utility  to convert and set the array
+                                            
+                                                    object.setExtent((java.lang.String[])
+                                                        list9.toArray(new java.lang.String[list9.size()]));
+                                                
                               }  // End of if for expected property start element
                                 
                                     else {
@@ -1756,6 +2083,69 @@
                                                     object.setDescription((java.lang.String[])
                                                         list10.toArray(new java.lang.String[list10.size()]));
                                                 
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","keyword").equals(reader.getName())){
+                                
+                                    
+                                    
+                                    // Process the array and step past its final element's end.
+                                    list11.add(reader.getElementText());
+                                            
+                                            //loop until we find a start element that is not part of this array
+                                            boolean loopDone11 = false;
+                                            while(!loopDone11){
+                                                // Ensure we are at the EndElement
+                                                while (!reader.isEndElement()){
+                                                    reader.next();
+                                                }
+                                                // Step out of this element
+                                                reader.next();
+                                                // Step to next element event.
+                                                while (!reader.isStartElement() && !reader.isEndElement())
+                                                    reader.next();
+                                                if (reader.isEndElement()){
+                                                    //two continuous end elements means we are exiting the xml structure
+                                                    loopDone11 = true;
+                                                } else {
+                                                    if (new javax.xml.namespace.QName("","keyword").equals(reader.getName())){
+                                                         list11.add(reader.getElementText());
+                                                        
+                                                    }else{
+                                                        loopDone11 = true;
+                                                    }
+                                                }
+                                            }
+                                            // call the converter utility  to convert and set the array
+                                            
+                                                    object.setKeyword((java.lang.String[])
+                                                        list11.toArray(new java.lang.String[list11.size()]));
+                                                
+                              }  // End of if for expected property start element
+                                
+                                    else {
+                                        
+                                    }
+                                
+                                    
+                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
+                                
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","location").equals(reader.getName())){
+                                
+                                    java.lang.String content = reader.getElementText();
+                                    
+                                              object.setLocation(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              
+                                        reader.next();
+                                    
                               }  // End of if for expected property start element
                                 
                                     else {

@@ -13,7 +13,7 @@ var pRow;
 //add a PersonID-Input field to the form
 function addPndForm(){
 	var suchImage = "<div class=\"pnd\" style=\"margin-top:4px;\"><img src=\"../Icons/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" style=\"float:left;\" />"
-	+ "<input class=\"pndid\" type=\"text\" size=\"30\" value=\"PND-ID\" /></div>";
+	+ "<input class=\"pndid\" type=\"text\" size=\"30\" value=\"PND-ID\" name=\"pndId\" /></div>";
 	var imageDiv = $(".person").parent().append(suchImage);
 	$("head").append("<link  rel=\"stylesheet\" type=\"text/css\" href=\"/css/loddiggr.css\"/>");
 	$("img").click(requestPersonId);
