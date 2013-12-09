@@ -1,0 +1,488 @@
+<?php
+/**
+ * Short description for file
+ * 
+ * This file is part of OPUS. The software OPUS has been developed at the
+ * University of Stuttgart with funding from the German Research Net
+ * (Deutsches Forschungsnetz), the Federal Department of Higher Education and
+ * Research (Bundesministerium fuer Bildung und Forschung) and The Ministry of
+ * Science, Research and the Arts of the State of Baden-Wuerttemberg
+ * (Ministerium fuer Wissenschaft, Forschung und Kunst des Landes
+ * Baden-Wuerttemberg).
+ * 
+ * PHP versions 4 and 5
+ * 
+ * OPUS is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * OPUS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with OPUS; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * 
+ * @package     OPUS
+ * @author      Emily Erdbeer <emily@example.org>
+ * @copyright   Universitaetsbibliothek Stuttgart, 1998-2007
+ * @license     http://www.gnu.org/licenses/gpl.html
+ * @version     $Id: db_aendern.php 214 2007-05-17 10:28:15Z freudenberg $
+ */
+#############################################################
+#
+# Funktion: admin/db_aendern.php
+#           Abspeichern der Metadaten in der Datenbank
+# letzte Aenderung:
+# 20.4.2005, Annette Maile, UB Stuttgart
+# Auslagerung Design in lib/design.php
+# In Abhaengigkeit von $la kann das entsprechende Design eingelesen werden.
+#
+# Zugriff auf Volltexte weltweit/campusweit/weitere Bereiche
+#
+# 29.7.2005, Annette Maile, UB Stuttgart
+# Einfuegen Lizenzvertrag
+#
+#############################################################
+require '../../lib/opus.class.php';
+$opus = new OPUS('../../lib/opus.conf');
+$php = $opus->value("php");
+$url = $opus->value("url");
+$db = $opus->value("db");
+$opus_table = $opus->value("opus_table");
+$temp_table = $opus->value("temp_table");
+// Anfang Collections
+$coll_anzeigen = $opus->value("coll_anzeigen");
+// Ende Collections
+include ("../../lib/stringValidation.php");
+$table = $_REQUEST['table'];
+if ($table != $opus_table && $table != $temp_table) {
+    die("Fehler in Parameter table");
+}
+$title = $_REQUEST['title'];
+$title = _zeichen_loeschen("[`\n\r]", "", $title);
+$title_en = $_REQUEST['title_en'];
+$title_en = _zeichen_loeschen("[`\n\r]", "", $title_en);
+$title_de = $_REQUEST['title_de'];
+$title_de = _zeichen_loeschen("[`\n\r]", "", $title_de);
+$creator_name = $_REQUEST['creator_name'];
+if (is_array($creator_name)) {
+    array_walk($creator_name, '_array_zeichen_loeschen');
+} else {
+    $creator_name = array();
+}
+// PND I support from hbz
+// we try the same with pnd_id:
+$pnd_id = $_REQUEST['pnd_id'];
+if($pnd_id != null){
+  if (is_array($pnd_id)) {
+    array_walk($pnd_id, '_array_zeichen_loeschen');
+  } else {
+    $pnd_id = array();
+  }
+}
+
+
+$publisher_inst = $_REQUEST['publisher_inst'];
+foreach($publisher_inst as $i) {
+    if (!_is_valid($i, 0, 10, "[A-Za-z0-9]*")) {
+        die("Fehler in Parameter publisher_inst");
+    }
+}
+$creator_corporate = $_REQUEST['creator_corporate'];
+$creator_corporate = _zeichen_loeschen("[`\n\r]", "", $creator_corporate);
+$contributors_name = $_REQUEST['contributors_name'];
+$contributors_name = _zeichen_loeschen("[`\n\r]", "", $contributors_name);
+$contributors_corporate = $_REQUEST['contributors_corporate'];
+$contributors_corporate = _zeichen_loeschen("[`\n\r]", "", $contributors_corporate);
+$subject_swd = $_REQUEST['subject_swd'];
+$subject_swd = _zeichen_loeschen("[`\n\r]", "", $subject_swd);
+$subject_uncontrolled_german = $_REQUEST['subject_uncontrolled_german'];
+$subject_uncontrolled_german = _zeichen_loeschen("[`\n\r]", "", $subject_uncontrolled_german);
+$subject_uncontrolled_english = $_REQUEST['subject_uncontrolled_english'];
+$subject_uncontrolled_english = _zeichen_loeschen("[`\n\r]", "", $subject_uncontrolled_english);
+$description_lang = $_REQUEST['description_lang'];
+if (!_is_valid($description_lang, 0, 3, "[A-Za-z]*")) {
+    die("Fehler in Parameter description_lang");
+}
+$description2_lang = $_REQUEST['description2_lang'];
+if (!_is_valid($description2_lang, 0, 3, "[A-Za-z]*")) {
+    die("Fehler in Parameter description2_lang");
+}
+$description = $_REQUEST['description'];
+$description = _zeichen_loeschen("[`]", "", $description);
+$description2 = $_REQUEST['description2'];
+$description2 = _zeichen_loeschen("[`]", "", $description2);
+$publisher_university = $_REQUEST['publisher_university'];
+$publisher_university = _zeichen_loeschen("[`]", "", $publisher_university);
+$publisher_faculty = $_REQUEST['publisher_faculty'];
+if (!_is_valid($publisher_faculty, 0, 5, "[A-Za-z0-9\-]*")) {
+    die("Fehler in Parameter publisher_faculty");
+}
+$advisor = $_REQUEST['advisor'];
+$advisor = _zeichen_loeschen("[`\n\r]", "", $advisor);
+$type = $_REQUEST['type'];
+if (!_is_valid($type, 0, 5, "[0-9]*")) {
+    die("Fehler in Parameter type");
+}
+$date_accepted = $_REQUEST['date_accepted'];
+if (!_is_valid($date_accepted, 0, 10, "[0-9\.]*")) {
+    die("Fehler in Parameter date_accepted");
+}
+$sachgruppe_ddc = $_REQUEST['sachgruppe_ddc'];
+if (!_is_valid($sachgruppe_ddc, 0, 10, "[A-Za-z0-9\.]*")) {
+    die("Fehler in Parameter sachgruppe_ddc");
+}
+$language = $_REQUEST['language'];
+if (!_is_valid($language, 0, 3, "[A-Za-z]*")) {
+    die("Fehler in Parameter language");
+}
+$isbn = $_REQUEST['isbn'];
+if (!_is_valid($isbn, 0, 30, "[0-9xX ,;-]*")) {
+    die("Fehler in Parameter isbn");
+}
+$source_title = $_REQUEST['source_title'];
+$source_title = _zeichen_loeschen("[`]", "", $source_title);
+$source_swb = $_REQUEST['source_swb'];
+if (!_is_valid($source_swb, 0, 10, "[A-Za-z0-9\-]*")) {
+    die("Fehler in Parameter source_swb");
+}
+$verification = $_REQUEST['verification'];
+$verification = _zeichen_loeschen("[`\n\r]", "", $verification);
+$status = $_REQUEST['status'];
+$status = _zeichen_loeschen("[`\n\r]", "", $status);
+$date_valid = $_REQUEST['date_valid'];
+if (!_is_valid($date_valid, 0, 10, "[0-9\.]*")) {
+    die("Fehler in Parameter date_valid");
+}
+$subject_type = $_REQUEST['subject_type'];
+$subject_type = _zeichen_loeschen("[`\n\r]", "", $subject_type);
+$subject_value = $_REQUEST['subject_value'];
+$subject_value = _zeichen_loeschen("[`\n\r]", "", $subject_value);
+$source_opus = $_REQUEST['source_opus'];
+if (!_is_valid($source_opus, 0, 10, "[0-9]*")) {
+    die("Fehler in Parameter source_opus");
+}
+$date_modified = $_REQUEST['date_modified'];
+if (!_is_valid($date_modified, 0, 15, "[0-9]*")) {
+    die("Fehler in Parameter date_modified");
+}
+$date_year = $_REQUEST['date_year'];
+if (!_is_valid($date_year, 0, 4, "[0-9]*")) {
+    die("Fehler in Parameter date_year");
+}
+$sr_id = $_REQUEST['sr_id'];
+if (!_is_valid($sr_id, 0, 10, "[0-9]*")) {
+    die("Fehler in Parameter sr_id");
+}
+$sr_band = $_REQUEST['sr_band'];
+$sr_band = _zeichen_loeschen("[`\n\r]", "", $sr_band);
+$bereich_id = $_REQUEST['bereich_id'];
+if (!_is_valid($bereich_id, 0, 20, "[0-9]*")) {
+    die("Fehler in Parameter bereich_id");
+}
+$bem_intern = $_REQUEST['bem_intern'];
+$bem_intern = _zeichen_loeschen("[`]", "", $bem_intern);
+$bem_extern = $_REQUEST['bem_extern'];
+$bem_extern = _zeichen_loeschen("[`]", "", $bem_extern);
+# A. Maile, 20.4.05: Sprache einlesen aus opus.conf, falls nicht gesetzt
+if (!$la) {
+    $la = $opus->value("la");
+}
+// Anfang Collections
+if ($coll_anzeigen == "true") {
+    $collection = $_REQUEST['collection'];
+    if (is_array($collection)) {
+        array_walk($collection, '_array_zeichen_loeschen');
+    } else {
+        $collection = array();
+    }
+}
+// Ende Collections
+$table_autor = $table . "_autor";
+$table_inst = $table . "_inst";
+$table_diss = $table . "_diss";
+// Anfang Collections
+$table_coll = $table . "_coll";
+// Ende Collections
+$titel = $opus->value("titel_db_aendern");
+$ueberschrift = $opus->value("ueberschrift_db_aendern");
+# Annette Maile, 20.4.05 Design aus lib/design.php einlesen
+require ("../../lib/design.$php");
+$design = new design;
+$design->head_titel($titel);
+$design->head_ueberschrift($ueberschrift, $la);
+print ("<FONT COLOR=red>");
+$sock = $opus->connect();
+if ($sock < 0) {
+    echo ("Error: $ERRMSG\n</TABLE></TABLE>");
+}
+if ($opus->select_db() < 0) {
+    echo ("Error: $ERRMSG\n</TABLE></TABLE>");
+}
+print ("</FONT>");
+if ($sachgruppe_ddc == "no" && $table == $opus_table) {
+    print ("<H3>DDC-Sachgruppe fehlt!<BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+    $design->foot("db_aendern.$php", $la);
+    exit();
+}
+/* Wenn Feld subject_type belegt ist, aber Feld subject_value leer ist, war */
+/* das Feld subject_value vormals belegt und nun muessen die Eintraege in   */
+/* der entsprechenden Tabelle z.B. temp_msc oder opus_msc geloescht werden. */
+/* Zudem wird subject_type = "" gesetzt, damit das Klassifikationsfeld im   */
+/* Aendern-Formular nicht mehr angezeigt wird.                              */
+if ($subject_type != "" && $subject_value == "") {
+    $subject_type_table = $table . "_" . $subject_type;
+    $opus->query("DELETE from $subject_type_table WHERE source_opus = '$source_opus' ");
+    $subject_type = "";
+}
+/***** Schriftenreihe Start *****/
+print ("<!--");
+print ("$sr_id; $sr_band");
+print ("-->");
+if ($sr_id == "" xor $sr_band == "") {
+    print ("<H3>Schriftenreihe oder Bandnummer fehlt!<BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+    $design->foot("db_aendern.$php", $la);
+    exit();
+} else {
+    $opus_table_sr = $opus_table . "_schriftenreihe";
+    $temp_table_sr = $temp_table . "_schriftenreihe";
+    $res = $opus->query("SELECT source_opus, sr_id, sequence_nr FROM $opus_table_sr
+                                WHERE sequence_nr = '$sr_band' AND sr_id = '$sr_id' AND source_opus != '$source_opus'");
+    $res2 = $opus->query("SELECT source_opus, sr_id, sequence_nr FROM $temp_table_sr 
+                                WHERE sequence_nr = '$sr_band' AND sr_id = '$sr_id' AND source_opus != '$source_opus'");
+    $num = $opus->num_rows($res);
+    $num2 = $opus->num_rows($res2);
+    print ("<!--");
+    print ($num+$num2);
+    print ("-->");
+    if (($num+$num2) > 0) {
+        print ("<H3>Bandnummer existiert bereits<BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+        $design->foot("db_aendern.$php", $la);
+        exit();
+    } else {
+        $table_sr = $table . "_schriftenreihe";
+        $res = $opus->query("SELECT source_opus, sr_id, sequence_nr FROM $table_sr
+                                        WHERE source_opus = '$source_opus'");
+        $num = $opus->num_rows($res);
+        if ($num > 0) {
+            $mrow = $opus->fetch_row($res);
+            $sr_id_old = $mrow[1];
+            $sr_band_old = $mrow[2];
+            if ($sr_id == "") {
+                //print ("DELETE<BR>");
+                $stat = $opus->query("DELETE FROM $table_sr WHERE source_opus = '$source_opus' ");
+                if ($stat < 0) {
+                    print ("ERROR $table: $ERRMSG <p><HR>\nDatensatz wurde nicht gel&ouml;scht!");
+                }
+            } elseif (($sr_id != $sr_id_old) or ($sr_band != $sr_band_old)) {
+                //print("UPDATE<BR>");
+                $stat = $opus->query("UPDATE $table_sr SET sr_id = '$sr_id', sequence_nr = '$sr_band' WHERE source_opus = '$source_opus' ");
+                if ($stat < 0) {
+                    print ("ERROR $table: $ERRMSG <p><HR>\nDatensatz wurde nicht ge&auml;ndert!");
+                }
+            }
+        } elseif ($sr_id != "") {
+            //print("INSERT<BR>");
+            $stat = $opus->query("INSERT INTO $table_sr (sr_id, source_opus, sequence_nr) VALUES ('$sr_id','$source_opus','$sr_band') ");
+            if ($stat < 0) {
+                print ("ERROR $table: $ERRMSG <p><HR>\nDatensatz wurde nicht eingef&uuml;gt!");
+            }
+        }
+    }
+}
+/***** Schriftenreihe Stop *****/
+if ($type == "8" || $type == "24") {
+    if ($date_accepted == "") {
+        print ("<H3>Tag der m&uuml;ndlichen Pr&uuml;fung fehlt! <BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+        $design->foot("db_aendern.$php", $la);
+        exit();
+    }
+    $datum = explode(".", $date_accepted);
+    $date_accepted = mktime(0,0,0,$datum[1],$datum[0],$datum[2]);
+    
+    if (strftime("%a", $date_accepted) == "Sun") {
+        print ("<H3>Der Tag der m&uuml;ndlichen Pr&uuml;fung ist ein Sonntag!<BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+        $design->foot("db_aendern.$php", $la);
+        exit();
+    }
+    if ($advisor == "") {
+        print ("<H3>Hauptberichter fehlt! <BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+        $design->foot("db_aendern.$php", $la);
+        exit();
+    }
+    if ($publisher_faculty == "-1") {
+        print ("<H3>Fakult&auml;t fehlt! <BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+        $design->foot("db_aendern.$php", $la);
+        exit();
+    } else {
+        $res = $opus->query("SELECT * from $table_diss WHERE source_opus = '$source_opus' ");
+        $num = $opus->num_rows($res);
+        if ($num < 1) {
+            $res = $opus->query("INSERT into $table_diss (source_opus) VALUES ('$source_opus')");
+        }
+        $stat = $opus->query("UPDATE $table_diss
+			SET date_accepted = '$date_accepted', 
+	       	    	    	  advisor = '$advisor',
+			  	 title_de = '$title_de',
+			publisher_faculty = '$publisher_faculty'
+			WHERE source_opus = '$source_opus' ");
+    }
+} else {
+    $res = $opus->query("SELECT * from $table_diss WHERE source_opus = $source_opus");
+    $num = $opus->num_rows($res);
+    if ($num > 0) {
+        $opus->query("DELETE from $table_diss WHERE source_opus = $source_opus");
+    }
+}
+if ($date_valid != 0) {
+    $datum = explode(".", $date_valid);
+    $date_valid_unix = mktime(0, 0, 0, $datum[1], $datum[0], $datum[2]);
+} else {
+    $date_valid_unix = 0;
+}
+# Start Lizenzvertrag
+$lic_active = $opus->value("license_active");
+if ($lic_active > 0) {
+    $lic = $_REQUEST['lic'];
+    $lic = _zeichen_loeschen("[`\n\r]", "", $lic);
+} else {
+    $lic = "";
+}
+# Ende Lizenzvertrag
+$res = $opus->query("SELECT * FROM $table WHERE source_opus= $source_opus ");
+$num = $opus->num_rows($res);
+if ($num > 0) {
+    $stat = $opus->query("UPDATE $table
+    	SET title                       = '$title',
+	creator_corporate               = '$creator_corporate',
+	contributors_name               = '$contributors_name',
+	contributors_corporate          = '$contributors_corporate',
+	subject_swd                     = '$subject_swd',
+	description                     = '$description',
+	date_year                       = '$date_year',
+	date_modified                   = '$date_modified',
+	type                            = '$type',
+	language                        = '$language',
+	source_title                    = '$source_title',
+	source_swb                      = '$source_swb',
+	verification                    = '$verification',
+	subject_uncontrolled_german     = '$subject_uncontrolled_german',
+	subject_uncontrolled_english    = '$subject_uncontrolled_english',
+	title_en                        = '$title_en',
+	description2                    = '$description2',
+	subject_type			= '$subject_type',
+	date_valid			= '$date_valid_unix',
+	description_lang		= '$description_lang',
+	description2_lang               = '$description2_lang',
+	sachgruppe_ddc 			= '$sachgruppe_ddc',
+	publisher_university		= '$publisher_university',
+	bereich_id			= '$bereich_id',
+	lic				= '$lic',
+	isbn				= '$isbn',
+	bem_intern			= '$bem_intern',
+	bem_extern                      = '$bem_extern'
+	WHERE  source_opus = '$source_opus' ");
+    if ($table == "$temp_table") {
+        $stat = $opus->query("UPDATE $table SET status = '$status'  WHERE  source_opus = $source_opus");
+    }
+    if ($stat < 0) {
+        print ("ERROR $table: $ERRMSG <p><HR>\nDatensatz wurde nicht ge&auml;ndert!");
+    }
+    $anzahl_creator_name = sizeof($creator_name);
+    $stat = $opus->query("DELETE from $table_autor WHERE source_opus = '$source_opus' ");
+    if ($anzahl_creator_name > 0) {
+        $i = 0;
+        while ($i < $anzahl_creator_name) {
+            $j = $i+1;
+            if ($creator_name[$i] != "") {
+                $stat = $opus->query("INSERT INTO $table_autor (source_opus, creator_name, reihenfolge, pnd_id)
+                	         VALUES ('$source_opus', '$creator_name[$i]', $j, '$pnd_id[$i]'");
+            }
+            $i++;
+        }
+    }
+    if ($stat < 0) {
+        print ("ERROR $table\_autor: $ERRMSG <p><HR>\nDatensatz wurde nicht ge&auml;ndert!");
+    }
+    $anzahl_publisher_inst = sizeof($publisher_inst);
+    $stat = $opus->query("DELETE from $table_inst WHERE source_opus='$source_opus'");
+    if ($anzahl_publisher_inst > 0) {
+        $i = 0;
+        while ($i < $anzahl_publisher_inst) {
+            if ($publisher_inst[$i] != "0") {
+                $stat = $opus->query("INSERT INTO $table_inst (source_opus, inst_nr)
+                	         VALUES ('$source_opus', '$publisher_inst[$i]')");
+            }
+            $i++;
+        }
+    } else {
+        if ($publisher_inst == "0") {
+            print ("<H3>Institut fehlt!<BR>Bitte mit Back-Button zur&uuml;ck.</H3>");
+            $design->foot("db_aendern.$php", $la);
+            exit();
+        }
+    }
+    if ($stat < 0) {
+        print ("ERROR $table_inst: $ERRMSG <p><HR>\nDatensatz wurde nicht ge&auml;ndert!");
+    }
+    // Anfang collections
+    if ($coll_anzeigen == "true") {
+        $anzahl_collections = sizeof($collection);
+        $stat = $opus->query("DELETE FROM $table_coll WHERE source_opus = '$source_opus'");
+        if ($anzahl_collections > 0) {
+            $i = 0;
+            while ($i < $anzahl_collections) {
+                if ($collections[$i] != '0') {
+                    $stat = $opus->query("INSERT INTO $table_coll ( coll_id, source_opus )
+						VALUES ('$collection[$i]', $source_opus )");
+                    $i++;
+                }
+            }
+        }
+        if ($stat < 0) {
+            print ("ERROR $table_coll: $ERRMSG <p><hr>\nDatensatz wurde nicht ge&auml;ndert");
+        }
+    }
+    // Ende Collections
+    if ($subject_type != "") {
+        $subject_type_table = $table . "_" . $subject_type;
+        $opus->query("DELETE from $subject_type_table WHERE source_opus = '$source_opus' ");
+        $class = explode(",", $subject_value);
+        $last = count($class);
+        $i = 0;
+        $table_subject_type = $table . "_" . $subject_type;
+        while ($i < $last) {
+            /* fuehrende und nachfolgende Blanks entfernen */
+            $class[$i] = trim($class[$i]);
+            $stat = $opus->query("INSERT INTO $subject_type_table (source_opus, class)
+			VALUES ('$source_opus', '$class[$i]')");
+            $i++;
+        }
+        if ($stat < 0) {
+            print ("ERROR $table\_$subject_type: $ERRMSG <p><HR>\nDatensatz wurde nicht ge&auml;ndert!");
+        }
+    }
+    print ("Datensatz in $table ge&auml;ndert. \n");
+    print ("<P> \n");
+    if ($table == $opus_table) {
+        print ("<FORM METHOD=\"POST\" ACTION=\"$url/admin/indexfile.php\"> \n");
+        print ("<INPUT TYPE=\"submit\"  VALUE=\"Indexdatei neu erstellen\"> \n");
+        print ("<INPUT TYPE=\"hidden\" NAME=\"von\" VALUE=\"$source_opus\"> \n");
+        print ("<INPUT TYPE=\"hidden\" NAME=\"bis\" VALUE=\"$source_opus\"> \n");
+        print ("</FORM> \n");
+        print ("<P> \n");
+    }
+    print ("<FORM  METHOD=\"POST\" ACTION=\"$url/admin/aendern.$php?table=$table&suchfeld=source_opus&suchwert=$source_opus\"> \n");
+    print ("<INPUT TYPE=\"submit\"  VALUE=\"Zur&uuml;ck zum aktualisierten Datensatz\"> \n");
+    print ("</FORM> \n");
+    print ("<P><A HREF=\"$url/admin/\">Adminseite</A> \n");
+}
+$opus->free_result($res);
+$opus->close($sock);
+$design->foot("db_aendern.$php", $la);
+?>
+

@@ -6,16 +6,31 @@
  * author Andres Quast
  */
 
-$(document).ready(addPndForm);
+$(document).ready(addForms);
 
 var pRow;
+
+function addForms(){
+	addPndForm();
+	addOrcidForm();
+}
 
 function addPndForm(){
 	var suchImage = "<div class=\"pnd\" style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"PND nach Person durchsuchen\" /></div>";
 	var imageDiv = $(".PNDIdentNumber").parent().append(suchImage);
 	//$(".lastName").blur(requestPersonIdBlur);
-	$("img").click(requestPersonId);
+	$("div .pnd img").click(requestPersonId);
 	$("body").append("<div class=\"result\"><h4>Ergebnis der PND ID-Abfrage</h4></div>");
+	$(".result").hide();
+
+};
+
+function addOrcidForm(){
+	var suchImage = "<div class=\"orcid\" style=\"float:left;\"><img src=\"../image/search_icon.jpg\" alt=\"Orcid nach Person durchsuchen\" /></div>";
+	var imageDiv = $(".OrcidIdentNumber").parent().append(suchImage);
+	//$(".lastName").blur(requestPersonIdBlur);
+	$("div .orcid img").click(requestPersonId);
+	$("body").append("<div class=\"result\"><h4>Ergebnis der ORCID ID-Abfrage</h4></div>");
 	$(".result").hide();
 
 };
@@ -28,12 +43,27 @@ function requestPersonId(){
 	var lastName = $(this).parent().parent().parent().find(".lastName").val();
 	
 	pRow = $(this).parent().parent().parent();
-	if(pndFormCheck(firstName, lastName)){
+	if(personFormCheck(firstName, lastName) && $("pnd")){
 		requestGndService(firstName, lastName); 	
 		$(this).parent().parent().find(".pnd").append("<div class=\"resultalert\"></div>");
 		//$(this).parent().parent().find("img").remove();
     	}
+	if(personFormCheck(firstName, lastName) && $(".orcid")){
+		//requestOrcidService(firstName, lastName); 	
+		//requestGndService(firstName, lastName); 	
+		$(this).parent().parent().find(".orcid").append("<div class=\"resultalert\"></div>");
+		//$(this).parent().parent().find("img").remove();
+    	}
 };
+
+/*function requestService(firstName, lastName, clID){
+	if(clID == ".pnd"){
+		requestGndService(firstName, lastName);
+	}
+	if(clID == ".orcid"){
+		requestOrcidService(firstName, lastName);
+	}
+} */
 
 function requestPersonIdBlur(){
     $(".resultalert").remove();	
@@ -46,14 +76,14 @@ function requestPersonIdBlur(){
 	var lastName = $(this).parent().parent().find(".lastName").val();
 
 	pRow = $(this).parent().parent();
-	if(pndFormCheck(firstName, lastName)){
+	if(personFormCheck(firstName, lastName)){
 		requestGndService(firstName, lastName); 	
-		$(this).parent().parent().find(".pnd").append("<div class=\"resultalert\"></div>");
+		$(this).parent().parent().find(divClassId).append("<div class=\"resultalert\"></div>");
 		//$(this).parent().parent().find("img").remove();
     	}
 };
 
-function pndFormCheck(firstName, lastName){
+function personFormCheck(firstName, lastName){
     if(lastName == null || lastName == "" || firstName == null || firstName == ""){
         alert('Füllen Sie bitte zunächst Nach- und Vornamenfelder aus');
     return false;
@@ -65,6 +95,47 @@ function requestGndService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
 	var requestUrl = "http://localhost:8080/axis2/services/gndRequester/getGndPersonInfo?firstName=" 
 	+ firstName + "&lastName=" + lastName;
+	var options = {
+			
+			type: 'GET',
+			url: requestUrl,
+			dataType: 'xml',
+            	}
+            
+     var testText;
+     var jqxhr = jQuery.ajax(options)
+			.done(function(){
+				$("div.resultalert").append($(jqxhr.responseText).find("resultSize").text());
+				$("div.resultalert").slideDown("slow");
+				$("div.resultalert").click(function(){
+					$(".result").show();
+					});
+				$("div.result").append(responseParser(jqxhr.responseText));
+				$("a.item strong").click(function(){
+					$(this).parent().parent().find("ul li strong").remove();
+					var pnd = $(this).parent().parent().find("ul li:first-child").text();
+					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
+					pRow.find("input.PNDIdentNumber").val(pnd);
+					$(".result").hide();
+				});
+			})
+			.fail(function(){
+				alert("request failed: " + jqxhr.statusText);
+				var xml = "<test><resultSize>4</resultSize></test>";
+				$("div.resultalert").append($(xml).find("resultSize").text());
+				$("div.resultalert").slideDown("slow");
+				})
+			.always(function(){
+			});
+    return jqxhr.responseText;
+            	
+
+}
+
+function requestOrcidService(firstName, lastName){
+	//return $("<p>" + lastName + ", " + firstName + "</p>");
+	var requestUrl = "http://pub.sandbox-1.orcid.org/search/orcid-bio?q=" 
+	+ "given-names:" + firstName + "+AND+" + "family-name:" + lastName;
 	var options = {
 			
 			type: 'GET',

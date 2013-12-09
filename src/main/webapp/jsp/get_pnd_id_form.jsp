@@ -17,6 +17,8 @@ for (int i=0; i<z; i++){
 	acadTitleList.add(i,"");
 }
 
+
+// Fill in parameter values from previous form-calls
 if(request.getParameter("acadTitle[]")!= null && request.getParameter("acadTitle[]").length()!=0){
 	String[] acadTitle = request.getParameterValues("acadTitle[]");
 	for (int i=0; i<acadTitle.length; i++){
@@ -60,6 +62,18 @@ if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").len
 	}
 }
 
+ArrayList<String> orcidIdList = new ArrayList<String>();
+for (int i=0; i<z; i++){
+	orcidIdList.add(i,"");
+}
+
+if(request.getParameter("orcidId[]")!= null && request.getParameter("orcidId[]").length()!=0){
+	String[] orcidId = request.getParameterValues("orcidId[]");
+	for (int i=0; i<orcidId.length; i++){
+		orcidIdList.set(i,orcidId[i]);
+	}
+}
+
 response.addHeader("Access-Control-Allow-Origin", "http://131.220.138.195:8080");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,6 +95,7 @@ response.addHeader("Access-Control-Allow-Origin", "http://131.220.138.195:8080")
 						<td>Vorname(n)</td>
 						<td>Nachname</td>
 						<td>PND ID</td>
+						<td>ORCID ID</td>
 						<td>Rolle</td>
 					</tr>
 					<% 
@@ -100,6 +115,9 @@ for(int i = 0; i < z ; i++ ){
 						<td><input class="PNDIdentNumber" name="pndId[]" type="text"
 							size="10" value="<%= pndIdList.get(i) %>" /> 
 							<input type="hidden" name="index" value="<%= i %>" />
+						</td>
+						<td><input class="OrcidIdentNumber" name="orcId[]" type="text"
+							size="10" value="<%= orcidIdList.get(i) %>" /> 
 						</td>
 						<td><select>
 								<option value="author">Autor</option>
