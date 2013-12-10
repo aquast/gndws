@@ -146,17 +146,25 @@ function requestOrcidService(firstName, lastName){
      var testText;
      var jqxhr = jQuery.ajax(options)
 			.done(function(){
-				$("div.resultalert").append($(jqxhr.responseText).find("num-found").val());
+				//$("div.resultalert").append("Works");
+				var count = $(jqxhr.responseText).find("orcid-search-results").attr("num-found");
+				if (count >= 0){
+					$("div.resultalert").append(count);					
+				}else{
+					$("div.resultalert").append("0");
+					
+				}
+				
 				$("div.resultalert").slideDown("slow");
 				$("div.resultalert").click(function(){
 					$(".result").show();
 					});
-				$("div.result").append(responseParser(jqxhr.responseText));
+				$("div.result").append(responseParserOrcid(jqxhr.responseText));
 				$("a.item strong").click(function(){
 					$(this).parent().parent().find("ul li strong").remove();
 					var orcid = $(this).parent().parent().find("ul li:first-child").text();
 					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
-					pRow.find("input.OrcidIdentNumber").val(pnd);
+					pRow.find("input.OrcidIdentNumber").val(orcid);
 					$(".result").hide();
 				});
 			})
@@ -186,6 +194,22 @@ function responseParser(xml){
 		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong>" + prefferedName + "</strong></a>" 
 			+ "<ul><li><strong>PND-ID: </strong>" +  pndId + "</li>"
 			+ "<li><strong>Geburtsjahr: </strong>" + birth + "</li>"
+			+ "<li><strong>Bibliographische Daten: </strong>" + biogr  + "</li></ul></div>";
+	});
+	return resultField;
+}
+
+function responseParserOrcid(xml){
+	var resultField = "";
+	var pndResult = $(xml).find("orcid-search-result");
+	pndResult.each(function(){
+		var prefferedName = $(this).find("given-names").text() + " " + $(this).find("family-name").text();
+		var orcidUri =$(this).find("orcid-id").text();
+		var orcidId = $(this).find("orcid").text();
+		var biogr = $(this).find("biography").text();
+		
+		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong>" + prefferedName + "</strong></a>" 
+			+ "<ul><li><strong>ORCID-ID: </strong>" +  orcidId + "</li>"
 			+ "<li><strong>Bibliographische Daten: </strong>" + biogr  + "</li></ul></div>";
 	});
 	return resultField;
