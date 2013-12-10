@@ -51,8 +51,11 @@ if(request.getParameter("lastName[]")!= null && request.getParameter("lastName[]
 }
 
 ArrayList<String> pndIdList = new ArrayList<String>();
+ArrayList<String> orcidIdList = new ArrayList<String>();
+
 for (int i=0; i<z; i++){
 	pndIdList.add(i,"");
+	orcidIdList.add(i,"");
 }
 
 if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").length()!=0){
@@ -60,11 +63,6 @@ if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").len
 	for (int i=0; i<pndId.length; i++){
 		pndIdList.set(i,pndId[i]);
 	}
-}
-
-ArrayList<String> orcidIdList = new ArrayList<String>();
-for (int i=0; i<z; i++){
-	orcidIdList.add(i,"");
 }
 
 if(request.getParameter("orcidId[]")!= null && request.getParameter("orcidId[]").length()!=0){
