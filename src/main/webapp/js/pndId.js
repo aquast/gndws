@@ -43,13 +43,13 @@ function requestPersonId(){
 	var lastName = $(this).parent().parent().parent().find(".lastName").val();
 	
 	pRow = $(this).parent().parent().parent();
-	if(personFormCheck(firstName, lastName) && $("pnd")){
+	if(personFormCheck(firstName, lastName) && $(this).parent().is(".pnd")){
 		requestGndService(firstName, lastName); 	
 		$(this).parent().parent().find(".pnd").append("<div class=\"resultalert\"></div>");
 		//$(this).parent().parent().find("img").remove();
     	}
-	if(personFormCheck(firstName, lastName) && $(".orcid")){
-		//requestOrcidService(firstName, lastName); 	
+	if(personFormCheck(firstName, lastName) && $(this).parent().is(".orcid")){
+		requestOrcidService(firstName, lastName); 	
 		//requestGndService(firstName, lastName); 	
 		$(this).parent().parent().find(".orcid").append("<div class=\"resultalert\"></div>");
 		//$(this).parent().parent().find("img").remove();
@@ -134,7 +134,7 @@ function requestGndService(firstName, lastName){
 
 function requestOrcidService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
-	var requestUrl = "http://pub.sandbox-1.orcid.org/search/orcid-bio?q=" 
+	var requestUrl = "http://pub.orcid.org/search/orcid-bio?q=" 
 	+ "given-names:" + firstName + "+AND+" + "family-name:" + lastName;
 	var options = {
 			
@@ -146,7 +146,7 @@ function requestOrcidService(firstName, lastName){
      var testText;
      var jqxhr = jQuery.ajax(options)
 			.done(function(){
-				$("div.resultalert").append($(jqxhr.responseText).find("resultSize").text());
+				$("div.resultalert").append($(jqxhr.responseText).find("num-found").val());
 				$("div.resultalert").slideDown("slow");
 				$("div.resultalert").click(function(){
 					$(".result").show();
@@ -154,9 +154,9 @@ function requestOrcidService(firstName, lastName){
 				$("div.result").append(responseParser(jqxhr.responseText));
 				$("a.item strong").click(function(){
 					$(this).parent().parent().find("ul li strong").remove();
-					var pnd = $(this).parent().parent().find("ul li:first-child").text();
+					var orcid = $(this).parent().parent().find("ul li:first-child").text();
 					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
-					pRow.find("input.PNDIdentNumber").val(pnd);
+					pRow.find("input.OrcidIdentNumber").val(pnd);
 					$(".result").hide();
 				});
 			})
