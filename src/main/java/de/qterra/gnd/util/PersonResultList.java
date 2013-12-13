@@ -54,6 +54,7 @@ public class PersonResultList {
 	
 
 	private ArrayList<PersonResult> personResultList = new ArrayList<PersonResult>();
+	private String resultSize = null;
 
 
 	public ArrayList<PersonResult> getPersonResultList() {
@@ -67,6 +68,19 @@ public class PersonResultList {
 
 	public void addPersonResultList(ArrayList<PersonResult> personResultList) {
 		this.personResultList.addAll(personResultList);
+	}
+
+	public void addPersonResult(PersonResult personResult) {
+		this.personResultList.add(personResult);
+	}
+
+	public String getResultSize() {
+		return resultSize;
+	}
+
+
+	public void setResultSize(String resultSize) {
+		this.resultSize = resultSize;
 	}
 
 }

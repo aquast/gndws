@@ -12,7 +12,9 @@ public class PersonResult {
 	}
 
 
+	private String firstName = null;
 	private String lastName = null;
+	private String preferredName = null;
 	private String name = null;
 	private String academicTitle = null;
 	private String birth = null;
@@ -21,7 +23,6 @@ public class PersonResult {
 	private String persIdentUri = null;
 	private String wpUrl = null;
 
-	private String firstName = null;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -76,6 +77,12 @@ public class PersonResult {
 			name = lastName + "," + firstName;
 		}
 		return name;
+	}
+	public String getPrefferedName() {
+		return preferredName;
+	}
+	public void setPrefferedName(String prefferedName) {
+		this.preferredName = prefferedName;
 	}
 
 

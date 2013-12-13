@@ -32,6 +32,7 @@ import de.qterra.gnd.sparql.requests.PersonRequest;
 import de.qterra.gnd.sparql.util.ResourceResponse;
 import de.qterra.gnd.sparql.util.UnifyResults;
 import de.qterra.gnd.util.PersonResult;
+import de.qterra.gnd.util.PersonResultList;
 import de.qterra.gnd.webservice.GetGndKeywordResponse;
 import de.qterra.gnd.webservice.GetGndPersonInfo;
 import de.qterra.gnd.webservice.GetGndPersonInfoResponse;
@@ -65,8 +66,9 @@ public class GetGndPersonInfoService{
 			@QueryParam("lastName") String lastName,
 			@QueryParam("index") int index) {
 
-		PersonResult pResult = new PersonResult();
 		//GetGndPersonInfoResponse response = new GetGndPersonInfoResponse();
+		
+		//create Props for runRequests
 		ArrayList<Properties> propertyList = new ArrayList<Properties>();
 		results = new ArrayList<Hashtable<String,RDFNode>>();
 		
@@ -87,43 +89,38 @@ public class GetGndPersonInfoService{
 
 		runRequests(propertyList);
 
-		ArrayList<PersonResultType> resultArray = new ArrayList<PersonResultType>();
-		
-		// create appropriate GndPersonInfoResponse from results arraylist 
-		response.setResultSize(results.size());
+		//Parse requestResult
+		PersonResultList resultList = new PersonResultList();
+
+		resultList.setResultSize(Integer.toString(results.size()));
 		
 		for (int i=0; i<results.size(); i++){
+			PersonResult pResult = new PersonResult();
+			
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
-			PersonResultType res = new PersonResultType();
-			res.setPndUri(resLine.get("uri").toString());
-			res.setPrefferedName(resLine.get("name").toString());
-			res.setPndID(resLine.get("uri").toString().substring(21));
+			pResult.setPrefferedName(resLine.get("name").toString());
+			pResult.setPersIdentUri(resLine.get("uri").toString());
+			pResult.setPersIdent(resLine.get("uri").toString().substring(21));
 			
 			
 			if(resLine.containsKey("birth")){
-				res.setYearOfBirth(resLine.get("birth").toString());
-			}
-			if(resLine.containsKey("link")){
-				res.addWpUrl(resLine.get("link").toString());
+				pResult.setBirth(resLine.get("birth").toString());
 			}
 			if(resLine.containsKey("biogr")){
-				res.setBiograficData(resLine.get("biogr").toString());
+				pResult.setBiogr(resLine.get("biogr").toString());
 			}
 			if(resLine.containsKey("acad")){
-				res.setAcadTitle(resLine.get("acad").toString());
+				pResult.setAcademicTitle(resLine.get("acad").toString());
 			}
 			if(resLine.containsKey("link")){
-				res.addWpUrl(resLine.get("wpUrl").toString());
+				pResult.setWpUrl(resLine.get("wpUrl").toString());
 			}
 			
-			resultArray.add(res);
+			resultList.addPersonResult(pResult);
 		}
 		
-		PersonResultType[] resType = null;
-		resultArray.toArray(resType = new PersonResultType[resultArray.size()] );
-		response.setResult(resType) ;
-		return response;
+		return resultList;
 	}
 
 
