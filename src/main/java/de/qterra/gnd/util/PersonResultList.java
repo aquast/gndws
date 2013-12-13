@@ -23,6 +23,7 @@
 package de.qterra.gnd.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -44,35 +45,19 @@ public class PersonResultList {
 	// Initiate Logger for PersonResultList
 	private static Logger log = Logger.getLogger(PersonResultList.class);
 
-
-	/**
-	 * 
-	 */
-	public PersonResultList() {
-
-	}
-	
-
-	private ArrayList<PersonResult> personResultList = new ArrayList<PersonResult>();
+	private ArrayList<PersonResult> personResult = new ArrayList<PersonResult>();
 	private String resultSize = null;
 
 
 	public ArrayList<PersonResult> getPersonResultList() {
-		return personResultList;
+		return personResult;
 	}
 
 
-	public void setPersonResultList(ArrayList<PersonResult> personResultList) {
-		this.personResultList = personResultList;
+	public void setPersonResultList(ArrayList<PersonResult> personResult) {
+		this.personResult = personResult;
 	}
 
-	public void addPersonResultList(ArrayList<PersonResult> personResultList) {
-		this.personResultList.addAll(personResultList);
-	}
-
-	public void addPersonResult(PersonResult personResult) {
-		this.personResultList.add(personResult);
-	}
 
 	public String getResultSize() {
 		return resultSize;

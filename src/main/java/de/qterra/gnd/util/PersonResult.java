@@ -7,11 +7,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PersonResult {
 
-	public PersonResult(){
-		
-	}
-
-
 	private String firstName = null;
 	private String lastName = null;
 	private String preferredName = null;

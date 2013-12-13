@@ -59,7 +59,8 @@
   			<artifactId>maven-war-plugin</artifactId>
   			<version>2.3</version>
 			<configuration>
-				<packagingExcludes>WEB-INF/lib/*.jar,WEB-INF/classes/*</packagingExcludes>
+				<webXml>src/main/resources/WEB-INF/web.xml</webXml>
+				<!-- <packagingExcludes>WEB-INF/lib/*.jar,WEB-INF/classes/*</packagingExcludes> -->
 				<warName>loddiggr</warName>
 			</configuration>
   			<executions>
@@ -129,6 +130,11 @@
 				<groupId>com.sun.jersey</groupId>
 				<artifactId>jersey-bundle</artifactId>
 				<version>1.17.1</version>
+			</dependency>
+			<dependency>
+				<groupId>asm</groupId>
+				<artifactId>asm</artifactId>
+				<version>3.3</version>
 			</dependency>
    </dependencies>
 </project>

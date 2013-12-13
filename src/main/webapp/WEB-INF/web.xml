@@ -2,8 +2,8 @@
 
 <web-app>
     <display-name>lodDigger-Client</display-name>
-	    <servlet>
+	<servlet>
         <servlet-name>client</servlet-name>
         <display-name>lodDigger-Client</display-name>
-    </servlet>
+	</servlet>
 </web-app>
