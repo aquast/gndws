@@ -12,20 +12,7 @@ if(request.getParameter("count")!= null){
 	}
 
 
-ArrayList<String> acadTitleList = new ArrayList<String>();
-for (int i=0; i<z; i++){
-	acadTitleList.add(i,"");
-}
-
-
-// Fill in parameter values from previous form-calls
-if(request.getParameter("acadTitle[]")!= null && request.getParameter("acadTitle[]").length()!=0){
-	String[] acadTitle = request.getParameterValues("acadTitle[]");
-	for (int i=0; i<acadTitle.length; i++){
-		acadTitleList.set(i,acadTitle[i]);
-	}
-}
-
+//Fill in parameter values from previous form-calls
 ArrayList<String> firstNameList = new ArrayList<String>();
 for (int i=0; i<z; i++){
 	firstNameList.add(i,"");
@@ -51,8 +38,20 @@ if(request.getParameter("lastName[]")!= null && request.getParameter("lastName[]
 }
 
 ArrayList<String> pndIdList = new ArrayList<String>();
+ArrayList<String> orcidIdList = new ArrayList<String>();
+ArrayList<String> acadTitleList = new ArrayList<String>();
+
 for (int i=0; i<z; i++){
 	pndIdList.add(i,"");
+	orcidIdList.add(i,"");
+	acadTitleList.add(i,"");
+}
+
+if(request.getParameter("acadTitle[]")!= null && request.getParameter("acadTitle[]").length()!=0){
+	String[] acadTitle = request.getParameterValues("acadTitle[]");
+	for (int i=0; i<acadTitle.length; i++){
+		acadTitleList.set(i,acadTitle[i]);
+	}
 }
 
 if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").length()!=0){
@@ -60,11 +59,6 @@ if(request.getParameter("pndId[]")!= null && request.getParameter("pndId[]").len
 	for (int i=0; i<pndId.length; i++){
 		pndIdList.set(i,pndId[i]);
 	}
-}
-
-ArrayList<String> orcidIdList = new ArrayList<String>();
-for (int i=0; i<z; i++){
-	orcidIdList.add(i,"");
 }
 
 if(request.getParameter("orcidId[]")!= null && request.getParameter("orcidId[]").length()!=0){
@@ -116,7 +110,7 @@ for(int i = 0; i < z ; i++ ){
 							size="10" value="<%= pndIdList.get(i) %>" /> 
 							<input type="hidden" name="index" value="<%= i %>" />
 						</td>
-						<td><input class="OrcidIdentNumber" name="orcId[]" type="text"
+						<td><input class="OrcidIdentNumber" name="orcidId[]" type="text"
 							size="10" value="<%= orcidIdList.get(i) %>" /> 
 						</td>
 						<td><select>
