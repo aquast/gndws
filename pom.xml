@@ -125,5 +125,10 @@
   	        	<artifactId>icu4j</artifactId>
   	        	<version>51.1</version>
   	        </dependency>
+  	        <dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-bundle</artifactId>
+				<version>1.17.1</version>
+			</dependency>
    </dependencies>
 </project>
