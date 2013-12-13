@@ -1,6 +1,6 @@
 
 /**
- * GetGndPersonInfo.java
+ * GetGndPersonInfoService.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:34 EDT)
@@ -10,7 +10,7 @@
             
 
             /**
-            *  GetGndPersonInfo bean class
+            *  GetGndPersonInfoService bean class
             */
         
         public  class GetGndPersonInfo
