@@ -18,22 +18,26 @@ import javax.ws.rs.core.MediaType;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
-
+import de.qterra.gnd.services.GetResourcesByIdentifier;
+import de.qterra.gnd.services.GetResourcesByIdentifierResponse;
 import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
+import de.qterra.gnd.sparql.util.ResourceResponse;
+import de.qterra.gnd.sparql.util.UnifyResults;
 import de.qterra.gnd.util.PersonResult;
 import de.qterra.gnd.util.PersonResultList;
+import de.qterra.gnd.webservice.ResourceResultType;
 
-@Path("/personInfo")
-public class GetGndPersonInfoService{
+@Path("/resourcesInfo")
+public class GetRessourcesByGndIDService{
 
 	// Initiate Logger for Class
-	private static Logger log = Logger.getLogger(GetGndPersonInfoService.class);
+	private static Logger log = Logger.getLogger(GetRessourcesByGndIDService.class);
 
 	private ArrayList<Hashtable<String,RDFNode>> results = null;
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PersonResultList getGndPersonInfo(@QueryParam("firstName") String firstName, 
+	public PersonResultList getResourcesByIdInfo(@QueryParam("firstName") String firstName, 
 			@QueryParam("lastName") String lastName,
 			@QueryParam("index") int index) {
 
@@ -42,11 +46,114 @@ public class GetGndPersonInfoService{
 		
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public PersonResultList postGndPersonInfo(@QueryParam("firstName") String firstName, 
+	public PersonResultList postResourcesByIdInfo(@QueryParam("firstName") String firstName, 
 			@QueryParam("lastName") String lastName,
 			@QueryParam("index") int index) {
 
 		return gndPersonInfo(firstName, lastName);
+	}
+
+	public GetResourcesByIdentifierResponse getResourcesByIdentifier(
+			GetResourcesByIdentifier getResourcesByIdentifier) {
+		GetResourcesByIdentifierResponse response = new GetResourcesByIdentifierResponse();
+
+		ArrayList<Properties> propertyList = new ArrayList<Properties>();
+		results = new ArrayList<Hashtable<String,RDFNode>>();
+		
+		String isbn = null;
+		int isbnType = 0;
+		String idType = getResourcesByIdentifier.getIdType();
+		String id = getResourcesByIdentifier.getIdString();
+				
+		if(idType.equals("isbn")){
+			isbn = id.replace("-", "");
+			isbnType = isbn.length();
+			log.info(isbnType);
+		}
+		
+		Properties gndResByIsbnProp = new Properties();
+		gndResByIsbnProp.setProperty("requestUrl", "http://lobid.org/sparql/");
+		gndResByIsbnProp.setProperty("sparqlFile", "gndResourcesByIsbn" + isbnType + "Request.txt");
+		gndResByIsbnProp.setProperty("$isbn", isbn);
+		propertyList.add(gndResByIsbnProp);
+		
+		runRequests(propertyList);
+
+	    // unify those rows from the SPARQL Response, that cohave the same Resource ID   
+		UnifyResults uni = new UnifyResults();
+	    uni.setResults(results);
+	    //ArrayList<Hashtable<String,ArrayList<String>>> unifiedResults = uni.unify();
+	    ArrayList<Hashtable<String, ResourceResponse>> unifiedResults 
+	    = uni.unify("uri");
+
+		
+		
+		ArrayList<ResourceResultType> resultArray = new ArrayList<ResourceResultType>();
+
+		
+		// create appropriate GndPersonInfoResponse from results arraylist 
+		response.setResultSize(unifiedResults.size());
+		
+		for (int i=0; i<unifiedResults.size(); i++){
+
+			ResourceResultType res = new ResourceResultType();
+	    	Hashtable<String, ResourceResponse> uResult = unifiedResults.get(i); 
+
+	    	//log.info(unifiedResults.size());
+	    	Enumeration<String> kEnum = uResult.keys();
+    		int k = 1;
+	    	while (kEnum.hasMoreElements()){
+	    		String rKey = kEnum.nextElement();
+				res.setResourceUri(rKey);
+	    		Enumeration<String> keyEnum =  uResult.get(rKey).getResponse().keys();
+	    		while(keyEnum.hasMoreElements()){
+	    			String key = keyEnum.nextElement();
+	    			ArrayList<String> value = uResult.get(rKey).getResponse().get(key);
+	    			for(int j = 0; j<value.size(); j++){
+		    			if(key.equals("person")){
+		    				res.addPndUri(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("name")){
+		    				res.addPrefferedName(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("title")){
+		    				res.setResourceTitle(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("isbn")){
+		    				res.addIsbn(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("extent")){
+		    				res.addExtent(value.get(j));
+		    				//TODO: make this multiple
+		    			}
+		    			
+		    			if(key.equals("publisher")){
+		    				res.setPublisher(value.get(j));
+		    			}
+		    			
+		    			if(key.equals("issued")){
+		    				res.setIssued(value.get(j));
+		    			}
+		    			
+	    			}
+
+	    		}
+	    	}			
+
+			resultArray.add(res);
+		}
+		
+		
+		ResourceResultType[] resType = null;
+		resultArray.toArray(resType = new ResourceResultType[resultArray.size()] );
+		response.setResult(resType) ;
+		
+		
+		return response;
 	}
 
 	

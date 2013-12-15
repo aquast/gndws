@@ -45,17 +45,17 @@ public class PersonResultList {
 	// Initiate Logger for PersonResultList
 	private static Logger log = Logger.getLogger(PersonResultList.class);
 
-	private ArrayList<PersonResult> personResult = new ArrayList<PersonResult>();
+	private ArrayList<PersonResult> person = new ArrayList<PersonResult>();
 	private String resultSize = null;
 
 
 	public ArrayList<PersonResult> getPersonResultList() {
-		return personResult;
+		return person;
 	}
 
 
 	public void setPersonResultList(ArrayList<PersonResult> personResult) {
-		this.personResult = personResult;
+		this.person = personResult;
 	}
 
 
