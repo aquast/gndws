@@ -73,11 +73,11 @@ public class PersonResult {
 		}
 		return name;
 	}
-	public String getPrefferedName() {
+	public String getPreferredName() {
 		return preferredName;
 	}
-	public void setPrefferedName(String prefferedName) {
-		this.preferredName = prefferedName;
+	public void setPreferredName(String preferredName) {
+		this.preferredName = preferredName;
 	}
 
 

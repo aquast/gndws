@@ -1,0 +1,34 @@
+h1. About
+
+Description of API provided by gndWS 
+
+h1. RestFul Services
+
+Replace domain with appropriate url
+
+http://domain/loddiggr/api
+
+h2. Services
+
+h3. GND Person ID Request
+
+Service takes first name(s) and last name of a person and returns an ID from the Gemeinsame Norm Datei (GND) if applicable
+
+Param: firstName, lastName
+
+Returns: a list of matching person data, each with: ID, preferred name, biographic details*, year of birth*, academic title*, wikipedia url*  
+
+* if applicable
+
+h4. Response Formmats
+
+application/xml
+application/json
+
+h4. Example Call
+
+@curl -v -H "Accept: application/json" -X GET --url "http://localhost:8080/loddiggr/api/personInfo?firstName=Loki&lastName=Schmidt"@ 
+
+h4. Known Bugs
+
+actually XMLRootelement and Person List element are the same
