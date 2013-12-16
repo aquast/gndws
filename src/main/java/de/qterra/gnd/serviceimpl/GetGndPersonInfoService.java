@@ -9,6 +9,7 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,7 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.hp.hpl.jena.rdf.model.RDFNode;
-
+import com.sun.jersey.api.json.JSONWithPadding;
 
 import de.qterra.gnd.sparql.requests.GenericSPARQLRequest;
 import de.qterra.gnd.util.PersonResult;
@@ -31,6 +32,7 @@ public class GetGndPersonInfoService{
 
 	private ArrayList<Hashtable<String,RDFNode>> results = null;
 	
+	/*
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PersonResultList getGndPersonInfo(@QueryParam("firstName") String firstName, 
@@ -39,7 +41,19 @@ public class GetGndPersonInfoService{
 
 		return gndPersonInfo(firstName, lastName);
 	}
-		
+	*/
+
+	@GET
+	@Produces({MediaType.APPLICATION_JSON})
+	public JSONWithPadding getGndPersonInfoJsonP(
+			@QueryParam("jsoncallback") @DefaultValue("fn") String callback,
+			@QueryParam("firstName") String firstName, 
+			@QueryParam("lastName") String lastName,
+			@QueryParam("index") int index) {
+
+		return new JSONWithPadding(gndPersonInfo(firstName, lastName));
+	}
+
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public PersonResultList postGndPersonInfo(@QueryParam("firstName") String firstName, 
