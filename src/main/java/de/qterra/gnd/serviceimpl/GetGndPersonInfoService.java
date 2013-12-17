@@ -51,7 +51,7 @@ public class GetGndPersonInfoService{
 			@QueryParam("lastName") String lastName,
 			@QueryParam("index") int index) {
 
-		return new JSONWithPadding(gndPersonInfo(firstName, lastName));
+		return new JSONWithPadding(gndPersonInfo(firstName, lastName), callback);
 	}
 
 	@POST
