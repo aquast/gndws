@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>A testpage to include jsonp via jquery</title>
+<script src="../js/jquery-1.9.1.min.js"></script>
+<script
+	type="text/javascript">
+	//var url="http://nyx.hbz-nrw.de/loddiggr/api/personInfo?firstName=Andres&lastName=Quast";
+	var url="http://localhost:8080/loddiggr/api/personInfo?firstName=Andres&lastName=Quast";
+	var url="http://www.geonames.org/postalCodeLookupJSON?postalcode=10504&country=US";
+	jQuery.getJSON(url+"&callback=?", function(data) {
+    	
+		alert("Symbol: " + data);
+	});
+	</script>
+</head>
+<body>
+<p>Hallo Du</p>
+</body>
+</html>
