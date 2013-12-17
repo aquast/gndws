@@ -25,10 +25,14 @@ h4. Response Formmats
 application/xml
 application/json
 
-h4. Example Call
+h4. Example Calls
 
-@curl -v -H "Accept: application/json" -X GET --url "http://localhost:8080/loddiggr/api/personInfo?firstName=Loki&lastName=Schmidt"@ 
+XML via POST
+@curl -v -H "Accept: application/xml" -X POST --url "http://localhost:8080/loddiggr/api/personInfo?firstName=Loki&lastName=Schmidt"@ 
 
-h4. Known Bugs
+JSONP via GET
+@curl 'http://localhost:8080/loddiggr/api/personInfo?firstName=Andres&lastName=Quast&callback=jQuery191014007193349014002_1387286344636&_=1387286344637' -H 'Accept: application/x-javascript'@
+
+h4. Known Issues
 
 actually XMLRootelement and Person List element are the same

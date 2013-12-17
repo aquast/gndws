@@ -44,7 +44,7 @@ public class GetGndPersonInfoService{
 	*/
 
 	@GET
-	@Produces({MediaType.APPLICATION_JSON})
+	@Produces({"application/x-javascript", MediaType.APPLICATION_JSON})
 	public JSONWithPadding getGndPersonInfoJsonP(
 			@QueryParam("callback") @DefaultValue("fn") String callback,
 			@QueryParam("firstName") String firstName, 
@@ -52,6 +52,15 @@ public class GetGndPersonInfoService{
 			@QueryParam("index") int index) {
 
 		return new JSONWithPadding(gndPersonInfo(firstName, lastName), callback);
+	}
+
+	@GET
+	@Produces({MediaType.APPLICATION_XML})
+	public PersonResultList getGndPersonInfo(@QueryParam("firstName") String firstName, 
+			@QueryParam("lastName") String lastName,
+			@QueryParam("index") int index) {
+
+		return gndPersonInfo(firstName, lastName);
 	}
 
 	@POST

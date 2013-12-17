@@ -213,4 +213,7 @@ function responseParserOrcid(xml){
 			+ "<li><strong>Bibliographische Daten: </strong>" + biogr  + "</li></ul></div>";
 	});
 	return resultField;
+	
+	
+	
 }
