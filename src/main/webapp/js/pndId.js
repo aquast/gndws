@@ -114,8 +114,10 @@ function requestGndService(firstName, lastName){
 				$("a.item strong").click(function(){
 					$(this).parent().parent().find("ul li strong").remove();
 					var pnd = $(this).parent().parent().find("ul li:first-child").text();
+					var firstPrefName =  $(this).parent().parent().find("ul li:first-child").text();
 					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
 					pRow.find("input.PNDIdentNumber").val(pnd);
+					pRow.find("input.lastName").val("test");
 					$(".result").hide();
 				});
 			})

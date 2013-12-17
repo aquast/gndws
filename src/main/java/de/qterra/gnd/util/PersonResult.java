@@ -10,6 +10,8 @@ public class PersonResult {
 	private String firstName = null;
 	private String lastName = null;
 	private String preferredName = null;
+	private String preferredFirstName = null;
+	private String preferredLastName = null;
 	private String name = null;
 	private String academicTitle = null;
 	private String birth = null;
@@ -78,6 +80,18 @@ public class PersonResult {
 	}
 	public void setPreferredName(String preferredName) {
 		this.preferredName = preferredName;
+	}
+	public String getPreferredFirstName() {
+		return preferredFirstName;
+	}
+	public void setPreferredFirstName(String preferredFirstName) {
+		this.preferredFirstName = preferredFirstName;
+	}
+	public String getPreferredLastName() {
+		return preferredLastName;
+	}
+	public void setPreferredLastName(String preferredLastName) {
+		this.preferredLastName = preferredLastName;
 	}
 
 
