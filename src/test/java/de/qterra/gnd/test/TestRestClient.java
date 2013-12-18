@@ -58,7 +58,7 @@ public class TestRestClient {
 	
 	@Test public void callRestFulServiceXml(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri + "/api/personInfo");
+		WebResource wResource = client.resource(uri + "/loddiggr/api/personInfo");
 		wResource = wResource.queryParam("firstName", "Andres")
 			.queryParam("lastName", "Quast");
 		

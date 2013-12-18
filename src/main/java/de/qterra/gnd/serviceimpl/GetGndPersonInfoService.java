@@ -112,6 +112,8 @@ public class GetGndPersonInfoService{
 			Hashtable<String,RDFNode> resLine = results.get(i);
 			
 			pResult.setPreferredName(resLine.get("name").toString());
+			pResult.setPreferredFirstName(resLine.get("fname").toString());
+			pResult.setPreferredLastName(resLine.get("lname").toString());
 			pResult.setPersIdentUri(resLine.get("uri").toString());
 			pResult.setPersIdent(resLine.get("uri").toString().substring(21));
 			
