@@ -35,4 +35,6 @@ JSONP via GET
 
 h4. Known Issues
 
-actually XMLRootelement and Person List element are the same
+* actually XMLRootelement and Person List element are the same
+* Sparql-request Results with columns containing blank nodes will be skipped: Do not define an Sparql-request template that returns a blank node column: was a feature to reduce results, maybe its a bug?
+  
