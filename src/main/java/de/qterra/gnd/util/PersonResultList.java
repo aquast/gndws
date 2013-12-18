@@ -39,14 +39,19 @@ import org.apache.log4j.Logger;
  * creation date: 13.12.2013
  *
  */
-@XmlRootElement
+@XmlRootElement(name="resultList")
 public class PersonResultList {
+
+	public PersonResultList() {
+	}
 
 	// Initiate Logger for PersonResultList
 	private static Logger log = Logger.getLogger(PersonResultList.class);
 
 	private ArrayList<PersonResult> person = new ArrayList<PersonResult>();
 	private String resultSize = null;
+
+
 
 
 	public ArrayList<PersonResult> getPersonResultList() {

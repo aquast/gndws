@@ -4,8 +4,14 @@ import org.apache.log4j.Logger;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name="result")
 public class PersonResult {
+	
+	
+
+	public PersonResult() {
+	
+	}
 
 	private String firstName = null;
 	private String lastName = null;

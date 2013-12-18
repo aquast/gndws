@@ -93,7 +93,7 @@ function personFormCheck(firstName, lastName){
 
 function requestGndService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
-	var requestUrl = "http://localhost:8080/axis2/services/gndRequester/getGndPersonInfo?firstName=" 
+	var requestUrl = "http://localhost:8080/loddiggr/api/personInfo?firstName=" 
 	+ firstName + "&lastName=" + lastName;
 	var options = {
 			
@@ -114,10 +114,12 @@ function requestGndService(firstName, lastName){
 				$("a.item strong").click(function(){
 					$(this).parent().parent().find("ul li strong").remove();
 					var pnd = $(this).parent().parent().find("ul li:first-child").text();
-					var firstPrefName =  $(this).parent().parent().find("ul li:first-child").text();
+					var preferredLastName = $(this).parent().parent().find("#lname").text();
+					var preferredFirstName = $(this).parent().parent().find("#fname").text();
 					//var firstName = $(this).parent().parent().find("ul li:first-child").text();
 					pRow.find("input.PNDIdentNumber").val(pnd);
-					pRow.find("input.lastName").val("test");
+					pRow.find("input.lastName").val(preferredLastName);
+					pRow.find("input.firstName").val(preferredFirstName);
 					$(".result").hide();
 				});
 			})
@@ -185,15 +187,17 @@ function requestOrcidService(firstName, lastName){
 
 function responseParser(xml){
 	var resultField = "";
-	var pndResult = $(xml).find("result");
+	var pndResult = $(xml).find("PersonResultList");
 	pndResult.each(function(){
-		var prefferedName = $(this).find("prefferedName").text();
+		var preferredName = $(this).find("preferredName").text();
+		var preferredFirstName = $(this).find("preferredFirstName").text();
+		var preferredLastName = $(this).find("preferredLastName").text();
 		var pndUri =$(this).find("pndUri").text();
 		var pndId = $(this).find("pndID").text();
 		var biogr = $(this).find("biograficData").text();
 		var birth =$(this).find("yearOfBirth").text();
 		
-		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong>" + prefferedName + "</strong></a>" 
+		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong><span id=\"lname\">" + preferredLastName + "</span>, <span id=\"fname\">" + preferredFirstName + "</span></strong></a>" 
 			+ "<ul><li><strong>PND-ID: </strong>" +  pndId + "</li>"
 			+ "<li><strong>Geburtsjahr: </strong>" + birth + "</li>"
 			+ "<li><strong>Bibliographische Daten: </strong>" + biogr  + "</li></ul></div>";
