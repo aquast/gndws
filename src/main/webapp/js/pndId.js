@@ -192,10 +192,10 @@ function responseParser(xml){
 		var preferredName = $(this).find("preferredName").text();
 		var preferredFirstName = $(this).find("preferredFirstName").text();
 		var preferredLastName = $(this).find("preferredLastName").text();
-		var pndUri =$(this).find("pndUri").text();
-		var pndId = $(this).find("pndID").text();
-		var biogr = $(this).find("biograficData").text();
-		var birth =$(this).find("yearOfBirth").text();
+		var pndUri =$(this).find("perIdentUri").text();
+		var pndId = $(this).find("persIdent").text();
+		var biogr = $(this).find("biogr").text();
+		var birth =$(this).find("birth").text();
 		
 		resultField = resultField + "<div class=\"item\" ><a href=\"#\" class=\"item\" ><strong><span id=\"lname\">" + preferredLastName + "</span>, <span id=\"fname\">" + preferredFirstName + "</span></strong></a>" 
 			+ "<ul><li><strong>PND-ID: </strong>" +  pndId + "</li>"

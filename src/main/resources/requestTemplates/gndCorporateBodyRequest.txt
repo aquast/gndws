@@ -1,0 +1,9 @@
+PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+select distinct ?uri ?corpName ?location ?variantName where 
+	{
+     ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForTheCorporateBody> "$corpName" . 
+     ?uri <http://d-nb.info/standards/elementset/gnd#preferredNameForTheCorporateBody> ?corpName . 
+     OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#variantNameForTheCorporateBody> ?variantName} .
+     OPTIONAL {?uri <http://d-nb.info/standards/elementset/gnd#placeOfBusiness> ?location} .
+    }
