@@ -93,7 +93,7 @@ function personFormCheck(firstName, lastName){
 
 function requestGndService(firstName, lastName){
 	//return $("<p>" + lastName + ", " + firstName + "</p>");
-	var requestUrl = "http://localhost:8080/loddiggr/api/personInfo?firstName=" 
+	var requestUrl = "http://nyx.hbz-nrw.de:8080/loddiggr/api/personInfo?firstName=" 
 	+ firstName + "&lastName=" + lastName;
 	var options = {
 			

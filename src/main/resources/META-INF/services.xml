@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- This file was auto-generated from WSDL -->
-<!-- by the Apache Axis2 version: 1.5  Built on : Apr 30, 2009 (06:07:24 EDT) -->
+<!-- by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:35 LKT) -->
 <serviceGroup>
     <service name="gndRequester">
         <messageReceivers>
             <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="de.qterra.gnd.services.GndRequesterMessageReceiverInOut"/>
         </messageReceivers>
         <parameter name="ServiceClass">de.qterra.gnd.serviceimpl.ServiceImpl</parameter>
-        <parameter name="useOriginalwsdl">true</parameter>
+        <parameter name="useOriginalwsdl">false</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
-        <operation name="getGndPersonInfo" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://gnd.hbz.nrw.de/definitions/">
-            <actionMapping>http://gnd.hbz.nrw.de/definitions/getGndPersonInfo</actionMapping>
-            <outputActionMapping>http://gnd.hbz.nrw.de/definitions/gndRequester/getGndPersonInfoResponse</outputActionMapping>
+        <operation name="getGndPersonInfo" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://gnd.qterra.de/services/">
+            <actionMapping>http://gnd.qterra.de/services/getGndPersonInfo</actionMapping>
+            <outputActionMapping>http://gnd.qterra.de/services/gndRequester/getGndPersonInfoResponse</outputActionMapping>
+        </operation>
+        <operation name="getResourcesByIdentifier" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://gnd.qterra.de/services/">
+            <actionMapping>http://gnd.qterra.de/services/getResourcesByIdentifier</actionMapping>
+            <outputActionMapping>http://gnd.qterra.de/services/gndRequester/getResourcesByIdentifierResponse</outputActionMapping>
+        </operation>
+        <operation name="getResourcesByPnd" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://gnd.qterra.de/services/">
+            <actionMapping>http://gnd.qterra.de/services/getResourcesByPnd</actionMapping>
+            <outputActionMapping>http://gnd.qterra.de/services/gndRequester/getResourcesByPndResponse</outputActionMapping>
         </operation>
     </service>
 </serviceGroup>

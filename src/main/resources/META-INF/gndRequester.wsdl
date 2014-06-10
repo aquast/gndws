@@ -200,7 +200,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   </wsdl:binding>
   <wsdl:service name="gndRequester">
     <wsdl:port name="gndRequesterSOAP" binding="tns:gndRequesterSOAP">
-      <soap:address location="http://www.qterra.de/gnd"/>
+      <soap:address location="http://www.qterra.de:8080/axis2/services/"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

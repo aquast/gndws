@@ -3,7 +3,7 @@
  * GndRequesterMessageReceiverInOut.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT)
+ * by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:35 LKT)
  */
         package de.qterra.gnd.services;
 
@@ -32,62 +32,62 @@
         }
 
         java.lang.String methodName;
-        if((op.getName() != null) && ((methodName = org.apache.axis2.util.JavaUtils.xmlNameToJavaIdentifier(op.getName().getLocalPart())) != null)){
+        if((op.getName() != null) && ((methodName = org.apache.axis2.util.JavaUtils.xmlNameToJava(op.getName().getLocalPart())) != null)){
 
         
 
             if("getGndPersonInfo".equals(methodName)){
                 
-                de.qterra.gnd.webservice.GetGndPersonInfoResponse getGndPersonInfoResponse1 = null;
+                de.qterra.gnd.webservice.GetGndPersonInfoResponse getGndPersonInfoResponse7 = null;
 	                        de.qterra.gnd.webservice.GetGndPersonInfo wrappedParam =
                                                              (de.qterra.gnd.webservice.GetGndPersonInfo)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.qterra.gnd.webservice.GetGndPersonInfo.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getGndPersonInfoResponse1 =
+                                               getGndPersonInfoResponse7 =
                                                    
                                                    
                                                          skel.getGndPersonInfo(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getGndPersonInfoResponse1, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getGndPersonInfoResponse7, false);
                                     } else 
 
             if("getResourcesByIdentifier".equals(methodName)){
                 
-                de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifierResponse3 = null;
+                de.qterra.gnd.services.GetResourcesByIdentifierResponse getResourcesByIdentifierResponse9 = null;
 	                        de.qterra.gnd.services.GetResourcesByIdentifier wrappedParam =
                                                              (de.qterra.gnd.services.GetResourcesByIdentifier)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.qterra.gnd.services.GetResourcesByIdentifier.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getResourcesByIdentifierResponse3 =
+                                               getResourcesByIdentifierResponse9 =
                                                    
                                                    
                                                          skel.getResourcesByIdentifier(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByIdentifierResponse3, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByIdentifierResponse9, false);
                                     } else 
 
             if("getResourcesByPnd".equals(methodName)){
                 
-                de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPndResponse5 = null;
+                de.qterra.gnd.webservice.GetResourcesByPndResponse getResourcesByPndResponse11 = null;
 	                        de.qterra.gnd.webservice.GetResourcesByPnd wrappedParam =
                                                              (de.qterra.gnd.webservice.GetResourcesByPnd)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     de.qterra.gnd.webservice.GetResourcesByPnd.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               getResourcesByPndResponse5 =
+                                               getResourcesByPndResponse11 =
                                                    
                                                    
                                                          skel.getResourcesByPnd(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByPndResponse5, false);
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), getResourcesByPndResponse11, false);
                                     
             } else {
               throw new java.lang.RuntimeException("method not found");

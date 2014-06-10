@@ -1,22 +1,6 @@
-@CHARSET "UTF-8";
-
-body{
-	background-color: #ffffff;
-	font-family: "Verdana", "Arial", "Helvetica", sans-serif;
-	}
-
 table {
 	z-index:0;
 }
-table tr td{
-	z-index:0;
-	font-size: 0.7em;
-	padding-right: 20px;
-	padding-top:3px;
-	padding-bottom:3px;
-	border: 1px solid;
-	}
-
 
 .formarea{
 	background-color: #ddd;
@@ -40,6 +24,7 @@ div.search_icon{
 
 div.resultalert{
 	float:left;
+	cursor: pointer;
 	background-color: #ffeb6c;
 	box-shadow:  1px 1px 4px #6666ff;
 	border-radius: 3px;
@@ -49,11 +34,11 @@ div.resultalert{
 }
 
 div.result{
-	font-size: 0.7em;
+	font-size: 1.0em;
 	z-index:10;
 	position:absolute;
-	top:20px;
-	right: 20px; 
+	top:600px;
+	right: 50px; 
 	width:30%;
 	background-color: #fffcad;
 	box-shadow:  3px 3px 7px #6666ff;

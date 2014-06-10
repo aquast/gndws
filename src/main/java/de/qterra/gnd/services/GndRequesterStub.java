@@ -3,7 +3,7 @@
  * GndRequesterStub.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.5.1  Built on : Oct 19, 2009 (10:59:00 EDT)
+ * by the Apache Axis2 version: 1.4.1  Built on : Aug 13, 2008 (05:03:35 LKT)
  */
         package de.qterra.gnd.services;
 
@@ -25,13 +25,13 @@
 
         private static int counter = 0;
 
-        private static synchronized java.lang.String getUniqueSuffix(){
+        private static synchronized String getUniqueSuffix(){
             // reset the counter if it is greater than 99999
             if (counter > 99999){
                 counter = 0;
             }
             counter = counter + 1; 
-            return java.lang.Long.toString(System.currentTimeMillis()) + "_" + counter;
+            return Long.toString(System.currentTimeMillis()) + "_" + counter;
         }
 
     
@@ -115,6 +115,8 @@
         _serviceClient = new org.apache.axis2.client.ServiceClient(configurationContext,_service);
         
 	
+        configurationContext = _serviceClient.getServiceContext().getConfigurationContext();
+
         _serviceClient.getOptions().setTo(new org.apache.axis2.addressing.EndpointReference(
                 targetEndpoint));
         _serviceClient.getOptions().setUseSeparateListener(useSeparateListener);
